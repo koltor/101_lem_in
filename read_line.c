@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 10:23:13 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 17:15:20 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/17 15:45:36 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,7 +66,7 @@ static	char	*ft_option_line(char *line, char option)
 	{
 		tmp = line;
 		line = ft_strtrim(tmp);
-		free (tmp);
+		free(tmp);
 	}
 	return (line);
 }

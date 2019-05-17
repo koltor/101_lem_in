@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 18:25:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/17 16:30:57 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,13 +55,14 @@ typedef enum e_bool t_bool;
 ** fonction for the parsing
 */
 char			*get_clean_line(int fd, char option);
-t_bool			check_and_parse_anthill(const int file_fd, t_room **room, t_tube **tube);
+t_bool			check_and_parse_anthill(const int file_fd, t_room **room, t_tube **tube, UINT *nb_fourmis);
 t_bool			manage_room(const char *s, char *se, t_room **room, t_room *begin);
 t_room			*new_room(int x, int y, char *name, char salle_id);
 void			free_room(t_room *room);
 t_tube			*new_tube(UINT id_salle1, UINT id_salle2);
 void			free_tube(t_tube *tube);
-
+t_bool			manage_diese(const char *s, char *se);
+t_bool			manage_tube(const char *s, char *se, t_tube **tube, t_room *room);
 /*
 ** error
 */
@@ -74,4 +75,5 @@ void			usage(void);
 */
 
 void			show_room(t_room *room);
+void			show_tube(t_tube *tube);
 #endif
