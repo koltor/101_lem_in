@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   error.c                                          .::    .:/ .      .::   */
+/*   lib_plus.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 19:19:09 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/21 18:12:13 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/21 19:46:37 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	usage(void)
+size_t	ft_strlenc(const char *s, char c)
 {
-	ft_putstr("lem-in: [anthill_file]\n");
+	UINT i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
 }
 
-void	*f_error(char value, void *data)
+char	*ft_strsub_c(const char *src, char c)
 {
-	static char errno = 0;
+	return (ft_strsub(src, 0, ft_strlenc(src, c)));
+}
 
-	if (value > 0)
-		errno = value;
-	else if (value == 0)
-		return ((void*)&errno);
-	return (data);
+int		atoi_id(const char *s, char c, UINT index)
+{
+	int i;
+
+	i = 0;
+	while (s[i] && index)
+	{
+		while (s[i] != c && index)
+			i++;
+		index -= 1;
+	}
+	return (ft_atoi(&s[i]));
 }

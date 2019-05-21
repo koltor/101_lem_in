@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/17 16:30:57 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 19:12:32 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,42 +38,57 @@ typedef struct		s_room
 	int				x;
 	int				y;
 	UINT			salle_id;
-	struct s_room	*next;
 }					t_room;
 
 typedef	struct		s_tube
 {
 	UINT			salle1;
 	UINT			salle2;
-	struct s_tube	*next;
 }					t_tube;
 
 
 typedef enum e_bool t_bool;
 
-/*
-** fonction for the parsing
-*/
-char			*get_clean_line(int fd, char option);
-t_bool			check_and_parse_anthill(const int file_fd, t_room **room, t_tube **tube, UINT *nb_fourmis);
-t_bool			manage_room(const char *s, char *se, t_room **room, t_room *begin);
-t_room			*new_room(int x, int y, char *name, char salle_id);
-void			free_room(t_room *room);
-t_tube			*new_tube(UINT id_salle1, UINT id_salle2);
-void			free_tube(t_tube *tube);
-t_bool			manage_diese(const char *s, char *se);
-t_bool			manage_tube(const char *s, char *se, t_tube **tube, t_room *room);
-/*
-** error
-*/
+/*************************************************
+**********************PARSING*********************
+*************************************************/
 
-void			error(void);
+char	*parsing_into_line(const char *path);
+char	*scan_line_line(char *s);
+
+UINT    get_number_of_room(const char *s);
+UINT    get_number_of_tube(const char *s);
+UINT	get_number_of_ants(const char *s);
+
+char	is_room(const char *s);
+char	is_tube(const char *s);
+
+/*************************************************
+***********************ERROR**********************
+*************************************************/
+
+# define ERR_MALLOC 	1
+# define ERR_OPEN		2
+# define ERR_READ		3
+# define ERR_OCCURD		4
+# define ERR_ANTS		10 // le nombre de fourmis ne peut pas etre negatif
+# define ERR_ANTS_SPACE	11 // espace present lors de la transmission du nombre de fourmis
+
 void			usage(void);
+void			*f_error(char value, void *data);
 
-/*
-** debug
-*/
+/**************************************************
+*************debug*********************************
+**************************************************/
 
-void			show_room(t_room *room);
-void			show_tube(t_tube *tube);
+
+char	detect_char(const char c, char *s);
+
+
+/**************************************************
+**********************lib_plus*********************
+***************************************************/
+
+char	*ft_strsub_c(const char *src, char c);
+int		atoi_id(const char *s, char c, UINT index);
 #endif

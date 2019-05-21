@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   error.c                                          .::    .:/ .      .::   */
+/*   scan_room.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 19:19:09 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/21 16:42:37 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/21 16:45:29 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	usage(void)
+UINT	get_number_of_room(const char *s)
 {
-	ft_putstr("lem-in: [anthill_file]\n");
-}
+	UINT	nb_room;
+	char	*s_cpy;
+	char	*line;
+	char	ret;
 
-void	*f_error(char value, void *data)
-{
-	static char errno = 0;
-
-	if (value > 0)
-		errno = value;
-	else if (value == 0)
-		return ((void*)&errno);
-	return (data);
+	nb_room = 0;
+	if (!(s_cpy = ft_strdup(s)))
+		return (*(UINT*)f_error(ERR_MALLOC, &nb_room));
+	scan_line_line(s_cpy);
+	while ((line = scan_line_line(s_cpy)))
+		if ((ret = is_room(line)) == 0)
+			nb_room += 1;
+		else if (ret == -1)
+			break ;
+	scan_line_line(NULL);
+	free(s_cpy);
+	return (nb_room);
 }
