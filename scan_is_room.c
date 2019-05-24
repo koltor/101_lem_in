@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:45:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 21:09:52 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 15:48:08 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ static int	count_space(const char *s, UINT *i)
 **		need a string containing a line of the file
 **		UINT adresse for moving on the string
 **	variables
-**		nb: count the number of char 
+**		nb: count the number of char
 **	return value
 **		0 OK it's a Room
 **		1 NO it's a Comment
@@ -64,7 +64,7 @@ static int	count_not_space(const char *s, UINT *i)
 **		2 NO it's not a Room
 */
 
-int		is_room(const char *s)
+int			is_room(const char *s)
 {
 	UINT i;
 

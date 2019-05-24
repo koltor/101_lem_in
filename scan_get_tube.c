@@ -6,14 +6,14 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 23:11:58 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 15:46:56 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static long	check_room_exist(const char *name, t_room *r_tab, UINT size)
+static long		check_room_exist(const char *name, t_room *r_tab, UINT size)
 {
 	UINT i;
 
@@ -27,7 +27,7 @@ static long	check_room_exist(const char *name, t_room *r_tab, UINT size)
 	return (-1);
 }
 
-t_bool	exit_slft(UINT err, t_bool value, char *s1, char *s2)
+t_bool			exit_slft(UINT err, t_bool value, char *s1, char *s2)
 {
 	f_error(err, NULL);
 	s1 ? free(s1) : 0;
@@ -41,22 +41,24 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 	char *s2;
 	long id;
 
-	if(!(s1 = ft_strsub_c(line, '-')))
-		return(exit_slft(ERR_MALLOC, false, NULL, NULL));
-	if(!(s2 = ft_revstrsub_c(line, '-')))
-		return(exit_slft(ERR_MALLOC, false, s1, NULL));
+	if (!(s1 = ft_strsub_c(line, '-')))
+		return (exit_slft(ERR_MALLOC, false, NULL, NULL));
+	if (!(s2 = ft_revstrsub_c(line, '-')))
+		return (exit_slft(ERR_MALLOC, false, s1, NULL));
+	if (!ft_strcmp(s1, s2))
+		return (exit_slft(-1, false, s1, s2));
 	if ((id = check_room_exist(s1, data->r_tab, data->rooms)) != -1)
 		tube->salle1 = id;
 	else
-		return(exit_slft(-1, false, s1, s2));
+		return (exit_slft(-1, false, s1, s2));
 	if ((id = check_room_exist(s2, data->r_tab, data->rooms)) != -1)
 		tube->salle2 = id;
 	else
-		return(exit_slft(-1, false, s1, s2));
-	return(exit_slft(-1, true, s1, s2));
+		return (exit_slft(-1, false, s1, s2));
+	return (exit_slft(-1, true, s1, s2));
 }
 
-void    get_tube(char *file_line, t_data *data, char *line)
+void			get_tube(char *file_line, t_data *data, char *line)
 {
 	UINT id;
 

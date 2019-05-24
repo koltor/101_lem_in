@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 23:16:10 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 15:48:37 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,8 +38,9 @@ t_bool	stock_anthill(char *file_line, t_data *data)
 
 	if (!(data->ants = get_number_of_ants(file_line)))
 		return (false);
-	if(!(line = get_room(file_line, data)))
+	if (!(line = get_room(file_line, data)))
 	{
+		data->tubes = 0;
 		scan_line_line(NULL);
 		return (false);
 	}
