@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 15:50:51 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 18:25:16 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,11 +62,11 @@ void		debug_lem_in(t_data *data)
 	show_tube(data->t_tab, data->tubes, data->r_tab);
 }
 
-void		debug_main(void)
+void		debug_main(int option)
 {
 	char d;
 
 	d = *(char*)f_error(0, NULL);
-	dprintf(1, "                 Error: %d\n", (int)d);
+	dprintf(1, "     option: %d                Error: %d\n", option, (int)d);
 	str_error((int)d);
 }

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 22:24:26 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 18:16:14 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,13 @@
 
 void	usage(void)
 {
-	ft_putstr("lem-in: [anthill_file]\n");
+	printf("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
+}
+
+void	usage_option(char c)
+{
+	printf("ls: illegal option -- %c\n", c);
+	printf("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
 }
 
 void	*f_error(char value, void *data)

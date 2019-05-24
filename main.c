@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 15:48:37 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 18:20:12 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,7 +49,7 @@ t_bool	stock_anthill(char *file_line, t_data *data)
 	return (true);
 }
 
-t_bool	lem_in(const char *path)
+t_bool	lem_in(const char *path, int option)
 {
 	char	*file_line;
 	t_data	data;
@@ -65,16 +65,24 @@ t_bool	lem_in(const char *path)
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(file_line, data.r_tab, NULL));
 	stock_anthill(file_line, &data);
-	debug_lem_in(&data);
+	if (D)
+		debug_lem_in(&data);
 	return (exit_lem_in_ok(file_line, &data));
 }
 
 int		main(int ac, char **av)
 {
-	if (ac == 2)
-		lem_in(av[1]);
+	int option;
+
+	option = 0;
+	if (ac >= 2)
+	{
+		av = get_option(ac, &av[1], &option);
+		lem_in(*av, option);
+	}
 	else
 		usage();
-	debug_main();
+	if (D)
+		debug_main(option);
 	return (0);
 }

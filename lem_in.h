@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 15:03:24 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 18:21:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,14 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-#define UINT unsigned int
+# define UINT unsigned int
+
+/*
+** help for option's comprehention
+*/
+
+# define D (option & 1)
+# define LIST_OPTION "d"
 
 enum	e_bool
 {
@@ -62,26 +69,27 @@ typedef enum e_bool t_bool;
 **********************PARSING*********************
 *************************************************/
 
-char	*parsing_into_line(const char *path);
-char	*scan_line_line(char *s);
+char			**get_option(int ac, char **av, int *option);
+char			*parsing_into_line(const char *path);
+char			*scan_line_line(char *s);
 
-t_room	*create_room(UINT size);
-t_tube	*create_tube(UINT size);
-void	free_room(t_room *r_tab, UINT size);
+t_room			*create_room(UINT size);
+t_tube			*create_tube(UINT size);
+void			free_room(t_room *r_tab, UINT size);
 
-UINT    get_number_of_room(const char *s);
-UINT    get_number_of_tube(const char *s);
-UINT	get_number_of_ants(const char *s);
+UINT    		get_number_of_room(const char *s);
+UINT    		get_number_of_tube(const char *s);
+UINT			get_number_of_ants(const char *s);
 
-char	*get_room(char *file_line, t_data *data);
-void    get_tube(char *file_line, t_data *data, char *line);
+char			*get_room(char *file_line, t_data *data);
+void    		get_tube(char *file_line, t_data *data, char *line);
 
-int		is_room(const char *s);
-int		is_tube(const char *s);
-int		is_order(const char *s);
+int				is_room(const char *s);
+int				is_tube(const char *s);
+int				is_order(const char *s);
 
-void	skip_ants_number(char *s);
-char	*skip_room(char *s);
+void			skip_ants_number(char *s);
+char			*skip_room(char *s);
 
 /*************************************************
 ***********************ERROR**********************
@@ -100,6 +108,7 @@ char	*skip_room(char *s);
 # define ERR_LACK_TUBE	14 // pas de fin dans la fourmiliere
 
 void			usage(void);
+void			usage_option(char c);
 void			*f_error(char value, void *data);
 void			str_error(int error);
 
@@ -107,15 +116,15 @@ void			str_error(int error);
 *************debug*********************************
 **************************************************/
 
-void    debug_lem_in(t_data *data);
-void    debug_main();
+void			debug_lem_in(t_data *data);
+void			debug_main(int option);
 
 /**************************************************
 **********************lib_plus*********************
 ***************************************************/
 
-size_t	ft_strlenc(const char *s, char c);
-char	*ft_strsub_c(const char *src, char c);
-char	*ft_revstrsub_c(const char *src, char c);
-int		atoi_id(const char *s, char c, UINT index);
+size_t			ft_strlenc(const char *s, char c);
+char			*ft_strsub_c(const char *src, char c);
+char			*ft_revstrsub_c(const char *src, char c);
+int				atoi_id(const char *s, char c, UINT index);
 #endif
