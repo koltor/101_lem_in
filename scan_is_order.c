@@ -13,6 +13,18 @@
 
 #include "lem_in.h"
 
+/*
+** is_order:
+**	parameters
+**		need a string containing a line of the file
+**	variables
+**		just a UINT for moving on the string
+**	return value
+**		0 OK it's a Order
+**		1 NO it's a Comment
+**		2 NO it's not a Order
+*/
+
 int		is_order(const char *s)
 {
 	if (s && s[0] != '#')

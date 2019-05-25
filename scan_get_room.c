@@ -13,6 +13,16 @@
 
 #include "lem_in.h"
 
+/*
+** split_line_for_room:
+**	parameters
+**		need a line of the file
+**		need a case of the room_tab
+**	return value
+**		true of the data is collect
+**		false otherwise
+*/
+
 static t_bool	split_line_for_room(char *line, t_room *room)
 {
 	if (!(room->name = ft_strsub_c(line, ' ')))
@@ -24,6 +34,18 @@ static t_bool	split_line_for_room(char *line, t_room *room)
 	room->y = atoi_id(line, ' ', 2);
 	return (true);
 }
+
+/*
+** select_ben (begin-end-normal):
+**	parameters
+**		need a line
+**		need the struct data
+**		need the type of line
+**		need an & id for moving it
+**	return value
+**		true of the data is collect
+**		false otherwise
+*/
 
 static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 {
@@ -46,6 +68,22 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 	*order = 0;
 	return (true);
 }
+
+/*
+** get_room:
+**	transform the middle part of the file into room_data
+**	parameters
+**		the file_line of the file
+**		the struct data
+**	variable
+**		a line to stock the line after call scan_line_line
+**		an order to know the order given by an upper line
+**		type to know the type of the line
+**		an id to move on the room_table
+**	return value
+**		return the line how the function stop and affect an error
+**		if an error occurd
+*/
 
 char			*get_room(char *file_line, t_data *data)
 {

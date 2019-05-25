@@ -13,6 +13,17 @@
 
 #include "lem_in.h"
 
+
+/*
+** create_room:
+**	parameters
+**		need the number of room to allocate
+**	variables
+**		just an address
+**	return value
+**		return the first address of the room_table
+*/
+
 t_room	*create_room(UINT size)
 {
 	t_room	*room_tab;
@@ -28,6 +39,17 @@ t_room	*create_room(UINT size)
 	return (room_tab);
 }
 
+/*
+** free_room:
+**	parameters
+**		need the room_table to free
+**		need the size of the table
+**	variables
+**		just an address
+**	return value
+**		return the first address of the room_table
+*/
+
 void	free_room(t_room *r_tab, UINT size)
 {
 	UINT i;
@@ -41,6 +63,16 @@ void	free_room(t_room *r_tab, UINT size)
 	}
 	free(r_tab);
 }
+
+/*
+** create_tube:
+**	parameters
+**		need the number of tube to allocate
+**	variables
+**		just an address
+**	return value
+**		return the first address of the tube_table
+*/
 
 t_tube	*create_tube(UINT size)
 {

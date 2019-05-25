@@ -13,6 +13,14 @@
 
 #include "lem_in.h"
 
+/*
+** exit_lem_in_error:
+**	parameters
+**		need elements for free
+**	return value
+**		return false
+*/
+
 t_bool	exit_lem_in_error(char *file_line, t_room *room, t_tube *tube)
 {
 	if (file_line)
@@ -24,6 +32,14 @@ t_bool	exit_lem_in_error(char *file_line, t_room *room, t_tube *tube)
 	return (false);
 }
 
+/*
+** exit_lem_in_ok:
+**	parameters
+**		need elements for free
+**	return value
+**		return true
+*/
+
 t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 {
 	free(file_line);
@@ -31,6 +47,16 @@ t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free_room(data->r_tab, data->rooms);
 	return (true);
 }
+
+/*
+** stock_anthill:
+**	parameters
+**		need the file_line to recover information about it
+**	return value
+**		return true if the file_line is in good format
+**		and enough information collect
+**		otherwise return false
+*/
 
 t_bool	stock_anthill(char *file_line, t_data *data)
 {
@@ -48,6 +74,20 @@ t_bool	stock_anthill(char *file_line, t_data *data)
 	scan_line_line(NULL);
 	return (true);
 }
+
+/*
+** lem_in:
+**	parameters
+**		the path of the file given in parameters
+**		the option given
+**	variable
+**		char *file_line to stock the file after transform in string
+**		struct data to stock it
+**	return value
+**		return true if the file_line is in good format
+**		and enough information collect
+**		otherwise return false
+*/
 
 t_bool	lem_in(const char *path, int option)
 {
@@ -69,6 +109,16 @@ t_bool	lem_in(const char *path, int option)
 		debug_lem_in(&data);
 	return (exit_lem_in_ok(file_line, &data));
 }
+
+/*
+**main:
+**	first function call after exect the programm
+**	parameters
+**		int		ac	number of argument
+**		char	**a	arguments
+**	variable
+**		int for stock options
+*/
 
 int		main(int ac, char **av)
 {

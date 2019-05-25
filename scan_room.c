@@ -13,6 +13,19 @@
 
 #include "lem_in.h"
 
+/*
+** get_number_of_room:
+**	parameters
+**		need a string containing a line of the file
+**	variables
+**		INT		for stock the number of ants after scaning
+**		s_cpy	for copy the string S give at argument
+**		line	stock temporately the reading line after call scan_line_line
+**		ret		keep the return of the function IS_ROOM
+**	return value
+**		the number of rooms and affect an error of a problem as occurd
+*/
+
 UINT	get_number_of_room(const char *s)
 {
 	UINT	nb_room;

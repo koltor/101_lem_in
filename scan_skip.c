@@ -13,10 +13,28 @@
 
 #include "lem_in.h"
 
+/*
+** skip_ants_number:
+**	parameters
+**		need a string containing a line of the file
+**	skip a line of the line S
+*/
+
 void	skip_ants_number(char *s)
 {
 	scan_line_line(s);
 }
+
+
+/*
+** skip_room:
+**	parameters
+**		need a string containing a line of the file
+**	variables
+**		line stock temporately the reading line after call scan_line_line
+**	return value
+**		the first line not corresponding with the pattern ROOM
+*/
 
 char	*skip_room(char *s)
 {

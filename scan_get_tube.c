@@ -13,6 +13,17 @@
 
 #include "lem_in.h"
 
+/*
+** check_room_exist:
+**	parameters
+**		a name of a room
+**		the room_tab
+**		the size of the room_tab
+**	return value
+**		the id of the room if the room exist
+**		-1 otherwise
+*/
+
 static long		check_room_exist(const char *name, t_room *r_tab, UINT size)
 {
 	UINT i;
@@ -27,6 +38,17 @@ static long		check_room_exist(const char *name, t_room *r_tab, UINT size)
 	return (-1);
 }
 
+/*
+** check_room_exist:
+**	parameters
+**		a name of a room
+**		the room_tab
+**		the size of the room_tab
+**	return value
+**		the id of the room if the room exist
+**		-1 otherwise
+*/
+
 t_bool			exit_slft(UINT err, t_bool value, char *s1, char *s2)
 {
 	f_error(err, NULL);
@@ -34,6 +56,18 @@ t_bool			exit_slft(UINT err, t_bool value, char *s1, char *s2)
 	s2 ? free(s2) : 0;
 	return (value);
 }
+
+/*
+** exit_slft:
+**	quit properly the function split_line_for_tube
+**	parameters
+**		value to free
+**		the value of the f_error
+**		return value
+**	return value
+**		true of the data is collect
+**		false otherwise
+*/
 
 static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 {
@@ -57,6 +91,19 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(-1, false, s1, s2));
 	return (exit_slft(-1, true, s1, s2));
 }
+
+/*
+** get_tube:
+**	transform the last part of the file into tube_data
+**	parameters
+**		the file_line of the file
+**		the struct data
+**		the previous line how the function get_room stop
+**	variable
+	just an id to move on the tube_table
+**	return value
+**		affect an error if an error occurd
+*/
 
 void			get_tube(char *file_line, t_data *data, char *line)
 {

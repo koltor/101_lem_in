@@ -13,6 +13,17 @@
 
 #include "lem_in.h"
 
+/*
+** get_number_of_ants:
+**	parameters
+**		need a string containing a line of the file
+**	variables
+**		INT for stock the number of ants after scaning
+**		s_cpy for copy the string S give at argument 
+**	return value
+**		the number of ants and affect an error of a problem as occurd
+*/
+
 UINT	get_number_of_ants(const char *s)
 {
 	int		ants_number;

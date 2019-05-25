@@ -13,6 +13,19 @@
 
 #include "lem_in.h"
 
+/*
+** is_Tube:
+**	parameters
+**		need a string containing a line of the file
+**	variables
+**		UINT for moving on the string
+**		UINT for keep a back position
+**	return value
+**		0 OK it's a Tube
+**		1 NO it's a Comment
+**		2 NO it's not a Tube
+*/
+
 int		is_tube(const char *s)
 {
 	UINT i;

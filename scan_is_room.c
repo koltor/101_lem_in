@@ -13,6 +13,17 @@
 
 #include "lem_in.h"
 
+/*
+** count_not_space:
+**	parameters
+**		need a string containing a line of the file
+**		UINT adresse for moving on the string
+**	variables
+**		nb: count the number of char
+**	return value
+**		the number of space
+*/
+
 static int	count_space(const char *s, UINT *i)
 {
 	int nb;
@@ -34,9 +45,7 @@ static int	count_space(const char *s, UINT *i)
 **	variables
 **		nb: count the number of char
 **	return value
-**		0 OK it's a Room
-**		1 NO it's a Comment
-**		2 NO it's not a Room
+**		the number of char diffent of space
 */
 
 static int	count_not_space(const char *s, UINT *i)
