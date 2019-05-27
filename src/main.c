@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 18:20:12 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 11:54:49 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,33 +45,6 @@ t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free(file_line);
 	free(data->t_tab);
 	free_room(data->r_tab, data->rooms);
-	return (true);
-}
-
-/*
-** stock_anthill:
-**	parameters
-**		need the file_line to recover information about it
-**	return value
-**		return true if the file_line is in good format
-**		and enough information collect
-**		otherwise return false
-*/
-
-t_bool	stock_anthill(char *file_line, t_data *data)
-{
-	char *line;
-
-	if (!(data->ants = get_number_of_ants(file_line)))
-		return (false);
-	if (!(line = get_room(file_line, data)))
-	{
-		data->tubes = 0;
-		scan_line_line(NULL);
-		return (false);
-	}
-	get_tube(file_line, data, line);
-	scan_line_line(NULL);
 	return (true);
 }
 

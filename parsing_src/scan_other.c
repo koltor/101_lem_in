@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:41:19 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 19:46:05 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 18:35:08 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@
 **		need a string containing a line of the file
 **	variables
 **		INT for stock the number of ants after scaning
-**		s_cpy for copy the string S give at argument 
+**		s_cpy for copy the string S give at argument
 **	return value
 **		the number of ants and affect an error of a problem as occurd
 */

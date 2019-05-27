@@ -6,12 +6,37 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 17:32:49 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 18:35:31 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
+{
+	UINT i;
+
+	i = 0;
+	while (i < tab_size)
+	{
+		if (id != i)
+		{
+			if (r_tab[i].name && !ft_strcmp(r_tab[id].name, r_tab[i].name))
+			{
+				f_error(ERR_DUPL_ROOM, NULL);
+				return (false);
+			}
+			else if (r_tab[id].x == r_tab[i].x && r_tab[id].y == r_tab[i].y)
+			{
+				f_error(ERR_DUPL_XY_ROOM, NULL);
+				return (false);
+			}
+		}
+		i += 1;
+	}
+	return (true);
+}
 
 /*
 ** split_line_for_room:
@@ -36,6 +61,27 @@ static t_bool	split_line_for_room(char *line, t_room *room)
 }
 
 /*
+** reset_one_room:
+**	reset a room
+**	parameters
+**		need a room to reset
+**	return value
+**		false
+*/
+
+static t_bool	reset_one_room(t_room *room)
+{
+	if (room->name)
+	{
+		free(room->name);
+		room->name = NULL;
+	}
+	room->x = 0;
+	room->y = 0;
+	return (false);
+}
+
+/*
 ** select_ben (begin-end-normal):
 **	parameters
 **		need a line
@@ -49,22 +95,21 @@ static t_bool	split_line_for_room(char *line, t_room *room)
 
 static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 {
-	if (*order == 1)
+	if (*order == 1 || *order == 2)
 	{
-		if (split_line_for_room(line, &data->r_tab[0]))
+		if (split_line_for_room(line, &data->r_tab[*order - 1]))
 			return (false);
-	}
-	else if (*order == 2)
-	{
-		if (split_line_for_room(line, &data->r_tab[1]))
-			return (false);
+		if (check_duplicate_room(*order - 1, data->r_tab, *ir))
+			return (reset_one_room(&data->r_tab[*order - 1]));
 	}
 	else if (*order == 0 && *ir < data->rooms)
 	{
 		if (split_line_for_room(line, &data->r_tab[*ir]))
 			return (false);
+		if (check_duplicate_room(*ir, data->r_tab, *ir))
+			return (reset_one_room(&data->r_tab[*ir]));
+		*ir = *ir + 1;
 	}
-	*ir = (*order == 0) ? *ir + 1 : *ir;
 	*order = 0;
 	return (true);
 }

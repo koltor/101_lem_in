@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_is_tube.c                                   .::    .:/ .      .::   */
+/*   scan_get_anthill.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/21 16:45:46 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 21:45:50 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/27 11:54:31 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/27 18:35:35 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,42 +14,28 @@
 #include "lem_in.h"
 
 /*
-** is_Tube:
+** stock_anthill:
 **	parameters
-**		need a string containing a line of the file
-**	variables
-**		UINT for moving on the string
-**		UINT for keep a back position
+**		need the file_line to recover information about it
 **	return value
-**		0 OK it's a Tube
-**		1 NO it's a Comment
-**		2 NO it's not a Tube
+**		return true if the file_line is in good format
+**		and enough information collect
+**		otherwise return false
 */
 
-int		is_tube(const char *s)
+t_bool	stock_anthill(char *file_line, t_data *data)
 {
-	UINT i;
-	UINT j;
+	char *line;
 
-	i = 0;
-	if (*s == '#')
-		return (1);
-	if (!s[i] || s[i] == ' ')
-		return (-1);
-	while (s[i] && s[i] != '-')
+	if (!(data->ants = get_number_of_ants(file_line)))
+		return (false);
+	if (!(line = get_room(file_line, data)))
 	{
-		if (s[i++] == ' ')
-			return (-1);
+		data->tubes = 0;
+		scan_line_line(NULL);
+		return (false);
 	}
-	j = i;
-	if (!s[i] || i == 0)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i++] == ' ')
-			return (-1);
-	}
-	if (j == i)
-		return (-1);
-	return (0);
+	get_tube(file_line, data, line);
+	scan_line_line(NULL);
+	return (true);
 }

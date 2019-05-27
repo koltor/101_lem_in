@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/20 12:17:24 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 17:45:03 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 20:21:22 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,12 +37,12 @@ char	*parsing_into_line(const char *path)
 	int		ret;
 
 	line_return = NULL;
-	if (!(tmp = ft_strnew(0)))
-		return (f_error(ERR_MALLOC, NULL));
 	if ((file_fd = open(path, O_RDONLY)) < 0)
 		return (f_error(ERR_OPEN, NULL));
 	if (read(file_fd, NULL, 0) < 0)
 		return (f_error(ERR_READ, NULL));
+	if (!(tmp = ft_strnew(0)))
+		return (f_error(ERR_MALLOC, NULL));
 	while ((ret = read(file_fd, line, 9000)))
 	{
 		line[ret] = '\0';

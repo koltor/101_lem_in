@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/06 15:05:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 18:15:06 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 11:52:26 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,9 +22,9 @@
 */
 
 /*
- ** permet de desactivé des options par rapport à d'autre option
- ** pour rajouter une option il suffit de recopier le patern suivant
- */
+** permet de desactivé des options par rapport à d'autre option
+** pour rajouter une option il suffit de recopier le patern suivant
+*/
 
 static int	ft_plugout_option(char c, int option)
 {

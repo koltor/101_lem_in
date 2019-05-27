@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_is_order.c                                  .::    .:/ .      .::   */
+/*   scan_is_tube.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/23 16:22:26 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 18:44:02 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/21 16:45:46 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/27 18:35:23 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,24 +14,42 @@
 #include "lem_in.h"
 
 /*
-** is_order:
+** is_Tube:
 **	parameters
 **		need a string containing a line of the file
 **	variables
-**		just a UINT for moving on the string
+**		UINT for moving on the string
+**		UINT for keep a back position
 **	return value
-**		0 OK it's a Order
+**		0 OK it's a Tube
 **		1 NO it's a Comment
-**		2 NO it's not a Order
+**		2 NO it's not a Tube
 */
 
-int		is_order(const char *s)
+int		is_tube(const char *s)
 {
-	if (s && s[0] != '#')
-		return (0);
-	if (!strcmp(s, "##start"))
+	UINT i;
+	UINT j;
+
+	i = 0;
+	if (*s == '#')
 		return (1);
-	if (!strcmp(s, "##end"))
-		return (2);
+	if (!s[i] || s[i] == ' ')
+		return (-1);
+	while (s[i] && s[i] != '-')
+	{
+		if (s[i++] == ' ')
+			return (-1);
+	}
+	j = i;
+	if (!s[i] || i == 0)
+		return (-1);
+	while (s[i])
+	{
+		if (s[i++] == ' ')
+			return (-1);
+	}
+	if (j == i)
+		return (-1);
 	return (0);
 }

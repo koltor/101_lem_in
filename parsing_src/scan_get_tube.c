@@ -6,12 +6,36 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 17:43:16 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 18:35:21 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static t_bool	check_duplicate_tube(t_tube *t_tab, UINT size)
+{
+	UINT i;
+	UINT j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (i != j)
+			{
+				if (t_tab[i].salle1 == t_tab[j].salle1 &&
+										t_tab[i].salle2 == t_tab[j].salle2)
+					return (false);
+			}
+			j += 1;
+		}
+		i += 1;
+	}
+	return (true);
+}
 
 /*
 ** check_room_exist:
@@ -100,7 +124,7 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 **		the struct data
 **		the previous line how the function get_room stop
 **	variable
-	just an id to move on the tube_table
+**	just an id to move on the tube_table
 **	return value
 **		affect an error if an error occurd
 */
@@ -111,14 +135,12 @@ void			get_tube(char *file_line, t_data *data, char *line)
 
 	id = 1;
 	if (!is_tube(line))
-	{
 		if (split_line_for_tube(line, data, &data->t_tab[0]))
 		{
 			f_error(ERR_LACK_TUBE, NULL);
 			data->tubes = 0;
 			return ;
 		}
-	}
 	while ((line = scan_line_line(file_line)))
 	{
 		if (!is_tube(line))
@@ -131,4 +153,6 @@ void			get_tube(char *file_line, t_data *data, char *line)
 			id += 1;
 		}
 	}
+	if (check_duplicate_tube(data->t_tab, data->tubes))
+		f_error(ERR_DUPL_TUBE, NULL);
 }

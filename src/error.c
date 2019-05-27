@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 18:16:14 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 20:20:02 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,8 @@ void	usage_option(char c)
 
 /*
 ** f_error:
-**	affect a value given in parameters in a static if the value given is upper than 0
+**	affect a value given in parameters in a static
+**	if the value given is upper than 0
 **	if the value is 0 return the static value
 **	parameters
 **		a static value
@@ -69,27 +70,28 @@ void	*f_error(char value, void *data)
 void	str_error(int error)
 {
 	const char *tab[20] = {
-	"Aucune Erreur detecter",
-	"Un Malloc a Planter",
-	"Impossible de d'ouvrir e fichier",
-	"Impossible de lire le fichier",
+	"Aucune erreur\n",
+	"Un malloc a planter\n",
+	"Impossible de d'ouvrir le fichier\n",
+	"Impossible de lire le fichier\n",
+	"Une Erreur est survenu\n",
 	"",
 	"",
 	"",
-	"",
-	"Le Nombre de Chemin doit Etre au minimum de 1",
-	"Le Nombre de salle doit Etre au minimum de 2",
-	"Le Nombre de Fourmis ne peut pas etre negative",
-	"Le Nombre de Fourmis n'est Pas au bon format",
-	"Manque Le Debut de la fourmilere",
-	"Manque La Fin de la fourmiliere",
-	"Manque de chemins",
-	"",
-	"",
-	"",
+	"Le nombre de chemin doit etre au minimum de 1\n",
+	"Le nombre de salle doit etre au minimum de 2\n",
+	"Le nombre de fourmis ne peut pas etre negative\n",
+	"Le nombre de fourmis n'est pas au bon format\n",
+	"Manque le debut de la fourmilere\n",
+	"Manque la fin de la fourmiliere\n",
+	"Manque de chemins\n",
+	"2 salles ont le meme nom\n",
+	"2 salles ont les memes coordonnées\n",
+	"Attention: 2 chemins sont identiques\n",
 	"",
 	"",
 	};
 
-	dprintf(1, "%30s\n", tab[error]);
+	ft_putstr("----------------------------------\nmessage d'erreur: \n");
+	ft_putstr(tab[error]);
 }
