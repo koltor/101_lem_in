@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:41:19 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 18:35:08 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 16:50:12 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,11 +33,16 @@ UINT	get_number_of_ants(const char *s)
 	ants_number = 0;
 	if (!(s_cpy = ft_strdup(s)))
 		return (*(UINT*)f_error(ERR_MALLOC, &ants_number));
-	if (!(line = scan_line_line(s_cpy)))
+	line = scan_line_line(s_cpy);
+	while (is_room(line) == 1)
 	{
-		free(s_cpy);
-		scan_line_line(NULL);
-		return (*(UINT*)(f_error(ERR_OCCURD, &ants_number)));
+		line = scan_line_line(s_cpy);
+		if (!line)
+		{
+			free(s_cpy);
+			scan_line_line(NULL);
+			return (*(UINT*)(f_error(ERR_OCCURD, &ants_number)));
+		}
 	}
 	if (ft_strchr(line, ' '))
 	{
