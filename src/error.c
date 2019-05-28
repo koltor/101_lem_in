@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 20:20:02 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 15:20:52 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,7 @@ void	str_error(int error)
 	"Une Erreur est survenu\n",
 	"",
 	"",
-	"",
+	"erreur format de tube\n",
 	"Le nombre de chemin doit etre au minimum de 1\n",
 	"Le nombre de salle doit etre au minimum de 2\n",
 	"Le nombre de fourmis ne peut pas etre negative\n",

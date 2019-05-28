@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 18:35:21 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 16:02:08 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,9 @@ static t_bool	check_duplicate_tube(t_tube *t_tab, UINT size)
 			{
 				if (t_tab[i].salle1 == t_tab[j].salle1 &&
 										t_tab[i].salle2 == t_tab[j].salle2)
+					return (false);
+				else if (t_tab[i].salle1 == t_tab[j].salle2 &&
+							t_tab[i].salle2 == t_tab[j].salle1)
 					return (false);
 			}
 			j += 1;
@@ -103,6 +106,10 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(ERR_MALLOC, false, NULL, NULL));
 	if (!(s2 = ft_revstrsub_c(line, '-')))
 		return (exit_slft(ERR_MALLOC, false, s1, NULL));
+	if (!s1)
+		return (exit_slft(-1, false, s2, NULL));
+	if (!s2)
+		return (exit_slft(-1, false, s1, NULL));
 	if (!ft_strcmp(s1, s2))
 		return (exit_slft(-1, false, s1, s2));
 	if ((id = check_room_exist(s1, data->r_tab, data->rooms)) != -1)
@@ -131,7 +138,8 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 
 void			get_tube(char *file_line, t_data *data, char *line)
 {
-	UINT id;
+	UINT	id;
+	int		ret;
 
 	id = 1;
 	if (!is_tube(line))
@@ -143,7 +151,7 @@ void			get_tube(char *file_line, t_data *data, char *line)
 		}
 	while ((line = scan_line_line(file_line)))
 	{
-		if (!is_tube(line))
+		if (!(ret = is_tube(line)))
 		{
 			if (split_line_for_tube(line, data, &data->t_tab[id]))
 			{
@@ -151,6 +159,11 @@ void			get_tube(char *file_line, t_data *data, char *line)
 				break ;
 			}
 			id += 1;
+		}
+		else if (ret == -1)
+		{
+			f_error(ERR_TUBES_FORMAT, NULL);
+			break ;
 		}
 	}
 	if (check_duplicate_tube(data->t_tab, data->tubes))

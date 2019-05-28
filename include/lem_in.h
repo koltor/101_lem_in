@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 20:19:33 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 15:21:01 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,6 +104,7 @@ char				*skip_room(char *s);
 # define ERR_OPEN			2  //impossible d'ouvrir
 # define ERR_READ			3  //impossible de lire
 # define ERR_OCCURD			4  //une erreur est survenu
+# define ERR_TUBES_FORMAT	7  // erreur format de tube
 # define ERR_TUBES			8  // au moins 1 chemin
 # define ERR_ROOMS			9  // au moins 2 salles
 # define ERR_ANTS			10 // le nombre de fourmis ne peut pas etre negatif

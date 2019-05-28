@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 11:54:49 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 15:37:11 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ int		main(int ac, char **av)
 	option = 0;
 	if (ac >= 2)
 	{
-		av = get_option(ac, &av[1], &option);
+		av = get_option(ac - 1, &av[1], &option);
 		lem_in(*av, option);
 	}
 	else
