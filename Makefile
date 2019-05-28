@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/05/28 15:55:02 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/28 18:47:52 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -48,7 +48,7 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(NAME_OBJ))
 PARSING_OBJ	= $(addprefix $(PARSING_OBJ_PATH)/,$(PARSING_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc#-g3 -fsanitize=address
+CC			= gcc -g3 -fsanitize=address
 CFLAGS		= -Wall -Wextra -Werror
 
 #librairies

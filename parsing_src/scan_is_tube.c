@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:45:46 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:33:13 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 17:45:07 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@
 **	return value
 **		0 OK it's a Tube
 **		1 NO it's a Comment
-**		2 NO it's not a Tube
+**		-1 NO it's not a Tube
 */
 
 int		is_tube(const char *s)

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:21:01 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 19:23:45 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,12 +46,14 @@ typedef struct		s_room
 	char			*name;
 	int				x;
 	int				y;
+	t_tube 			*tubes;
 }					t_room;
 
 typedef	struct		s_tube
 {
 	UINT			salle1;
 	UINT			salle2;
+	UINT			path_id;
 }					t_tube;
 
 typedef struct		s_data
@@ -91,7 +93,7 @@ int					is_room(const char *s);
 int					is_tube(const char *s);
 int					is_order(const char *s);
 
-void				skip_ants_number(char *s);
+t_bool				skip_ants_number(char *s);
 char				*skip_room(char *s);
 
 /*
@@ -100,21 +102,28 @@ char				*skip_room(char *s);
 **************************************************
 */
 
-# define ERR_MALLOC 		1  // malloc a planté
-# define ERR_OPEN			2  //impossible d'ouvrir
-# define ERR_READ			3  //impossible de lire
-# define ERR_OCCURD			4  //une erreur est survenu
-# define ERR_TUBES_FORMAT	7  // erreur format de tube
-# define ERR_TUBES			8  // au moins 1 chemin
-# define ERR_ROOMS			9  // au moins 2 salles
-# define ERR_ANTS			10 // le nombre de fourmis ne peut pas etre negatif
-# define ERR_ANTS_SPACE		11 // espace present autour du nombre de fourmis
-# define ERR_LACK_BEGIN		12 // pas de debut dans la fourmiliere
-# define ERR_LACK_END		13 // pas de fin dans la fourmiliere
-# define ERR_LACK_TUBE		14 // pas de fin dans la fourmiliere
-# define ERR_DUPL_ROOM		15 // 2 salles ont le meme nom
-# define ERR_DUPL_XY_ROOM	16 // 2 salles ont les meme coordonnées
-# define ERR_DUPL_TUBE		17 // Attention: 2 chemins sont identiques
+# define ERR_MALLOC 			1  // malloc a planté
+# define ERR_OPEN				2  //impossible d'ouvrir
+# define ERR_READ				3  //impossible de lire
+# define ERR_OCCURD				4  //une erreur est survenu
+# define ERR_DUPLICATE_STR		5 //
+# define ERR_DUPLICATE_END		6 //
+# define ERR_TUBES_FORMAT		7  // erreur format de tube
+# define ERR_TUBES				8  // au moins 1 chemin
+# define ERR_ROOMS				9  // au moins 2 salles
+# define ERR_ANTS				10 // le nombre de fourmis ne peut pas etre negatif
+# define ERR_ANTS_SPACE			11 // espace present autour du nombre de fourmis
+# define ERR_LACK_BEGIN			12 // pas de debut dans la fourmiliere
+# define ERR_LACK_END			13 // pas de fin dans la fourmiliere
+# define ERR_ROOM_FORMAT		14 // erreur format de room
+# define ERR_DUPL_ROOM			15 // 2 salles ont le meme nom
+# define ERR_DUPL_XY_ROOM		16 // 2 salles ont les meme coordonnées
+# define ERR_DUPL_TUBE			17 // Attention: 2 chemins sont identiques
+# define ERR_LINK_TUBE_ITSELF	18 // Attention: 2 chemins sont identiques
+# define ERR_EMPTY_FILE			19 // fichier vide
+# define ERR_ORDER				20 // ordre invalide
+# define ERR_OVERFLOW			21 // overflow sur les salles
+# define ERR_ONLY_COMMENT		22 // que des commentaires
 
 void				usage(void);
 void				usage_option(char c);
@@ -139,5 +148,5 @@ void				debug_main(int option);
 size_t				ft_strlenc(const char *s, char c);
 char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
-int					atoi_id(const char *s, char c, UINT index);
+long				atol_id(const char *s, char c, UINT index);
 #endif

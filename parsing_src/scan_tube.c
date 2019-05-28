@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:43:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 18:34:59 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 17:54:31 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,6 @@ UINT	get_number_of_tube(const char *s)
 	scan_line_line(NULL);
 	free(s_cpy);
 	if (nb_tube < 1)
-		f_error(ERR_TUBES, NULL);
+		f_error(ERR_ROOM_FORMAT, NULL);
 	return (nb_tube);
 }

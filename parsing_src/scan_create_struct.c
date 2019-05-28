@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:27:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:39:07 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 19:23:44 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,7 @@ t_room	*create_room(UINT size)
 		return (f_error(ERR_MALLOC, NULL));
 	while (size--)
 	{
+		room_tab[size].tubes = NULL;
 		room_tab[size].name = NULL;
 		room_tab[size].x = 0;
 		room_tab[size].y = 0;
@@ -83,6 +84,7 @@ t_tube	*create_tube(UINT size)
 	{
 		tube_tab[size].salle1 = 0;
 		tube_tab[size].salle2 = 0;
+		tube_tab[size].path_id = 0;
 	}
 	return (tube_tab);
 }

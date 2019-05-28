@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:42:37 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 16:49:32 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 18:50:49 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,8 @@ UINT	get_number_of_room(const char *s)
 	nb_room = 0;
 	if (!(s_cpy = ft_strdup(s)))
 		return (*(UINT*)f_error(ERR_MALLOC, &nb_room));
-	skip_ants_number(s_cpy);
+	if (skip_ants_number(s_cpy))
+		return (nb_room);
 	while ((line = scan_line_line(s_cpy)))
 	{
 		if ((ret = is_room(line)) == 0)

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 16:02:08 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 19:06:13 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,13 +28,25 @@ static t_bool	check_duplicate_tube(t_tube *t_tab, UINT size)
 			{
 				if (t_tab[i].salle1 == t_tab[j].salle1 &&
 										t_tab[i].salle2 == t_tab[j].salle2)
+				{
+					f_error(ERR_DUPL_TUBE, NULL);
 					return (false);
+				}
 				else if (t_tab[i].salle1 == t_tab[j].salle2 &&
 							t_tab[i].salle2 == t_tab[j].salle1)
+				{
+					f_error(ERR_DUPL_TUBE, NULL);
 					return (false);
+				}
 			}
 			j += 1;
 		}
+		if (t_tab[i].salle1 == t_tab[i].salle2)
+		{
+			f_error(ERR_LINK_TUBE_ITSELF, NULL);
+			return (false);
+		}
+
 		i += 1;
 	}
 	return (true);
@@ -110,8 +122,6 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(-1, false, s2, NULL));
 	if (!s2)
 		return (exit_slft(-1, false, s1, NULL));
-	if (!ft_strcmp(s1, s2))
-		return (exit_slft(-1, false, s1, s2));
 	if ((id = check_room_exist(s1, data->r_tab, data->rooms)) != -1)
 		tube->salle1 = id;
 	else
@@ -145,7 +155,6 @@ void			get_tube(char *file_line, t_data *data, char *line)
 	if (!is_tube(line))
 		if (split_line_for_tube(line, data, &data->t_tab[0]))
 		{
-			f_error(ERR_LACK_TUBE, NULL);
 			data->tubes = 0;
 			return ;
 		}
@@ -166,6 +175,5 @@ void			get_tube(char *file_line, t_data *data, char *line)
 			break ;
 		}
 	}
-	if (check_duplicate_tube(data->t_tab, data->tubes))
-		f_error(ERR_DUPL_TUBE, NULL);
+	check_duplicate_tube(data->t_tab, data->tubes);
 }

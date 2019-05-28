@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 18:12:13 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 15:49:23 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 18:35:58 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,9 +74,9 @@ char	*ft_revstrsub_c(const char *src, char c)
 **		a number afer skip a certain number of skipping char
 */
 
-int		atoi_id(const char *s, char c, UINT index)
+long	atol_id(const char *s, char c, UINT index)
 {
-	int i;
+	long i;
 
 	i = 0;
 	while (s[i] && index)
@@ -86,5 +86,5 @@ int		atoi_id(const char *s, char c, UINT index)
 		index -= 1;
 		i++;
 	}
-	return (ft_atoi(&s[i]));
+	return (ft_atol(&s[i]));
 }

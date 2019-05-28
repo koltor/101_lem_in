@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 18:35:31 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 18:44:54 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
 				f_error(ERR_DUPL_ROOM, NULL);
 				return (false);
 			}
-			else if (r_tab[id].x == r_tab[i].x && r_tab[id].y == r_tab[i].y)
+			else if (r_tab[i].name && r_tab[id].x == r_tab[i].x && r_tab[id].y == r_tab[i].y)
 			{
 				f_error(ERR_DUPL_XY_ROOM, NULL);
 				return (false);
@@ -50,13 +50,24 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
 
 static t_bool	split_line_for_room(char *line, t_room *room)
 {
+	long x1;
+	long y1;
+
 	if (!(room->name = ft_strsub_c(line, ' ')))
 	{
 		f_error(ERR_MALLOC, NULL);
 		return (false);
 	}
-	room->x = atoi_id(line, ' ', 1);
-	room->y = atoi_id(line, ' ', 2);
+	x1 = atol_id(line, ' ', 1);
+	y1 = atol_id(line, ' ', 2);
+	if (x1 < -2147483648 || y1 < -2147483648 ||
+		x1 > 2147483647 || y1 > 2147483647)
+	{
+		f_error(ERR_OVERFLOW, NULL);
+		return (false);
+	}
+	room->x = (int)x1;
+	room->y = (int)y1;
 	return (true);
 }
 
@@ -97,10 +108,25 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 {
 	if (*order == 1 || *order == 2)
 	{
+		if (data->r_tab[0].name != NULL && *order == 1)
+		{
+			f_error(ERR_DUPLICATE_STR, NULL);
+			return (false);
+		}
+		if (data->r_tab[1].name != NULL && *order == 2)
+		{
+			f_error(ERR_DUPLICATE_END, NULL);
+			return (false);
+		}
 		if (split_line_for_room(line, &data->r_tab[*order - 1]))
 			return (false);
 		if (check_duplicate_room(*order - 1, data->r_tab, *ir))
 			return (reset_one_room(&data->r_tab[*order - 1]));
+		else if (data->r_tab[*order - 1].name[0] == 'L')
+		{
+			f_error(ERR_ROOM_FORMAT, NULL);
+			return (reset_one_room(&data->r_tab[*order - 1]));
+		}
 	}
 	else if (*order == 0 && *ir < data->rooms)
 	{
@@ -108,6 +134,11 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 			return (false);
 		if (check_duplicate_room(*ir, data->r_tab, *ir))
 			return (reset_one_room(&data->r_tab[*ir]));
+		else if (data->r_tab[*ir].name[0] == 'L')
+		{
+			f_error(ERR_ROOM_FORMAT, NULL);
+			return (reset_one_room(&data->r_tab[*ir]));
+		}
 		*ir = *ir + 1;
 	}
 	*order = 0;
@@ -148,8 +179,13 @@ char			*get_room(char *file_line, t_data *data)
 			continue ;
 		if (type == 0)
 			if (select_ben(line, data, &order, &ir))
+			{
+				data->rooms = ir;
 				return (NULL);
+			}
 	}
+	if (order)
+		return (f_error(ERR_ORDER, NULL));	
 	if (data->r_tab[0].name == NULL || data->r_tab[1].name == NULL)
 	{
 		data->r_tab[0].name == NULL ? f_error(ERR_LACK_BEGIN, NULL) : 0;

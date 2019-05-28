@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 16:42:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 19:17:55 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,7 +68,11 @@ t_bool	lem_in(const char *path, int option)
 	t_data	data;
 
 	if (!(file_line = parsing_into_line(path)))
+	{
+		if (*(char*)f_error(0, NULL) == 0)
+			f_error(ERR_EMPTY_FILE, NULL);
 		return (exit_lem_in_error(NULL, NULL, NULL));
+	}
 	if ((data.rooms = get_number_of_room(file_line)) < 2)
 		return (exit_lem_in_error(file_line, NULL, NULL));
 	if ((data.tubes = get_number_of_tube(file_line)) < 1)
@@ -78,6 +82,7 @@ t_bool	lem_in(const char *path, int option)
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(file_line, data.r_tab, NULL));
 	stock_anthill(file_line, &data);
+	// get nodes
 	if (D)
 		debug_lem_in(&data);
 	return (exit_lem_in_ok(file_line, &data));
