@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/05/28 18:47:52 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/29 18:59:30 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -41,6 +41,7 @@ PARSING_NAME_OBJ 	= $(NAME_SRC_PARSING:.c=.o)
 #les sources
 SRC		 =  $(addprefix $(SRC_PATH)/,$(NAME_SRC))
 SRC		+=  $(addprefix $(PARSING_SRC_PATH)/,$(NAME_SRC_PARSING))
+
 HEADER	=  $(INC_PATH)/lem_in.h
 
 # les objects

@@ -6,12 +6,33 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:41:19 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 18:15:15 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/29 18:20:38 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static UINT	exit_get_nb_of_ant(char *line, UINT ants_number, char error)
+{
+	free(line);
+	scan_line_line(NULL);
+	return (*(UINT*)(f_error(error, &ants_number)));
+}
+
+static char	*skip_first_comment(char *s_cpy)
+{
+	char *line;
+
+	while ((line = scan_line_line(s_cpy)))
+	{
+		if (!line)
+			return (NULL);
+		if (is_room(line) != 1)
+			break ;
+	}
+	return (line);
+}
 
 /*
 ** get_number_of_ants:
@@ -24,7 +45,7 @@
 **		the number of ants and affect an error of a problem as occurd
 */
 
-UINT	get_number_of_ants(const char *s)
+UINT		get_number_of_ants(const char *s)
 {
 	long	ants_number;
 	char	*line;
@@ -33,28 +54,12 @@ UINT	get_number_of_ants(const char *s)
 	ants_number = 0;
 	if (!(s_cpy = ft_strdup(s)))
 		return (*(UINT*)f_error(ERR_MALLOC, &ants_number));
-	
-	while ((line = scan_line_line(s_cpy)))
-	{
-		if (!line)
-		{
-			free(s_cpy);
-			scan_line_line(NULL);
-			return (*(UINT*)(f_error(ERR_OCCURD, &ants_number)));
-		}
-		if (is_room(line) != 1)
-			break ;
-	}
+	if (!(line = skip_first_comment(s_cpy)))
+		return (exit_get_nb_of_ant(s_cpy, ants_number, ERR_OCCURD));
 	if (ft_strchr(line, ' '))
-	{
-		scan_line_line(NULL);
-		free(s_cpy);
-		return (*(UINT*)(f_error(ERR_ANTS_SPACE, &ants_number)));
-	}
+		return (exit_get_nb_of_ant(s_cpy, ants_number, ERR_ANTS_SPACE));
 	ants_number = ft_atol(line);
-	scan_line_line(NULL);
-	free(s_cpy);
 	if (ants_number <= 0 || ants_number >= (long)2147483648)
-		return (*(UINT*)(f_error(ERR_ANTS, &ants_number)));
-	return ((UINT)ants_number);
+		return (exit_get_nb_of_ant(s_cpy, ants_number, ERR_ANTS));
+	return (exit_get_nb_of_ant(s_cpy, ants_number, -1));
 }

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 19:23:45 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/29 18:11:39 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,8 @@ typedef struct		s_room
 	char			*name;
 	int				x;
 	int				y;
-	t_tube 			*tubes;
+	UINT			nb_link_tubes;
+	struct s_room	*link_tubes;
 }					t_room;
 
 typedef	struct		s_tube
@@ -111,7 +112,7 @@ char				*skip_room(char *s);
 # define ERR_TUBES_FORMAT		7  // erreur format de tube
 # define ERR_TUBES				8  // au moins 1 chemin
 # define ERR_ROOMS				9  // au moins 2 salles
-# define ERR_ANTS				10 // le nombre de fourmis ne peut pas etre negatif
+# define ERR_ANTS				10 // le nombre de ants ne peut pas etre negatif
 # define ERR_ANTS_SPACE			11 // espace present autour du nombre de fourmis
 # define ERR_LACK_BEGIN			12 // pas de debut dans la fourmiliere
 # define ERR_LACK_END			13 // pas de fin dans la fourmiliere

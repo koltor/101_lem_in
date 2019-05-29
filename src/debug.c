@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:36:14 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/29 18:08:01 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,22 +18,22 @@ static void	show_room(t_room *r_tab, UINT size)
 	UINT i;
 
 	i = 0;
-	dprintf(1, "\n------Les Salles Apres Stockage---------------\n");
-	dprintf(1, "ID    Status        Nom     X     Y      \n");
+	dprintf(1, "\n------------Les Salles Apres Stockage-----------------\n");
+	dprintf(1, "ID    Status        Nom     X     Y             liens\n");
 	while (i < size)
 	{
 		if (i == 0)
-			dprintf(1, "%-5u %6s %10s %5d %5d --> Debut\n", i, "Debut:",
-							r_tab[i].name, r_tab[i].x, r_tab[i].y);
+			dprintf(1, "%-5u %6s %10s %5d %5d --> Debut   %3d\n", i, "Debut:",
+				r_tab[i].name, r_tab[i].x, r_tab[i].y, r_tab[i].nb_link_tubes);
 		else if (i == 1)
-			dprintf(1, "%-5u %6s %10s %5d %5d --> Fin\n", i, "Fin:",
-							r_tab[i].name, r_tab[i].x, r_tab[i].y);
+			dprintf(1, "%-5u %6s %10s %5d %5d --> Fin     %3d\n", i, "Fin:",
+				r_tab[i].name, r_tab[i].x, r_tab[i].y, r_tab[i].nb_link_tubes);
 		else
-			dprintf(1, "%-5u salle: %10s %5d %5d\n", i,
-							r_tab[i].name, r_tab[i].x, r_tab[i].y);
+			dprintf(1, "%-5u salle: %10s %5d %5d             %3d\n", i,
+				r_tab[i].name, r_tab[i].x, r_tab[i].y, r_tab[i].nb_link_tubes);
 		i++;
 	}
-	dprintf(1, "-------------------Fin------------------------\n");
+	dprintf(1, "----------------------------Fin------------------------\n");
 }
 
 static void	show_tube(t_tube *t_tab, UINT size, t_room *r_tab)
@@ -55,7 +55,7 @@ static void	show_tube(t_tube *t_tab, UINT size, t_room *r_tab)
 
 void		debug_lem_in(t_data *data)
 {
-	dprintf(1, "-----------Information General----------------\n");
+	dprintf(1, "------------------Information General-----------------\n");
 	dprintf(1, "salle:%4u    tube:%4u    fourmis:%5u\n", data->rooms,
 												data->tubes, data->ants);
 	show_room(data->r_tab, data->rooms);
