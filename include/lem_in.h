@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/29 18:11:39 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/30 11:38:10 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ typedef struct		s_room
 	int				x;
 	int				y;
 	UINT			nb_link_tubes;
-	struct s_room	*link_tubes;
+	UINT			*link_tubes;
 }					t_room;
 
 typedef	struct		s_tube
@@ -99,6 +99,14 @@ char				*skip_room(char *s);
 
 /*
 **************************************************
+***********************PART 1*********************
+**************************************************
+*/
+
+void				get_nodes(t_data *data);
+
+/*
+**************************************************
 ***********************ERROR**********************
 **************************************************
 */
@@ -139,6 +147,7 @@ void				str_error(int error);
 
 void				debug_lem_in(t_data *data);
 void				debug_main(int option);
+void				show_tab_tubes(UINT id_room, t_data *data);
 
 /*
 ***************************************************

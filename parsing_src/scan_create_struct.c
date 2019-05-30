@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:27:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/29 17:55:47 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/30 12:34:00 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,8 @@ void	free_room(t_room *r_tab, UINT size)
 	{
 		if (r_tab[i].name)
 			free(r_tab[i].name);
+		if (r_tab[i].link_tubes)
+			free(r_tab[i].link_tubes);
 		i++;
 	}
 	free(r_tab);

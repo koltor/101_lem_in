@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/05/29 18:59:30 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/30 11:40:16 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -27,7 +27,7 @@ INC_PATH			= include
 LIB_PATH			= .
 
 # nom des fichier code source (*.c)
-NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c
+NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c get_nodes.c
 
 NAME_SRC_PARSING	=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 						scan_get_room.c scan_get_tube.c scan_is_order.c \
@@ -49,7 +49,7 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(NAME_OBJ))
 PARSING_OBJ	= $(addprefix $(PARSING_OBJ_PATH)/,$(PARSING_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc -g3 -fsanitize=address
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
 #librairies

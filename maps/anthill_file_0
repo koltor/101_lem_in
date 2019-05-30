@@ -1,17 +1,18 @@
 114
 ##commentaire4
 ##start
-2 16 7
-5 14 5
-3 16 8
+salut 16 7
+bonjour 14 5
+hello 16 8
 ##commentaire5
 ##end
 # commentaire1
-4 22 0
+fin 22 0
 qwerty 79 14
-qwerty-2
-2-4
-3-2
-2-3
-3-4
+qwerty-salut
+salut-hello
+salut-bonjour
+bonjour-hello
+hello-fin
+bonjour-fin
 ##commentaire 2

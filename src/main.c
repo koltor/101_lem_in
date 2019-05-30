@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/29 18:05:22 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/30 12:36:38 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,6 +85,7 @@ t_bool	lem_in(const char *path, int option)
 	// get nodes
 	if (D)
 		debug_lem_in(&data);
+	get_nodes(&data); // a mettre dans un if pour protec malloc
 	return (exit_lem_in_ok(file_line, &data));
 }
 
