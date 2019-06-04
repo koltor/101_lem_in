@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 20:01:51 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 22:18:47 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -98,26 +98,4 @@ void			debug_lem_in(t_data *data)
 	show_room(data->r_tab, data->rooms);
 	show_tube(data->t_tab, data->tubes, data->r_tab);
 	g_show_tab_tubes(data);
-}
-
-void			show_turns(t_turn *turns, UINT size)
-{
-	UINT i;
-
-	i = 0;
-	while (i < size)
-	{
-		dprintf(1, "id_room = %u, id_path = %u, turn_index = %u\n",
-					turns[i].id_room, turns[i].id_path, turns[i].turn);
-		i++;
-	}
-}
-
-void			debug_main(int option)
-{
-	char d;
-
-	d = *(char*)f_error(0, NULL);
-	dprintf(1, "     option: %d                Error: %d\n", option, (int)d);
-	str_error((int)d);
 }

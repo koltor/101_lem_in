@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 19:43:16 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 21:57:07 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,7 +66,7 @@ static void	detect_tubes(t_room *room, t_data *data, UINT id_room)
 	}
 }
 
-void		get_nodes(t_data *data)
+t_bool		get_nodes(t_data *data)
 {
 	UINT cp_room;
 	UINT id_room;
@@ -77,7 +77,7 @@ void		get_nodes(t_data *data)
 	if ((ret = malloc_link_tubes(data)))
 	{
 		exit_get_node_malloc_error(data, ret + 1);
-		return ;
+		return (false);
 	}
 	while (cp_room)
 	{
@@ -85,4 +85,5 @@ void		get_nodes(t_data *data)
 		id_room++;
 		cp_room--;
 	}
+	return (true);
 }

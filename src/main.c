@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 19:44:02 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 22:05:10 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,7 @@ t_bool	lem_in(const char *path, int option)
 	{
 		if (*(char*)f_error(0, NULL) == 0)
 			f_error(ERR_EMPTY_FILE, NULL);
-		return (exit_lem_in_error(NULL, NULL, NULL));
+		return (exit_lem_in_error(file_line, NULL, NULL));
 	}
 	if ((data.rooms = get_number_of_room(file_line)) < 2)
 		return (exit_lem_in_error(file_line, NULL, NULL));
@@ -81,11 +81,13 @@ t_bool	lem_in(const char *path, int option)
 		return (exit_lem_in_error(file_line, NULL, NULL));
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(file_line, data.r_tab, NULL));
-	stock_anthill(file_line, &data);
-	get_nodes(&data); // a mettre dans un if pour protec malloc
-	browse_map(&data);
-	if (D)
-		debug_lem_in(&data);
+	if (stock_anthill(file_line, &data))
+		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	if (get_nodes(&data))
+		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	if (browse_map(&data))
+		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	D ? debug_lem_in(&data) : 0;
 	return (exit_lem_in_ok(file_line, &data));
 }
 

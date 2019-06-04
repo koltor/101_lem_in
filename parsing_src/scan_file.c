@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/20 12:17:24 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:09:00 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 22:14:25 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,8 @@ char	*parsing_into_line(const char *path)
 		free(tmp);
 		tmp = line_return;
 	}
+	if (line_return == NULL)
+		free(tmp);
 	return (line_return);
 }
 

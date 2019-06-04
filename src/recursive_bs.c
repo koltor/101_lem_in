@@ -6,29 +6,26 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 14:38:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 20:51:28 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 21:43:15 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-UINT	destroy_path(t_turn *turns, UINT parent, UINT id_turn, UINT child)
+UINT	destroy_path(t_turn *turns, UINT old_children, UINT id_turn, UINT child)
 {
-	while (++id_turn < parent + child)
+	UINT ipath;
+
+	ipath = turns[id_turn].id_path;
+	while (++id_turn < old_children + child)
 	{
-		if (turns[id_turn].id_path == turns[id_turn].id_path)
+		if (turns[id_turn].id_path == ipath)
 		{
 			turns[id_turn].turn = turns[id_turn].turn - 1;
 		}
 	}
 	return (child);
-}
-
-void	set_parent(t_tube *tube, UINT lap, UINT id_path)
-{
-	tube->path_id = id_path;
-	tube->turn = lap;
 }
 
 UINT	set_children(t_turn *turn, UINT lap, UINT id_room, UINT id_path)
@@ -39,46 +36,51 @@ UINT	set_children(t_turn *turn, UINT lap, UINT id_room, UINT id_path)
 	return (1);
 }
 
-UINT	lap_room_managment(t_tube *tubes, t_room *room, t_turn *turns, UINT lap, UINT id_turn, UINT old_children)
+UINT	lap_r_managment(t_data *dt, t_turn *turns, UINT id_turn, UINT old_child)
 {
-	UINT i;
-	UINT children;
-	UINT room_id;
+	UINT	i;
+	UINT	lap;
+	UINT	children;
+	t_turn	old_t;
+	t_room	room;
 
-	i = 0;
+	i = -1;
+	lap = turns[id_turn].turn + 1;
 	children = 0;
-	while (i < room->nb_link_tubes)
+	old_t = turns[id_turn];
+	room = dt->r_tab[turns[id_turn].id_room];
+	while (++i < room.nb_link_tubes)
 	{
-		if (tubes[room->link_tubes[i]].path_id == 0)
+		if (dt->t_tab[room.link_tubes[i]].path_id == 0)
 		{
-			room_id = get_id_room(tubes[room->link_tubes[i]], turns[id_turn].id_room);
-			set_parent(&tubes[room->link_tubes[i]], lap, turns[id_turn].id_path);
-			children += set_children(&turns[old_children + children], lap, room_id, turns[id_turn].id_path);
-			if (get_id_room(tubes[room->link_tubes[i]], turns[id_turn].id_room) == 1)
-				return (destroy_path(turns, old_children, id_turn, children));
+			dt->t_tab[room.link_tubes[i]].turn = lap;
+			dt->t_tab[room.link_tubes[i]].path_id = old_t.id_path;
+			children += set_children(&turns[old_child + children], lap,
+				get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room),
+					old_t.id_path);
+			if (get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room) == 1)
+				return (destroy_path(turns, old_child, id_turn, children));
 		}
-		i++;
 	}
 	return (children);
 }
 
 UINT	lap_managment(t_data *data, t_turn *turns, UINT parent, UINT lap)
 {
-	UINT id_turn;
-	UINT children;
+	UINT turn_id;
+	UINT child;
 
-	id_turn = 0;
-	children = 0;
-	while (id_turn < parent)
+	turn_id = 0;
+	child = 0;
+	while (turn_id < parent)
 	{
-		if (turns[id_turn].turn == lap - 1)
+		if (turns[turn_id].turn == lap - 1)
 		{
-			children += lap_room_managment(data->t_tab,
-				&data->r_tab[turns[id_turn].id_room], turns, lap, id_turn, parent + children);
+			child += lap_r_managment(data, turns, turn_id, parent + child);
 		}
-		id_turn++;
+		turn_id++;
 	}
-	return (children);
+	return (child);
 }
 
 void	recursive_bs_turn(t_data *data, t_turn *turns, UINT parent, UINT lap)

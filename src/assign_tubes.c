@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 20:01:29 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 22:15:22 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,13 +60,16 @@ static void		start_columns(UINT nb_columns, t_room *start,
 	}
 }
 
-void			browse_map(t_data *data)
+t_bool			browse_map(t_data *data)
 {
 	t_turn	*turns;
 	UINT	nbr_col;
 
-	turns = init_turn(data->tubes);
+	if (!(turns = init_turn(data->tubes)))
+		return (false);
 	nbr_col = get_nbr_columns(data->r_tab[0], data->r_tab[1]);
 	start_columns(nbr_col, &data->r_tab[0], data->t_tab, turns);
 	recursive_bs_turn(data, turns, data->r_tab[0].nb_link_tubes, 2);
+	free(turns);
+	return (true);
 }

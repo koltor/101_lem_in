@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 20:01:17 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 21:57:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,7 +111,7 @@ char				*skip_room(char *s);
 **************************************************
 */
 
-void				get_nodes(t_data *data);
+t_bool				get_nodes(t_data *data);
 
 /*
 **************************************************
@@ -119,7 +119,7 @@ void				get_nodes(t_data *data);
 **************************************************
 */
 
-void				browse_map(t_data *data);
+t_bool				browse_map(t_data *data);
 void				recursive_bs_turn(t_data *data, t_turn *turns, UINT turn_nb, UINT lap);
 UINT				get_id_room(t_tube tubes, UINT id_room);
 
