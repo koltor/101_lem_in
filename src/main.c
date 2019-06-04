@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 16:20:48 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 19:44:02 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,11 +82,8 @@ t_bool	lem_in(const char *path, int option)
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(file_line, data.r_tab, NULL));
 	stock_anthill(file_line, &data);
-
-	// get nodes
 	get_nodes(&data); // a mettre dans un if pour protec malloc
 	browse_map(&data);
-
 	if (D)
 		debug_lem_in(&data);
 	return (exit_lem_in_ok(file_line, &data));

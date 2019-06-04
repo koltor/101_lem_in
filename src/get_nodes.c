@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   algo.c                                           .::    .:/ .      .::   */
+/*   get_nodes.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: matheme <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 13:17:24 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 19:43:16 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,7 @@
 static void	exit_get_node_malloc_error(t_data *data, UINT size)
 {
 	UINT cp_room;
+
 	cp_room = data->rooms;
 	while (size--)
 		free(data->r_tab[size].link_tubes);
@@ -25,12 +26,13 @@ static UINT	malloc_link_tubes(t_data *data)
 {
 	UINT cp_room;
 	UINT i;
-	
+
 	i = 0;
 	cp_room = data->rooms;
 	while (cp_room)
 	{
-		if (!(data->r_tab[i].link_tubes = (UINT *)malloc(sizeof(UINT) * data->r_tab[i].nb_link_tubes)))
+		if (!(data->r_tab[i].link_tubes = (UINT *)malloc(sizeof(UINT) *
+											data->r_tab[i].nb_link_tubes)))
 			return (*(UINT*)f_error(ERR_MALLOC, &i));
 		i++;
 		cp_room--;
@@ -64,7 +66,7 @@ static void	detect_tubes(t_room *room, t_data *data, UINT id_room)
 	}
 }
 
-void	get_nodes(t_data *data)
+void		get_nodes(t_data *data)
 {
 	UINT cp_room;
 	UINT id_room;
@@ -80,7 +82,6 @@ void	get_nodes(t_data *data)
 	while (cp_room)
 	{
 		detect_tubes(&data->r_tab[id_room], data, id_room);
-	//	show_tab_tubes(id_room, data);
 		id_room++;
 		cp_room--;
 	}

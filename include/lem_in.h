@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 17:30:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 20:01:17 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ typedef	struct		s_turn
 {
 	UINT			id_room;
 	UINT			id_path;
-	UINT			index_turn;
+	UINT			turn;
 }					t_turn;
 
 typedef struct		s_data
@@ -165,7 +165,7 @@ void				str_error(int error);
 
 void				debug_lem_in(t_data *data);
 void				debug_main(int option);
-void				show_turns(t_turn *turns, t_data *data);
+void				show_turns(t_turn *turns, UINT size);
 
 /*
 ***************************************************
