@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/05/30 16:21:56 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/04 15:46:32 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -21,7 +21,7 @@ PARSING_SRC_PATH	= parsing_src
 SRC_PATH			= src
 #object
 OBJ_PATH			= obj
-PARSING_OBJ_PATH	= parsing_obj
+PARSING_OBJ_PATH	= obj
 
 INC_PATH			= include
 LIB_PATH			= .
