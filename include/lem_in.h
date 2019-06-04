@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 11:38:10 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/30 17:30:08 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,15 @@ typedef	struct		s_tube
 	UINT			salle1;
 	UINT			salle2;
 	UINT			path_id;
+	UINT			turn;
 }					t_tube;
+
+typedef	struct		s_turn
+{
+	UINT			id_room;
+	UINT			id_path;
+	UINT			index_turn;
+}					t_turn;
 
 typedef struct		s_data
 {
@@ -107,6 +115,16 @@ void				get_nodes(t_data *data);
 
 /*
 **************************************************
+***********************PART 2*********************
+**************************************************
+*/
+
+void				browse_map(t_data *data);
+void				recursive_bs_turn(t_data *data, t_turn *turns, UINT turn_nb, UINT lap);
+UINT				get_id_room(t_tube tubes, UINT id_room);
+
+/*
+**************************************************
 ***********************ERROR**********************
 **************************************************
 */
@@ -147,7 +165,7 @@ void				str_error(int error);
 
 void				debug_lem_in(t_data *data);
 void				debug_main(int option);
-void				show_tab_tubes(UINT id_room, t_data *data);
+void				show_turns(t_turn *turns, t_data *data);
 
 /*
 ***************************************************

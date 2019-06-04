@@ -6,7 +6,7 @@
 /*   By: matheme <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 12:32:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/30 13:17:24 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,7 +80,7 @@ void	get_nodes(t_data *data)
 	while (cp_room)
 	{
 		detect_tubes(&data->r_tab[id_room], data, id_room);
-		show_tab_tubes(id_room, data);
+	//	show_tab_tubes(id_room, data);
 		id_room++;
 		cp_room--;
 	}
