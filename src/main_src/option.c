@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/06 15:05:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 15:13:55 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/31 11:04:10 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 /*
 **  1024 512 256 128  64  32  16   8   4   2   1
-**    -   -   -   -    -   -   -   -   -   -   d
+**    -   -   -   -    -   -   -   -   -   v   d
 **    0   0   0   0    0   0   0   0   0   0   0
 **
 ** Lors d'ajout d'option penser a rajouter l'option dans la liste des options
@@ -39,7 +39,8 @@ static int	ft_plugout_option(char c, int option)
 
 static int	ft_listing_option(char c, int option)
 {
-	c == 'd' ? option = option | +1 : 0;
+	c == 'd' ? option = option | 1 : 0;
+	c == 'v' ? option = option | 2 : 0;
 	option = ft_plugout_option(c, option);
 	return (option);
 }
@@ -98,7 +99,7 @@ char		**get_option(int ac, char **av, int *option)
 
 /*
 **  1024 512 256 128  64  32  16   8   4   2   1
-**    -   -   -   -    -   -   -   -   -   -   d
+**    -   -   -   -    -   -   -   -   -   v   d
 **    0   0   0   0    0   0   0   0   0   0   0
 **
 ** Lors d'ajout d'option penser a rajouter l'option dans la liste des options

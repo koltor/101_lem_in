@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 21:57:05 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/04 22:32:15 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,8 +32,9 @@
 ** help for option's comprehention
 */
 
-# define D (option & 1)
-# define LIST_OPTION "d"
+# define O_D (option & 1)
+# define O_V (option & 2)
+# define LIST_OPTION "vd"
 
 enum	e_bool
 {
@@ -177,4 +178,12 @@ size_t				ft_strlenc(const char *s, char c);
 char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
 long				atol_id(const char *s, char c, UINT index);
+
+/*
+**************************************************
+*******************VISUALISATEUR******************
+**************************************************
+*/
+
+void				main_visualisateur(t_data data);
 #endif
