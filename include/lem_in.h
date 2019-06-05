@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:46:45 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 18:10:14 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,8 @@
 
 # define O_D (option & 1)
 # define O_V (option & 2)
-# define LIST_OPTION "vd"
+# define O_I (option & 4)
+# define LIST_OPTION "vid"
 
 enum	e_bool
 {
@@ -169,6 +170,7 @@ void				str_error(int error);
 
 void				debug_lem_in(t_data *data);
 void				debug_main(int option);
+void				global_info(t_data *data);
 void				show_turns(t_turn *turns, UINT size);
 
 /*

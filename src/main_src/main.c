@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:45:56 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 18:10:09 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 
 static void		manage_option(t_data *data, int option)
 {
+	O_D || O_I ? global_info(data) : 0;
 	O_D ? debug_lem_in(data) : 0;
 	O_V ? main_visualisateur(*data) : 0;
 }
@@ -119,7 +120,7 @@ int				main(int ac, char **av)
 	}
 	else
 		usage();
-	if (O_D)
+	if (O_D || O_I)
 		debug_main(option);
 	return (0);
 }

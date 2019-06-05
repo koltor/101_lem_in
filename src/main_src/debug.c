@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 22:18:47 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 18:08:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,9 +92,6 @@ static void		g_show_tab_tubes(t_data *data)
 
 void			debug_lem_in(t_data *data)
 {
-	dprintf(1, "------------------Information General-----------------\n");
-	dprintf(1, "  salle: %-4u       tube: %-4u         fourmis: %-5u\n",
-	data->rooms, data->tubes, data->ants);
 	show_room(data->r_tab, data->rooms);
 	show_tube(data->t_tab, data->tubes, data->r_tab);
 	g_show_tab_tubes(data);

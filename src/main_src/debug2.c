@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/04 22:18:29 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 22:30:44 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 18:12:04 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,11 +26,18 @@ void			show_turns(t_turn *turns, UINT size)
 	}
 }
 
+void			global_info(t_data *data)
+{
+	dprintf(1, "------------------Information General-----------------\n");
+	dprintf(1, "  salle: %-4u       tube: %-4u         fourmis: %-5u\n",
+	data->rooms, data->tubes, data->ants);
+}
+
 void			debug_main(int option)
 {
 	char d;
 
 	d = *(char*)f_error(0, NULL);
-	dprintf(1, "     option: %d                Error: %d\n", option, (int)d);
+	dprintf(1, "  option: %d         error: %d\n", option, (int)d);
 	str_error((int)d);
 }
