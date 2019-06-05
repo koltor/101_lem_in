@@ -6,12 +6,18 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 22:31:43 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 17:45:56 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static void		manage_option(t_data *data, int option)
+{
+	O_D ? debug_lem_in(data) : 0;
+	O_V ? main_visualisateur(*data) : 0;
+}
 
 /*
 ** exit_lem_in_error:
@@ -21,10 +27,10 @@
 **		return false
 */
 
-t_bool	exit_lem_in_error(char *file_line, t_room *room, t_tube *tube)
+static t_bool	exit_lem_in_error(char *line, t_room *room, t_tube *tube)
 {
-	if (file_line)
-		free(file_line);
+	if (line)
+		free(line);
 	if (room)
 		free(room);
 	if (tube)
@@ -40,7 +46,7 @@ t_bool	exit_lem_in_error(char *file_line, t_room *room, t_tube *tube)
 **		return true
 */
 
-t_bool	exit_lem_in_ok(char *file_line, t_data *data)
+static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 {
 	free(file_line);
 	free(data->t_tab);
@@ -62,7 +68,7 @@ t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 **		otherwise return false
 */
 
-t_bool	lem_in(const char *path, int option)
+t_bool			lem_in(const char *path, int option)
 {
 	char	*file_line;
 	t_data	data;
@@ -87,8 +93,7 @@ t_bool	lem_in(const char *path, int option)
 		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	if (browse_map(&data))
 		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
-	O_D ? debug_lem_in(&data) : 0;
-	O_V ? main_visualisateur(data) : 0;
+	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }
 
@@ -102,7 +107,7 @@ t_bool	lem_in(const char *path, int option)
 **		int for stock options
 */
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	int option;
 

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:11:51 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 18:30:21 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 17:49:41 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,8 +20,8 @@
 /*
 ** size X and Y of windows
 */
-# define WIN_SIZE_X 700
-# define WIN_SIZE_Y 700
+# define WIN_SIZE_X 1700
+# define WIN_SIZE_Y 1000
 
 /*
 ** define for keyboard_keys
@@ -45,35 +45,38 @@
 # define A			0
 # define D			2
 # define R			15
+# define L			37
 
-typedef struct  	s_env
+typedef struct		s_env
 {
-	struct s_data	*data;		//pointeur vers la struct data
-	
-    void        	*mlx_ptr;	//pointeur vers la mlx
-    void        	*win_ptr;	//pointeur vers la fenetre
-	void			*img_ptr;	//pointeur vers l'image
+	struct s_data	*data;//pointeur vers la struct data
 
-	char			*img_str;	//str de l'image
-	int				bpp;		//besoin pour generer l'image
-	int				s_l;		//besoin pour generer l'image
-	int				endian;		//besoin pour generer l'image
+	void			*mlx_ptr;//pointeur vers la mlx
+	void			*win_ptr;//pointeur vers la fenetre
+	void			*img_ptr;//pointeur vers l'image
 
-	double			zoom;  		//permet de zoomer dans ou dezoomer dans la map
-	int				marge; 		//permet de mettre une marge minimum entre les salles
-	int				x_img; 		//permet de bouger l'image en X
-	int				y_img; 		//permet de bouger l'image en Y
-	int				color; 		// coulor des salles
+	char			*img_str;//str de l'image
+	int				bpp;//besoin pour generer l'image
+	int				s_l;//besoin pour generer l'image
+	int				endian;//besoin pour generer l'image
 
-	t_bool			help; //permet d'activer ou desactiver les aide de UI
-}               	t_env;
+	double			zoom;//zoomer dans ou dezoomer dans la map
+	int				marge;//mettre une marge minimum entre les salles
+	int				x_img;//bouger l'image en X
+	int				y_img;//bouger l'image en Y
+	int				color;// coulor des salles
 
-int			algo_bresenham(double index[4], t_env *env);
-int			fill_pixel(t_env *env, int x, int y);
-void		put_img(t_env *env, t_data data);
+	t_bool			highlight_path;//pour surligner les chemins
+	t_bool			help;//active ou desactive les aide de UI
+}					t_env;
 
+int					algo_bresenham(double index[4], t_env *env);
+int					fill_pixel(t_env *env, int x, int y);
+void				put_img(t_env *env, t_data data);
 
-int			keyboard_events(int key, void *data);
-int			mouse_events(int button, int x, int y, void *data);
-void		user_interface(t_env env);
+int					keyboard_events(int key, void *data);
+int					mouse_events(int button, int x, int y, void *data);
+void				user_interface(t_env env);
+void				legendary(t_env env);
+void				other_infomations(t_env env);
 #endif

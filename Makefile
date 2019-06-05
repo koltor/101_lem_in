@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/04 22:38:33 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/05 17:42:25 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -30,14 +30,16 @@ LIB_PATH			= librairies
 
 # nom des fichier code source (*.c)
 NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c get_nodes.c \
-						debug2.c recursive_bs.c assign_tubes.c
+						recursive_bs.c assign_tubes.c recursive_bs_destroy.c \
+						debug2.c
 
 NAME_SRC_PARSING	=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 						scan_get_room.c scan_get_tube.c scan_is_order.c \
 						scan_is_room.c scan_is_tube.c scan_other.c \
 						scan_room.c scan_skip.c scan_tube.c
 
-NAME_SRC_VISU		= main_visu.c algo_bresenham.c print.c event.c ui.c
+NAME_SRC_VISU		=	main_visu.c algo_bresenham.c print.c event.c ui.c \
+						ui2_legendary.c fill_pixel.c
 
 #nom des ficher objects (*.o)
 NAME_OBJ			= $(NAME_SRC:.c=.o)

@@ -6,27 +6,12 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 14:38:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 21:43:15 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 17:41:51 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-UINT	destroy_path(t_turn *turns, UINT old_children, UINT id_turn, UINT child)
-{
-	UINT ipath;
-
-	ipath = turns[id_turn].id_path;
-	while (++id_turn < old_children + child)
-	{
-		if (turns[id_turn].id_path == ipath)
-		{
-			turns[id_turn].turn = turns[id_turn].turn - 1;
-		}
-	}
-	return (child);
-}
 
 UINT	set_children(t_turn *turn, UINT lap, UINT id_room, UINT id_path)
 {
@@ -39,29 +24,28 @@ UINT	set_children(t_turn *turn, UINT lap, UINT id_room, UINT id_path)
 UINT	lap_r_managment(t_data *dt, t_turn *turns, UINT id_turn, UINT old_child)
 {
 	UINT	i;
-	UINT	lap;
 	UINT	children;
 	t_turn	old_t;
 	t_room	room;
 
 	i = -1;
-	lap = turns[id_turn].turn + 1;
 	children = 0;
 	old_t = turns[id_turn];
 	room = dt->r_tab[turns[id_turn].id_room];
 	while (++i < room.nb_link_tubes)
-	{
 		if (dt->t_tab[room.link_tubes[i]].path_id == 0)
 		{
-			dt->t_tab[room.link_tubes[i]].turn = lap;
+			dt->t_tab[room.link_tubes[i]].turn = turns[id_turn].turn + 1;
 			dt->t_tab[room.link_tubes[i]].path_id = old_t.id_path;
-			children += set_children(&turns[old_child + children], lap,
-				get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room),
-					old_t.id_path);
+			children += set_children(&turns[old_child + children],
+			turns[id_turn].turn + 1, get_id_room(dt->t_tab[room.link_tubes[i]],
+				old_t.id_room), old_t.id_path);
 			if (get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room) == 1)
-				return (destroy_path(turns, old_child, id_turn, children));
+			{
+				destroy_path(dt->t_tab, room, i);
+				return (destroy_turn(turns, old_child, id_turn, children));
+			}
 		}
-	}
 	return (children);
 }
 

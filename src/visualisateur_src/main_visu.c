@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:05:47 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/31 16:11:38 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 17:17:12 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,6 +29,7 @@ void		main_visualisateur(t_data data)
 	env.marge = 4;
 	env.zoom = 50;
 	env.help = false;
+	env.highlight_path = false;
 	env.x_img = WIN_SIZE_X / 4;
 	env.y_img = WIN_SIZE_Y / 4;
 	env.data = &data;

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 15:52:28 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/04 22:33:14 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/05 17:33:34 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,11 +18,12 @@ static void	reset(t_env *env)
 	env->marge = 4;
 	env->zoom = 50;
 	env->help = false;
+	env->highlight_path = false;
 	env->x_img = WIN_SIZE_X / 4;
 	env->y_img = WIN_SIZE_Y / 4;
 }
 
-int	keyboard_events(int key, void *data)
+int			keyboard_events(int key, void *data)
 {
 	t_env *env;
 
@@ -41,15 +42,17 @@ int	keyboard_events(int key, void *data)
 		env->y_img -= 3;
 	else if (key == RIGHT || key == D)
 		env->y_img += 3;
-    else if (key == H)
-        env->help = (env->help) ? true : false;
+	else if (key == H)
+		env->help = (env->help) ? true : false;
 	else if (key == R)
 		reset(env);
+	else if (key == L)
+		env->highlight_path = (env->highlight_path) ? true : false;
 	put_img(env, *(env->data));
 	return (0);
 }
 
-int	mouse_events(int button, int x, int y, void *data)
+int			mouse_events(int button, int x, int y, void *data)
 {
 	t_env *env;
 
