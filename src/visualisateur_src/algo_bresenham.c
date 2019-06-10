@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/11/23 10:18:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/31 15:23:22 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 17:57:36 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,6 +112,11 @@ static int	algo_bresenham_xn(double i[4], t_env *env, double e, double d)
 	}
 	return (0);
 }
+
+/*
+** algo_bresenham:
+**	allow the possibility to draw line in image
+*/
 
 int			algo_bresenham(double index[4], t_env *env)
 {

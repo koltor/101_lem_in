@@ -6,12 +6,25 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 17:35:18 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:36:00 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 17:31:20 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "visu_lem_in.h"
+
+/*
+** fill_pixel:
+**	parameters
+**		need the struct env
+**		the pos_x of the pixel you want to fill
+**		the pos_y of the pixel you want to fill
+**	variables
+**		int pos for save of the pixel in the string
+**	return value
+**		1 if the pixel is in the windown
+**		0 if the pixel is not in the windown
+*/
 
 int				fill_pixel(t_env *env, int x, int y)
 {

@@ -6,12 +6,20 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:05:47 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 16:19:18 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 16:47:01 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "visu_lem_in.h"
+
+/*
+** main_visualisateur:
+**	this is the main of the vizualiseur
+**	init all the strcut env and open the windown and the event
+**	parameters
+**		the stuct data
+*/
 
 void		main_visualisateur(t_data data)
 {

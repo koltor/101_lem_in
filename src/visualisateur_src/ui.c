@@ -6,12 +6,21 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 15:55:00 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 16:16:28 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 17:37:25 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "visu_lem_in.h"
+
+/*
+** helping_informations:
+** enabled the display of the value of the variable in the helping menu
+**	parameters
+**		need the struct env
+**		m is for mlx_ptr
+**		w is for win_ptr
+*/
 
 static void	helping_informations_value(t_env env, void *m, void *w)
 {
@@ -41,6 +50,13 @@ static void	helping_informations_value(t_env env, void *m, void *w)
 	free(depl_y);
 }
 
+/*
+** helping_informations:
+** enabled the display of the helping menu
+**	parameters
+**		need the struct env
+*/
+
 static void	helping_informations(t_env env)
 {
 	void	*m;
@@ -64,6 +80,14 @@ static void	helping_informations(t_env env)
 		mlx_string_put(m, w, WIN_SIZE_X - 100, 85, clr, "(actif)");
 	free(speed);
 }
+
+/*
+** number_information:
+** enabled the display of the number of room, ants and tubes
+**	parameters
+**		need the struct env
+**		number of ants, rooms and tubes
+*/
 
 static void	number_information(t_env env, char *ants, char *rooms, char *tubes)
 {
@@ -94,6 +118,15 @@ static void	number_information(t_env env, char *ants, char *rooms, char *tubes)
 	}
 }
 
+/*
+** first_informations:
+** enabled the display of the first insformation
+**	parameters
+**		need the struct env
+**		m is for mlx_ptr
+**		w is for win_ptr
+*/
+
 static void	first_informations(t_env env, void *m, void *w)
 {
 	int		clr;
@@ -116,6 +149,13 @@ static void	first_informations(t_env env, void *m, void *w)
 	else
 		mlx_string_put(m, w, WIN_SIZE_X - 100, 5, clr, "(actif)");
 }
+
+/*
+** user_interface:
+** enabled the display of the variable informations and help informations
+**	parameters
+**		need the struct env
+*/
 
 void		user_interface(t_env env)
 {

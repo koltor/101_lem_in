@@ -6,22 +6,33 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 15:52:28 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 16:14:12 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 17:57:03 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "visu_lem_in.h"
 
+/*
+** reset:
+**	small function to reset default params
+*/
+
 static void	reset(t_env *env)
 {
 	env->marge = 4;
 	env->zoom = 50;
+	env->speedo = 3;
 	env->help = false;
 	env->highlight_path = false;
 	env->x_img = WIN_SIZE_X / 4;
 	env->y_img = WIN_SIZE_Y / 4;
 }
+
+/*
+** keyboard_events2:
+**	the last part of a function call after a keyboard event
+*/
 
 int			keyboard_events2(int key, void *data)
 {
@@ -36,6 +47,11 @@ int			keyboard_events2(int key, void *data)
 		env->highlight_path = (env->highlight_path) ? true : false;
 	return (0);
 }
+
+/*
+** keyboard_events:
+**	the first part of a function call after a keyboard event
+*/
 
 int			keyboard_events(int key, void *data)
 {
@@ -64,6 +80,11 @@ int			keyboard_events(int key, void *data)
 	put_img(env, *(env->data));
 	return (0);
 }
+
+/*
+** keyboard_events:
+**	this is the fuction call after a mouse event
+*/
 
 int			mouse_events(int button, int x, int y, void *data)
 {
