@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 11:18:49 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 15:16:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,8 +35,6 @@ static t_bool	check_duplicate_tube(t_tube *t_tab, UINT size)
 						t_tab[i].salle2 == t_tab[j].salle1)
 				return (*(t_bool*)f_error(ERR_DUPL_TUBE, &value));
 		}
-		if (t_tab[i].salle1 == t_tab[i].salle2)
-			return (*(t_bool*)f_error(ERR_LINK_TUBE_ITSELF, &value));
 	}
 	return (true);
 }
@@ -101,24 +99,25 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 {
 	char *s1;
 	char *s2;
-	long id;
+	long id1;
+	long id2;
 
 	if (!(s1 = ft_strsub_c(line, '-')))
 		return (exit_slft(ERR_MALLOC, false, NULL, NULL));
 	if (!(s2 = ft_revstrsub_c(line, '-')))
 		return (exit_slft(ERR_MALLOC, false, s1, NULL));
-	if (!s1)
-		return (exit_slft(-1, false, s2, NULL));
-	if (!s2)
-		return (exit_slft(-1, false, s1, NULL));
-	if ((id = check_room_exist(s1, data->r_tab, data->rooms)) == -1)
+	if (!s1 || !s2)
 		return (exit_slft(-1, false, s1, s2));
-	data->r_tab[id].nb_link_tubes += 1;
-	tube->salle1 = id;
-	if ((id = check_room_exist(s2, data->r_tab, data->rooms)) == -1)
+	if ((id1 = check_room_exist(s1, data->r_tab, data->rooms)) == -1)
 		return (exit_slft(-1, false, s1, s2));
-	data->r_tab[id].nb_link_tubes += 1;
-	tube->salle2 = id;
+	if ((id2 = check_room_exist(s2, data->r_tab, data->rooms)) == -1)
+		return (exit_slft(-1, false, s1, s2));
+	if (id1 == id2)
+		return (exit_slft(ERR_LINK_TUBE_ITSELF, false, s1, s2));
+	data->r_tab[id2].nb_link_tubes += 1;
+	tube->salle2 = id2;
+	data->r_tab[id1].nb_link_tubes += 1;
+	tube->salle1 = id1;
 	return (exit_slft(-1, true, s1, s2));
 }
 

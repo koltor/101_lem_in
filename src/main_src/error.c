@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/29 18:10:48 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 14:54:58 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,7 +82,7 @@ void	str_error(int error)
 	"Manque la fin de la fourmiliere\n", "erreur format de room\n",
 	"2 salles ont le meme nom\n", "2 salles ont les memes coordonnées\n",
 	"Attention: 2 chemins sont identiques\n",
-	"Attention: une salle est relier a elle même\n",
+	"Une salle est relier a elle même\n",
 	"fichier vide\n", "ordre invalide\n", "overflow sur les salles\n",
 	"que des commentaires dans le fichier\n",
 	"\n", "\n", "\n", "\n", "\n", "\n", "\n",
