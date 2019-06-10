@@ -1,22 +1,31 @@
 #include "lem_in.h"
 
-void	set_path_list(t_list **begin, t_tube tube)
+static void	set_path_list(t_list **begin, t_tube tube)
 {
 	t_path  new;
 	t_list *new_elem;
+	int i;
 
+	printf("\nallo le turn du tube dans set path_list = %d\n", tube.turn);
+	i = 0;
 	if (!(new.rooms_to_go = (char **)malloc(sizeof(char *) * tube.turn + 1)))
 	{
 		f_error(ERR_MALLOC, NULL);
 		return ;
 	}
-	new.rooms_to_go[tube.turn - 1] = NULL;
+	while (i < tube.turn) // possibilite d enlever ca pour opti magl, en fait non j en ai besoin lolilol
+	{
+		new.rooms_to_go[i] = ft_strdup("empty\n");
+		printf("i = %d\n", i);
+		i++;
+	}
+	new.rooms_to_go[tube.turn] = NULL;
 	new.path_id = tube.path_id;
 	new_elem = ft_lstnew(&new, sizeof(new));
 	ft_lstadd(begin, new_elem);
 }
 
-UINT	browse_list(t_list *begin, t_tube tube)
+static UINT	browse_list(t_list *begin, t_tube tube)
 {
 	while (begin)
 	{
@@ -27,7 +36,7 @@ UINT	browse_list(t_list *begin, t_tube tube)
 	return (0);
 }
 
-UINT	dead_end(t_data *data, t_room end)
+static UINT	dead_end(t_data *data, t_room end)
 {
 	int i;
 
@@ -42,19 +51,24 @@ UINT	dead_end(t_data *data, t_room end)
 }
 
 
-void	print_list_output(t_list *begin)
+void	print_list_output(t_list *begin) // test a enlever apres
 {
 	int i;
+	int j;
 
+	j = 0;
 	i = 0;
 	while (begin)
 	{
-		dprintf(1, "maillon numero %d, id_path = %u\n", ++i, ((t_path*)(begin->content))->path_id);
+		while (((t_path*)(begin->content))->rooms_to_go[j] != NULL)
+			j++;
+		dprintf(1, "maillon numero %d, id_path = %u, size du tab = %d\n", ++i, ((t_path*)(begin->content))->path_id, j);
+		j = 0;
 		begin = begin->next;
 	}
 }
 
-t_list	*get_id_path(t_room end, t_data *data)
+t_list	*get_id_path_list(t_room end, t_data *data)
 {
 	int	i;
 	int	test;

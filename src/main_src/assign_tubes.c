@@ -71,7 +71,7 @@ t_bool			browse_map(t_data *data)
 	nbr_col = get_nbr_columns(data->r_tab[0], data->r_tab[1]);
 	start_columns(nbr_col, &data->r_tab[0], data->t_tab, turns);
 	recursive_bs_turn(data, turns, data->r_tab[0].nb_link_tubes, 2);
-	paths = get_id_path(data->r_tab[1], data);
+	paths = get_id_path_list(data->r_tab[1], data);
 	free(turns);
 	return (true);
 }

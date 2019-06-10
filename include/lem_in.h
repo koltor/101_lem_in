@@ -140,7 +140,7 @@ void				destroy_path(t_tube *tubes, t_room room, UINT id);
 **************************************************
 */
 
-t_list				*get_id_path(t_room end, t_data *data);
+t_list				*get_id_path_list(t_room end, t_data *data);
 
 /*
 **************************************************
