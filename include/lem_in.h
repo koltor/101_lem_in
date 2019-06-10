@@ -76,6 +76,12 @@ typedef struct		s_data
 	struct s_room	*r_tab;
 }					t_data;
 
+typedef struct		s_path
+{
+	UINT 			path_id;
+	char			**rooms_to_go;
+}			t_path;
+
 typedef enum e_bool	t_bool;
 
 /*
@@ -127,6 +133,14 @@ UINT				get_id_room(t_tube tubes, UINT id_room);
 
 UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 void				destroy_path(t_tube *tubes, t_room room, UINT id);
+
+/*
+**************************************************
+***********************PART 3*********************
+**************************************************
+*/
+
+t_list				*get_id_path(t_room end, t_data *data);
 
 /*
 **************************************************

@@ -80,5 +80,27 @@ echo "test maps invalides"
 
 ./lem-in -d ./maps/unvalid_map/map_non_valid38 >> file
 
+./lem-in -d ./maps/valid_map/valid_map00 >> file
+./lem-in -d ./maps/valid_map/valid_map01 >> file
+./lem-in -d ./maps/valid_map/valid_map02 >> file
+./lem-in -d ./maps/valid_map/valid_map03 >> file
+./lem-in -d ./maps/valid_map/valid_map04 >> file
+./lem-in -d ./maps/valid_map/valid_map05 >> file
+./lem-in -d ./maps/valid_map/valid_map06 >> file
+./lem-in -d ./maps/valid_map/valid_map07 >> file
+./lem-in -d ./maps/valid_map/valid_map08 >> file
+./lem-in -d ./maps/valid_map/valid_map09 >> file
+./lem-in -d ./maps/valid_map/valid_map10 >> file
+./lem-in -d ./maps/valid_map/valid_map11 >> file
+./lem-in -d ./maps/valid_map/valid_map12 >> file
+./lem-in -d ./maps/valid_map/valid_map13 >> file
+./lem-in -d ./maps/valid_map/valid_map14 >> file
+./lem-in -d ./maps/valid_map/valid_map15 >> file
+./lem-in -d ./maps/valid_map/big_map00 >> file
+./lem-in -d ./maps/valid_map/validOrNot_Do_not_worry00 >> file
+./lem-in -d ./maps/valid_map/valid_map_dead_way00 >> file
+./lem-in -d ./maps/valid_map/valid_map_long_way00 >> file
+./lem-in -d ./maps/valid_map/valid_map_long_way01 >> file
+
 
 cat file | grep "Aucune erreur" | grep segfault

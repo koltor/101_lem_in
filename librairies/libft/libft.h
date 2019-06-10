@@ -27,6 +27,13 @@ typedef struct		s_glist
 	struct s_glist	*next;
 }					t_glist;
 
+typedef	struct		s_list
+{
+	void		*content;
+	size_t		content_size;
+	struct s_list	*next;
+}			t_list;
+
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -86,4 +93,6 @@ void				ft_putadresse(const void *adresse);
 void				ft_puttab(char **tab);
 int					*ft_tab_sub(int *pile, int size);
 int					get_next_line(const int fd, char **line);
+void				ft_lstadd(t_list **alst, t_list *new);
+t_list				*ft_lstnew(void const *content, size_t content_size);
 #endif

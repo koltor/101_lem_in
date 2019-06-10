@@ -72,7 +72,9 @@ OBJ= 	ft_memcpy.o\
 		ft_putadresse.o\
 		ft_puttab.o\
 		ft_tabsub.o\
-		get_next_line.o
+		get_next_line.o\
+		ft_lstadd.o\
+		ft_lstnew.o\
 
 CC=-Wall -Werror -Wextra
 
