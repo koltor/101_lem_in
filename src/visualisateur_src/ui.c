@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 15:55:00 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:39:28 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 16:16:28 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,16 +26,16 @@ static void	helping_informations_value(t_env env, void *m, void *w)
 	depl_x = ft_itoa(env.x_img);
 	depl_y = ft_itoa(env.y_img);
 	marge = ft_itoa(env.marge);
-	mlx_string_put(m, w, WIN_SIZE_X - 250, 105, clr, "======================");
-	mlx_string_put(m, w, WIN_SIZE_X - 250, 125, clr, "       zoom:");
-	mlx_string_put(m, w, WIN_SIZE_X - 100, 125, 0xaa5498, zoom);
-	mlx_string_put(m, w, WIN_SIZE_X - 70, 125, clr, "/100");
-	mlx_string_put(m, w, WIN_SIZE_X - 250, 145, clr, "deplacement:    x    y");
-	mlx_string_put(m, w, WIN_SIZE_X - 130, 145, 0xaa0000, depl_x);
-	mlx_string_put(m, w, WIN_SIZE_X - 80, 145, 0x00aa00, depl_y);
-	mlx_string_put(m, w, WIN_SIZE_X - 250, 165, clr, " ecartement:");
-	mlx_string_put(m, w, WIN_SIZE_X - 120, 165, 0xFF9A09, marge);
-	mlx_string_put(m, w, WIN_SIZE_X - 100, 165, clr, " -2/10");
+	mlx_string_put(m, w, WIN_SIZE_X - 250, 125, clr, "======================");
+	mlx_string_put(m, w, WIN_SIZE_X - 250, 145, clr, "       zoom:");
+	mlx_string_put(m, w, WIN_SIZE_X - 100, 145, 0xaa5498, zoom);
+	mlx_string_put(m, w, WIN_SIZE_X - 70, 145, clr, "/100");
+	mlx_string_put(m, w, WIN_SIZE_X - 250, 165, clr, "deplacement:    x    y");
+	mlx_string_put(m, w, WIN_SIZE_X - 130, 165, 0xaa0000, depl_x);
+	mlx_string_put(m, w, WIN_SIZE_X - 80, 165, 0x00aa00, depl_y);
+	mlx_string_put(m, w, WIN_SIZE_X - 250, 185, clr, " ecartement:");
+	mlx_string_put(m, w, WIN_SIZE_X - 120, 185, 0xFF9A09, marge);
+	mlx_string_put(m, w, WIN_SIZE_X - 100, 185, clr, " -2/10");
 	free(zoom);
 	free(depl_x);
 	free(depl_y);
@@ -46,18 +46,23 @@ static void	helping_informations(t_env env)
 	void	*m;
 	void	*w;
 	int		clr;
+	char	*speed;
 
 	m = env.mlx_ptr;
 	w = env.win_ptr;
 	clr = 0xaaaaaa;
+	speed = ft_itoa(env.speedo);
 	mlx_string_put(m, w, WIN_SIZE_X - 250, 25, clr, "       zoom: molette");
 	mlx_string_put(m, w, WIN_SIZE_X - 250, 45, clr, "deplacement: hgbd/wasd");
 	mlx_string_put(m, w, WIN_SIZE_X - 250, 65, clr, "      marge: + / -");
 	mlx_string_put(m, w, WIN_SIZE_X - 250, 85, clr, "   surligne: L ");
+	mlx_string_put(m, w, WIN_SIZE_X - 250, 105, clr, "   rapidite: Page ");
+	mlx_string_put(m, w, WIN_SIZE_X - 60, 105, 0xffffff, speed);
 	if (env.highlight_path)
 		mlx_string_put(m, w, WIN_SIZE_X - 100, 85, clr, "(inactif)");
 	else
 		mlx_string_put(m, w, WIN_SIZE_X - 100, 85, clr, "(actif)");
+	free(speed);
 }
 
 static void	number_information(t_env env, char *ants, char *rooms, char *tubes)

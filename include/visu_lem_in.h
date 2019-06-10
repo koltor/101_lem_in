@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:11:51 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:49:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 16:14:43 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,12 +30,6 @@
 # define PLUS		69
 # define LESS		78
 # define H			4
-
-/*
-** define for mouse button
-*/
-# define ZOOM_IN	5
-# define ZOOM_OUT	4
 # define UP			126
 # define DOWN		125
 # define LEFT		123
@@ -46,6 +40,14 @@
 # define D			2
 # define R			15
 # define L			37
+# define PUP		116
+# define PDOWN		121
+
+/*
+** define for mouse button
+*/
+# define ZOOM_IN	5
+# define ZOOM_OUT	4
 
 typedef struct		s_env
 {
@@ -61,6 +63,7 @@ typedef struct		s_env
 	int				endian;//besoin pour generer l'image
 
 	double			zoom;//zoomer dans ou dezoomer dans la map
+	unsigned char	speedo;//rapidite de deplacement
 	int				marge;//mettre une marge minimum entre les salles
 	int				x_img;//bouger l'image en X
 	int				y_img;//bouger l'image en Y

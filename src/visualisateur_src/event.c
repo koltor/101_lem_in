@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 15:52:28 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 17:33:34 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/10 16:14:12 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,20 @@ static void	reset(t_env *env)
 	env->y_img = WIN_SIZE_Y / 4;
 }
 
+int			keyboard_events2(int key, void *data)
+{
+	t_env *env;
+
+	env = (t_env*)data;
+	if (key == H)
+		env->help = (env->help) ? true : false;
+	else if (key == R)
+		reset(env);
+	else if (key == L)
+		env->highlight_path = (env->highlight_path) ? true : false;
+	return (0);
+}
+
 int			keyboard_events(int key, void *data)
 {
 	t_env *env;
@@ -30,24 +44,23 @@ int			keyboard_events(int key, void *data)
 	env = (t_env*)data;
 	if (key == ESC)
 		exit(0);
-	if (key == LESS && env->marge > 0)
+	if (key == PUP && env->speedo < 20)
+		env->speedo += 1;
+	else if (key == PDOWN && env->speedo > 0)
+		env->speedo -= 1;
+	else if (key == LESS && env->marge > 0)
 		env->marge -= 3;
 	else if (key == PLUS && env->marge < 10)
 		env->marge += 3;
 	else if (key == DOWN || key == S)
-		env->x_img += 3;
+		env->x_img += env->speedo;
 	else if (key == UP || key == W)
-		env->x_img -= 3;
+		env->x_img -= env->speedo;
 	else if (key == LEFT || key == A)
-		env->y_img -= 3;
+		env->y_img -= env->speedo;
 	else if (key == RIGHT || key == D)
-		env->y_img += 3;
-	else if (key == H)
-		env->help = (env->help) ? true : false;
-	else if (key == R)
-		reset(env);
-	else if (key == L)
-		env->highlight_path = (env->highlight_path) ? true : false;
+		env->y_img += env->speedo;
+	keyboard_events2(key, data);
 	put_img(env, *(env->data));
 	return (0);
 }
