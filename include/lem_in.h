@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 14:54:17 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/11 14:24:21 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -141,6 +141,8 @@ void				destroy_path(t_tube *tubes, t_room room, UINT id);
 */
 
 t_list				*get_id_path_list(t_room end, t_data *data);
+void				stock_rooms_to_go(t_list *begin, t_data *data,
+		UINT id_end_path);
 
 /*
 **************************************************
