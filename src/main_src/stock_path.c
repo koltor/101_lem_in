@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   stock_path.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/06/12 16:51:37 by ocrossi      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/12 17:00:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static void	set_path_list(t_list **begin, t_tube tube)
@@ -6,9 +19,9 @@ static void	set_path_list(t_list **begin, t_tube tube)
 	t_list *new_elem;
 	int i;
 
-	printf("\nallo le turn du tube dans set path_list = %d\n", tube.turn);
+//	printf("\nallo le turn du tube dans set path_list = %d\n", tube.turn);
 	i = 0;
-	if (!(new.rooms_to_go = (char **)malloc(sizeof(char *) * tube.turn + 1)))
+	if (!(new.rooms_to_go = (char **)malloc(sizeof(char *) * (tube.turn + 1)))) // a changer en tableau d int
 	{
 		f_error(ERR_MALLOC, NULL);
 		return ;
@@ -16,11 +29,12 @@ static void	set_path_list(t_list **begin, t_tube tube)
 	while (i < tube.turn) // possibilite d enlever ca pour opti magl, en fait non j en ai besoin lolilol
 	{
 		new.rooms_to_go[i] = ft_strdup("empty\n");
-		printf("i = %d\n", i);
+		//printf("i = %d\n", i);
 		i++;
 	}
 	new.rooms_to_go[tube.turn] = NULL;
 	new.path_id = tube.path_id;
+	new.turn = tube.turn;
 	new_elem = ft_lstnew(&new, sizeof(new));
 	ft_lstadd(begin, new_elem);
 }
@@ -62,7 +76,7 @@ void	print_list_output(t_list *begin) // test a enlever apres
 	{
 		while (((t_path*)(begin->content))->rooms_to_go[j] != NULL)
 			j++;
-		dprintf(1, "maillon numero %d, id_path = %u, size du tab = %d\n", ++i, ((t_path*)(begin->content))->path_id, j);
+		dprintf(1, "maillon numero %d, id_path = %u, size du tab = %d, tour = %u\n", ++i, ((t_path*)(begin->content))->path_id, j, ((t_path*)(begin->content))->turn);
 		j = 0;
 		begin = begin->next;
 	}
