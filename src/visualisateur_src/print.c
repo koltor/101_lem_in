@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:48:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 17:53:32 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/12 16:02:40 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -139,6 +139,29 @@ static void		put_tubes(UINT size, t_room *r_tab, t_tube *t_tab, t_env *env)
 	algo_bresenham(index, env);
 }
 
+static		void	show_name_room(t_env *env, t_data data)
+{
+	UINT i;
+	void	*mlx;
+	void	*win;
+	int		clr;
+	double	mult;
+
+	mult = env->zoom + env->marge;
+
+	mlx = env->mlx_ptr;
+	win = env->win_ptr;
+	clr = 0x63FC00;
+	i = 0;
+	while (i < data.rooms)
+	{
+		mlx_string_put(mlx, win, data.r_tab[i].x * mult + env->y_img + env->marge / 2,
+			data.r_tab[i].y * mult + env->x_img + env->marge / 2,
+			clr, data.r_tab[i].name);
+		i++;
+	}
+}
+
 /*
 ** put_img:
 ** it's the main of the calcul of the img
@@ -156,5 +179,7 @@ void			put_img(t_env *env, t_data data)
 	put_rooms(data.rooms, data.r_tab, env);
 	put_tubes(data.tubes, data.r_tab, data.t_tab, env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img_ptr, 0, 0);
+	if (env->zoom >= 50)
+		show_name_room(env, data);
 	user_interface(*env);
 }
