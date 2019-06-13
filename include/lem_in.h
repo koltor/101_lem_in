@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/13 16:16:38 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/13 20:37:58 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,7 +82,7 @@ typedef struct		s_path
 {
 	UINT			path_id;
 	UINT			turn;
-	char			**rooms_to_go;
+	UINT			*rooms_to_go;
 }			t_path;
 
 typedef enum e_bool	t_bool;
