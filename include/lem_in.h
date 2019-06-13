@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/12 16:44:31 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/13 16:16:38 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,8 @@
 # include <stdio.h>
 
 # define UINT unsigned int
+# define ROOM_START 0
+# define ROOM_END	1
 
 /*
 ** help for option's comprehention
@@ -106,6 +108,7 @@ UINT				get_number_of_ants(const char *s);
 t_bool				stock_anthill(char *file_line, t_data *data);
 char				*get_room(char *file_line, t_data *data);
 void				get_tube(char *file_line, t_data *data, char *line);
+t_bool				get_nodes(t_data *data);
 
 int					is_room(const char *s);
 int					is_tube(const char *s);
@@ -113,14 +116,6 @@ int					is_order(const char *s);
 
 t_bool				skip_ants_number(char *s);
 char				*skip_room(char *s);
-
-/*
-**************************************************
-***********************PART 1*********************
-**************************************************
-*/
-
-t_bool				get_nodes(t_data *data);
 
 /*
 **************************************************
@@ -133,7 +128,6 @@ void				recursive_bs_turn(t_data *d, t_turn *t, UINT nb, UINT lap);
 UINT				get_id_room(t_tube tubes, UINT id_room);
 
 UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
-void				destroy_path(t_tube *tubes, t_room room, UINT id);
 
 /*
 **************************************************

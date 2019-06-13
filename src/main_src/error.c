@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 14:54:58 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/13 15:09:36 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ void	*f_error(char value, void *data)
 /*
 ** str_error:
 **	transform an int_error into string
-**	to help us in the comprehension
+**	to help us for the comprehension
 **	parameters
 **		a static tab containing the string of the error
 */

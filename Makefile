@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/12 16:50:55 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/13 15:06:34 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -29,14 +29,14 @@ INC_PATH			= include
 LIB_PATH			= librairies
 
 # nom des fichier code source (*.c)
-NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c get_nodes.c \
-						recursive_bs.c assign_tubes.c recursive_bs_destroy.c \
+NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
+						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c stock_path.c stock_path2.c
 
 NAME_SRC_PARSING	=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 						scan_get_room.c scan_get_tube.c scan_is_order.c \
 						scan_is_room.c scan_is_tube.c scan_other.c \
-						scan_room.c scan_skip.c scan_tube.c
+						scan_room.c scan_skip.c scan_tube.c scan_get_nodes.c
 
 NAME_SRC_VISU		=	main_visu.c algo_bresenham.c print.c event.c ui.c \
 						ui2_legendary.c fill_pixel.c
