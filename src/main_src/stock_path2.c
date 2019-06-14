@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/12 17:02:06 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/13 20:56:35 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/13 21:29:48 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,6 +99,7 @@ void	print_rooms(t_list *current, t_data *data)
 		ft_putendl(data->r_tab[((t_path *)(current->content))->rooms_to_go[i]].name);
 		i++;
 	}
+	ft_putendl("--------------------------------");
 }
 
 void	stock_rooms_to_go(t_list *begin, t_data *data) // id end path va nous servir si on veut partir de end et 

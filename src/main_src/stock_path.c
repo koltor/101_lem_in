@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/12 16:51:37 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/13 20:49:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/14 14:10:18 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ static void	set_path_list(t_list **begin, t_tube tube)
 
 //	printf("\nallo le turn du tube dans set path_list = %d\n", tube.turn);
 	i = 0;
-	if (!(new.rooms_to_go = (int *)malloc(sizeof(int) * (tube.turn)))) // a changer en tableau d int
+	if (!(new.rooms_to_go = (UINT *)malloc(sizeof(UINT) * (tube.turn)))) // a changer en tableau d int
 	{
 		f_error(ERR_MALLOC, NULL);
 		return ;
@@ -56,24 +56,6 @@ static UINT	dead_end(t_data *data, t_room end)
 		i++;
 	}
 	return (1);
-}
-
-
-void	print_list_output(t_list *begin) // test a enlever apres
-{
-	int i;
-	int j;
-
-	j = 0;
-	i = 0;
-	while (begin)
-	{
-		while (((t_path*)(begin->content))->rooms_to_go[j] != NULL)
-			j++;
-		dprintf(1, "maillon numero %d, id_path = %u, size du tab = %d, tour = %u\n", ++i, ((t_path*)(begin->content))->path_id, j, ((t_path*)(begin->content))->turn);
-		j = 0;
-		begin = begin->next;
-	}
 }
 
 t_list	*get_id_path_list(t_room end, t_data *data)
