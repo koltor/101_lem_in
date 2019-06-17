@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 13:48:46 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 18:18:58 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,11 +19,9 @@ UINT	path_counter(t_data *data)
 	UINT i;
 	UINT j;
 	UINT ret;
-	UINT bol;
 
 	i = 0;
 	ret = 0;
-	bol = 0;
 	while (i < data->r_tab[1].nb_link_tubes)
 	{
 		tab_id[i] = data->t_tab[data->r_tab[1].link_tubes[i]].path_id;
@@ -37,9 +35,8 @@ UINT	path_counter(t_data *data)
 		j = i + 1;
 		while (j < data->r_tab[1].nb_link_tubes)
 		{
-			if (j != i && tab_id[j] != tab_id[i] && tab_id[j] != 0)
+			if (j != i && tab_id[j] != tab_id[i] && tab_id[j] != 0 && tab_id[i] != 0)
 			{
-				bol++;
 				ret++;
 				break ;
 			}
@@ -53,21 +50,31 @@ UINT	path_counter(t_data *data)
 UINT	find_smallest_path(t_data *data)
 {
 	UINT i;
-	t_bool test;
 	UINT ret;
 	UINT smallest;
 
 	i = 0;
-	test = false;
 	while (data->t_tab[data->r_tab[1].link_tubes[i]].path_id == 0 &&
 			i < data->r_tab[1].nb_link_tubes)
 		i++;
+	if (i == data->r_tab[1].nb_link_tubes)
+		exit(EXIT_FAILURE); // a refaire au propre
+	if (data->t_tab[data->r_tab[1].link_tubes[i]].used == true)
+	{
+		while (i < data->r_tab[1].nb_link_tubes)
+		{
+			if (data->t_tab[data->r_tab[1].link_tubes[i]].used == false)
+				break ;
+			i++;
+		}
+	}
 	ret = i;
 	smallest = data->t_tab[data->r_tab[1].link_tubes[i]].turn;
 	while (i < data->r_tab[1].nb_link_tubes)
 	{
-		if (smallest < data->t_tab[data->r_tab[1].link_tubes[i]].turn &&
-				data->t_tab[data->r_tab[1].link_tubes[i]].used == false)
+		if (smallest >= data->t_tab[data->r_tab[1].link_tubes[i]].turn &&
+				data->t_tab[data->r_tab[1].link_tubes[i]].used == false &&
+				data->t_tab[data->r_tab[1].link_tubes[i]].path_id != 0)
 		{
 			smallest = data->t_tab[data->r_tab[1].link_tubes[i]].turn;
 			ret = i;
@@ -87,43 +94,32 @@ void	malloc_path_tabs(t_data *data)
 	while (data->paths[i] != NULL)
 	{
 		index = find_smallest_path(data);
+		printf("index = %u\n", index);
 		data->t_tab[data->r_tab[1].link_tubes[index]].used = true;
-		if (!(data->paths[i] = (UINT*)malloc(sizeof(UINT) * (data->t_tab[data->r_tab[1].link_tubes[index]].turn + 1))))
+		if (!(data->paths[i] = (UINT *)malloc(sizeof(UINT) * (data->t_tab[data->r_tab[1].link_tubes[index]].turn + 3))))
 		{
 			f_error(ERR_MALLOC, NULL);
 			return ;
 		}
 		data->paths[i][0] = data->t_tab[data->r_tab[1].link_tubes[index]].path_id;
-		i++;
-	}
-}
-
-
-void	print_malloc_tab(t_data *data)
-{
-	int i;
-
-	i = 0;
-	while (data->paths[i] != NULL)
-	{
-		printf("tab n* %u path_id = %u\n", i, data->paths[i][0]);
+		printf("allo le path id %u\n", data->paths[i][0]);
+		data->paths[i][1] = data->t_tab[data->r_tab[1].link_tubes[index]].turn + 3;
 		i++;
 	}
 }
 
 void	fill_path_tab(t_data *data)
 {
-	int path_nb;
+	UINT path_nb;
 
 	path_nb = path_counter(data);
 	data->path_nbr = path_nb;
 	printf("path counter = %u\n", path_counter(data));
-	if (!(data->paths = (UINT**)malloc(sizeof(UINT*) * (path_counter + 1))))
+	if (!(data->paths = (UINT **)malloc(sizeof(UINT *) * (path_nb + 1))))
 	{
-		f_error();
-		return (f_error(ERR_MALLOC, NULL));
+		f_error(ERR_MALLOC, NULL);
+		return ;
 	}
-	paths[path_counter] = NULL;
+	data->paths[path_nb] = NULL;
 	malloc_path_tabs(data);
-	print_malloc_tab(data);
 }

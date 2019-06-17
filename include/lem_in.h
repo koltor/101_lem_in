@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 13:48:27 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 15:30:29 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -139,6 +139,7 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 */
 
 void				fill_path_tab(t_data *data);
+void				fill_tabs_with_rooms(t_data *data);
 
 
 /*

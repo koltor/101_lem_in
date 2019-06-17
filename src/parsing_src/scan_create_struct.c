@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:27:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/30 13:02:44 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 13:18:12 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,6 +89,7 @@ t_tube	*create_tube(UINT size)
 		tube_tab[size].salle2 = 0;
 		tube_tab[size].path_id = 0;
 		tube_tab[size].turn = 0;
+		tube_tab[size].used = false;
 	}
 	return (tube_tab);
 }
