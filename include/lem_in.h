@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/14 14:30:20 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 13:48:27 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,7 @@ typedef	struct		s_tube
 	UINT			salle2;
 	UINT			path_id;
 	UINT			turn;
+	enum e_bool		used;
 }					t_tube;
 
 typedef	struct		s_turn
@@ -74,6 +75,8 @@ typedef struct		s_data
 	UINT			ants;
 	UINT			rooms;
 	UINT			tubes;
+	UINT			**paths;
+	UINT			path_nbr;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
 }					t_data;
@@ -135,8 +138,8 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 **************************************************
 */
 
-t_list				*get_id_path_list(t_room end, t_data *data);
-void				stock_rooms_to_go(t_list *begin, t_data *data);
+void				fill_path_tab(t_data *data);
+
 
 /*
 **************************************************
