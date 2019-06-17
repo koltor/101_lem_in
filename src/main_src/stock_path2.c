@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/12 17:02:06 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/13 21:29:48 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 09:20:34 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,9 +44,11 @@ UINT	fill_link_with_current_room(t_list *elem, t_room croom, t_data *data)
 	i = 0;
 	while (i < croom.nb_link_tubes)
 	{
-		if (((t_path*)(elem->content))->path_id == data->t_tab[croom.link_tubes[i]].path_id && ((t_path*)(elem->content))->turn == data->t_tab[croom.link_tubes[i]].turn)
+
+	//	printf("id de la liste %u id du tube %u turn = %u\n", ((t_path*)(elem->content))->path_id, data->t_tab[croom.link_tubes[i]].path_id, data->t_tab[croom.link_tubes[i]].turn);
+		if (((t_path*)(elem->content))->path_id == data->t_tab[croom.link_tubes[i]].path_id
+				&& ((t_path*)(elem->content))->turn == data->t_tab[croom.link_tubes[i]].turn)
 		{
-			//ft_strdel(&(((t_path*)(elem->content))->rooms_to_go[data->t_tab[croom.link_tubes[i]].turn - 1]));
 			((t_path*)(elem->content))->rooms_to_go[data->t_tab[croom.link_tubes[i]].turn - 1] = get_id_room(data->t_tab[croom.link_tubes[i]], get_room_id(croom.name, data));
 			break ;
 		}
