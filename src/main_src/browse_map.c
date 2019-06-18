@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 15:01:07 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 15:04:52 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -153,12 +153,8 @@ t_bool			browse_map(t_data *data)
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
 //	paths = get_id_path_list(data->r_tab[1], data);
 //	stock_rooms_to_go(paths, data);
-<<<<<<< HEAD
 	fill_path_tab(data);
 	fill_tabs_with_rooms(data);
-=======
-//	fill_path_tab(data);
->>>>>>> 915a004cb7336d7120415d8b944ba8705996f66c
 	dprintf(1, "ALLO\n");
 	free(turns);
 	return (true);

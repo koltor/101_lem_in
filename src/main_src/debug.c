@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 16:02:48 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 15:15:47 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ static void		show_tube(t_tube *t_tab, UINT size, t_room *r_tab)
 	while (i < size)
 	{
 		dprintf(1, " %-4u --- %4u    ", t_tab[i].salle1, t_tab[i].salle2);
-		dprintf(1, "  %-9s --- %9s    %4d %4u\n", r_tab[t_tab[i].salle1].name,
+		dprintf(1, "  %-9s --- %9s    %4llu %4u\n", r_tab[t_tab[i].salle1].name,
 				r_tab[t_tab[i].salle2].name, t_tab[i].path_id, t_tab[i].turn);
 		i++;
 	}
@@ -66,7 +66,7 @@ static void		show_tab_tubes(UINT id_r, t_data *data)
 	dprintf(1, "id du tube        nom des salles      id_path  turn\n");
 	while (size)
 	{
-		dprintf(1, " %-10u%15s-%-15s%u%5u\n", data->r_tab[id_r].link_tubes[i],
+		dprintf(1, " %-10u%15s-%-15s%llu%5u\n", data->r_tab[id_r].link_tubes[i],
 		data->r_tab[data->t_tab[data->r_tab[id_r].link_tubes[i]].salle1].name,
 		data->r_tab[data->t_tab[data->r_tab[id_r].link_tubes[i]].salle2].name,
 		data->t_tab[data->r_tab[id_r].link_tubes[i]].path_id,

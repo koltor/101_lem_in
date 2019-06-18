@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:48:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 15:01:29 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 15:05:23 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -179,11 +179,7 @@ void			put_img(t_env *env, t_data data)
 	put_rooms(data.rooms, data.r_tab, env);
 	put_tubes(data.tubes, data.r_tab, data.t_tab, env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img_ptr, 0, 0);
-<<<<<<< HEAD
 	if (env->zoom >= 20)
-=======
-	if (env->zoom >= 40)
->>>>>>> 915a004cb7336d7120415d8b944ba8705996f66c
 		show_name_room(env, data);
 	user_interface(*env);
 }
