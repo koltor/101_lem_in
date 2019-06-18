@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 15:14:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 19:48:30 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,13 +83,6 @@ typedef struct		s_data
 	struct s_room	*r_tab;
 }					t_data;
 
-typedef struct		s_path
-{
-	UINT			path_id;
-	UINT			turn;
-	UINT			*rooms_to_go;
-}			t_path;
-
 typedef enum e_bool	t_bool;
 
 /*
@@ -97,6 +90,12 @@ typedef enum e_bool	t_bool;
 **********************PARSING*********************
 **************************************************
 */
+
+/* a enlever apres */
+
+#include "ft_printf.h"
+
+/******************/
 
 char				**get_option(int ac, char **av, int *option);
 char				*parsing_into_line(const char *path);
@@ -142,7 +141,9 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 
 void				fill_path_tab(t_data *data);
 void				fill_tabs_with_rooms(t_data *data);
-
+void				print_number_paths(t_data *data);
+UINT				count_bits(t_tube tube);
+UINT				potential_path_counter(t_data *data);
 
 /*
 **************************************************

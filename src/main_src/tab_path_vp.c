@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 18:18:58 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 20:40:55 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,15 +84,16 @@ UINT	find_smallest_path(t_data *data)
 	return (ret);
 }
 
-
+/*
 void	malloc_path_tabs(t_data *data)
 {
 	UINT i;
 	UINT index;
 
 	i = 0;
-	while (data->paths[i] != NULL)
+	while (i < data->path_nbr)
 	{
+		printf("ALLO TA MERE\n");
 		index = find_smallest_path(data);
 		printf("index = %u\n", index);
 		data->t_tab[data->r_tab[1].link_tubes[index]].used = true;
@@ -106,15 +107,51 @@ void	malloc_path_tabs(t_data *data)
 		data->paths[i][1] = data->t_tab[data->r_tab[1].link_tubes[index]].turn + 3;
 		i++;
 	}
+}*/
+
+UINT	find_pname(UINT path_id)
+{
+
+}
+
+void	malloc_path_tabs(t_data *data)
+{
+	UINT i;
+	UINT j;
+	UINT qt;
+	UINT pname;
+
+	i = 0;
+	j = 0;
+	qt = 0;
+	while (i < data->r_tab[1].nb_link_tubes)
+	{
+		//data->t_tab[data->r_tab[1].link_tubes[index]].used = true;
+		qt = qt + count_bits(data->t_tab[data->r_tab[1].link_tubes[i]].path_id);
+		printf("qt = %u pour un path id de %u\n", qt, data->t_tab[data->r_tab[1].link_tubes[i]].path_id);
+		while (j < qt)
+		{
+			pname = find_pname(data->t_tab[data->r_tab[1].link_tubes[i]].path_id) - 1;
+			if (!(data->paths[j] = (UINT *)malloc(sizeof(UINT) * (data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname] + 3))))
+			{
+				f_error(ERR_MALLOC, NULL);
+				return ;
+			}
+			data->paths[i][0] = data->t_tab[data->r_tab[1].link_tubes[index]].path_id;
+			data->paths[i][1] = data->t_tab[data->r_tab[1].link_tubes[index]].turn + 3;
+			j++;
+		}
+		i++;
+	}
 }
 
 void	fill_path_tab(t_data *data)
 {
 	UINT path_nb;
 
-	path_nb = path_counter(data);
+	path_nb = potential_path_counter(data);
 	data->path_nbr = path_nb;
-	printf("path counter = %u\n", path_counter(data));
+	printf("path counter = %u\n", path_nb);
 	if (!(data->paths = (UINT **)malloc(sizeof(UINT *) * (path_nb + 1))))
 	{
 		f_error(ERR_MALLOC, NULL);
