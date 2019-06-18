@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 15:30:29 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 14:59:45 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,7 @@ typedef	struct		s_tube
 	UINT			salle2;
 	UINT			path_id;
 	UINT			turn;
+	UINT			*tmp_turn;
 	enum e_bool		used;
 }					t_tube;
 
@@ -197,6 +198,7 @@ size_t				ft_strlenc(const char *s, char c);
 char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
 long				atol_id(const char *s, char c, UINT index);
+long				bin(char c);
 
 /*
 **************************************************
@@ -205,4 +207,7 @@ long				atol_id(const char *s, char c, UINT index);
 */
 
 void				main_visualisateur(t_data data);
+
+
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/05 17:35:18 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 17:31:20 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/18 14:48:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,8 +28,7 @@
 
 int				fill_pixel(t_env *env, int x, int y)
 {
-	int pos;
-
+	int		pos;
 	pos = WIN_SIZE_X * (y + env->x_img) * 4 + (x + env->y_img) * 4;
 	if (pos >= 0 && pos < WIN_SIZE_X * WIN_SIZE_Y * 4 &&
 		(x + env->y_img) < WIN_SIZE_X * 4 && (x + env->y_img) >= 0 &&
