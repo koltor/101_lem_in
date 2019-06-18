@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:48:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/12 16:02:40 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 18:05:14 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,18 +91,18 @@ static void		select_color_tube(t_env *env, UINT value)
 		0x33FFFA,
 		0x3338FF,
 		0xF933FF,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E
+		0x0096dc,
+		0xf39c05,
+		0xff80c0,
+		0x00a0ff,
+		0xffffff,
+		0x760a0a,
+		0xff69b4,
+		0xb1aaee,
+		0xaaeeb1,
+		0x8caba8,
+		0x494e6b,
+		0xff0080
 	};
 
 	if (!env->highlight_path)
@@ -179,7 +179,7 @@ void			put_img(t_env *env, t_data data)
 	put_rooms(data.rooms, data.r_tab, env);
 	put_tubes(data.tubes, data.r_tab, data.t_tab, env);
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img_ptr, 0, 0);
-	if (env->zoom >= 50)
+	if (env->zoom >= 40)
 		show_name_room(env, data);
 	user_interface(*env);
 }
