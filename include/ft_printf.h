@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/18 17:05:05 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 16:59:50 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/19 15:15:58 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,6 +20,7 @@
 # define PFCNUM 12
 # define TRUE 1
 # define FALSE 0
+# define FPF ft_printf
 
 typedef union				u_type
 {

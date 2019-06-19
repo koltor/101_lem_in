@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 19:48:30 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/19 20:21:12 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -139,10 +139,13 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 **************************************************
 */
 
+void				print_potential_paths(t_data *data);
 void				fill_path_tab(t_data *data);
 void				fill_tabs_with_rooms(t_data *data);
 void				print_number_paths(t_data *data);
 UINT				count_bits(t_tube tube);
+UINT				get_bit_place(ULL path_list);
+UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
 
 /*
