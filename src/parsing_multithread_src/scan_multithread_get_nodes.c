@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_get_nodes.c                                 .::    .:/ .      .::   */
+/*   scan_multithread_get_nodes.c                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/20 18:47:07 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/06/21 18:23:48 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/21 18:35:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "lem_in_thread.h"
 
 /*
 ** exit_get_node_malloc_error:
@@ -30,6 +30,7 @@ static void	exit_get_node_malloc_error(t_data *data, UINT size)
 	while (size--)
 		free(data->r_tab[size].link_tubes);
 }
+
 
 /*
 ** malloc_link_tubes:
@@ -57,18 +58,19 @@ static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
 	return (0);
 }
 
-/*
-** malloc_link_tubes:
-**	the function get and fill the tab link_tubes in the different_room
-**	with the help of the struct tubes
-**	parameters
-**		need the struct data
-**	return value
-**		0 if all right
-**		the number of nodes already malloc otherwise
-*/
+t_bool  multithread_malloc_nodes(t_data *data)
+{
+    UINT ret;
 
-static void	detect_tubes(t_data *data, UINT id_room)
+	if ((ret = malloc_link_tubes(data->r_tab, data->rooms)))
+	{
+		exit_get_node_malloc_error(data, ret + 1);
+		return (false);
+	}
+    return (true);
+}
+
+static void	multithread_detect_tubes(t_data *data, UINT id_room)
 {
 	UINT	id_tube;
 	t_room	*room;
@@ -88,29 +90,11 @@ static void	detect_tubes(t_data *data, UINT id_room)
 	}
 }
 
-/*
-** get_nodes:
-**	the function get and fill the tab link_tubes in the different_room
-**	this fill is call a node
-**	parameters
-**		need the struct data
-**	return value
-**		true if all right
-**		false otherwise
-*/
-
-t_bool		get_nodes(t_data *data)
+void	get_nodes_thread_main(t_data *data, UINT start, UINT end)
 {
-	UINT id_room;
-	UINT ret;
+    UINT id_room;
 
-	id_room = 0;
-	if ((ret = malloc_link_tubes(data->r_tab, data->rooms)))
-	{
-		exit_get_node_malloc_error(data, ret + 1);
-		return (false);
-	}
-	while (id_room < data->rooms)
-		detect_tubes(data, id_room++);
-	return (true);
+    id_room = start;
+    while (id_room < end)
+		multithread_detect_tubes(data, id_room++);
 }

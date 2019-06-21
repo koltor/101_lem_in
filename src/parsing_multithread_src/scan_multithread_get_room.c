@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_get_room.c                                  .::    .:/ .      .::   */
+/*   scan_multithread_get_room.c                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/20 20:31:35 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/06/20 20:11:39 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/21 19:19:22 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "lem_in_thread.h"
 
 static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
 {
@@ -20,13 +20,6 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
 
 	ret = false;
 	room = r_tab[id];
-	while (--tab_size >= 2)
-	{
-		if (!ft_strcmp(room.name, r_tab[tab_size].name))
-			return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-		else if (room.x == r_tab[tab_size].x && room.y == r_tab[tab_size].y)
-			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
-	}
 	while (tab_size--)
 	{
 		if (tab_size != id)
@@ -107,7 +100,8 @@ static t_bool	reset_one_room(t_room *room)
 
 static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 {
-	t_bool value;
+	t_bool	value;
+	UINT 	tmp_id_room;
 
 	value = false;
 	if (*order == 1 || *order == 2)
@@ -118,14 +112,16 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 			return (*(t_bool*)f_error(ERR_DUPLICATE_END, &value));
 		if (split_line_for_room(line, &data->r_tab[*order - 1]))
 			return (false);
-		if (check_duplicate_room(*order - 1, data->r_tab, *ir))
+		if (check_duplicate_room(*order - 1, data->r_tab, data->rooms))
 			return (reset_one_room(&data->r_tab[*order - 1]));
 	}
-	else if (*order == 0 && *ir < data->rooms)
+	else if (*order == 0)
 	{
+		if (*ir >= data->rooms)
+			return (false);
 		if (split_line_for_room(line, &data->r_tab[*ir]))
 			return (false);
-		if (check_duplicate_room(*ir, data->r_tab, *ir))
+		if (check_duplicate_room(*ir, data->r_tab, data->rooms))
 			return (reset_one_room(&data->r_tab[*ir]));
 		*ir = *ir + 1;
 	}
@@ -133,47 +129,31 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 	return (true);
 }
 
-/*
-** get_room:
-**	transform the middle part of the file into room_data
-**	parameters
-**		the file_line of the file
-**		the struct data
-**	variable
-**		a line to stock the line after call scan_line_line
-**		an order to know the order given by an upper line
-**		type to know the type of the line
-**		an id to move on the room_table
-**	return value
-**		return the line how the function stop and affect an error
-**		if an error occurd
-*/
-
-char			*get_room(char *file_line, t_data *data)
+void	get_room_thread_main(char *file_line, t_data *data, UINT id_thread, UINT section)
 {
 	char	*line;
 	UINT	ir;
+	UINT	cpt;
 	int		order;
 	char	type;
 
-	ir = 2;
+	ir = (section * (id_thread - 1)) + 2;
 	order = 0;
-	skip_ants_number(file_line);
-	while ((line = scan_line_line(file_line)))
-	{
+	cpt = 0;
+	type = 0;
+ 	while (cpt < section || (id_thread == NB_THREAD && type != -1))
+ 	{
+		line = scan_line_line_for_threading(file_line, id_thread - 1);
 		if ((type = is_room(line)) == -1)
 			break ;
 		if (type == 1 && order == 0 && (order = is_order(line)))
 			continue ;
-		if (type == 0 && select_ben(line, data, &order, &ir) &&
-												(data->rooms = ir))
-			return (NULL);
+		if (type == 0)
+		{
+			if (order == 0)
+				cpt++;
+			if (select_ben(line, data, &order, &ir) && (data->rooms = ir))
+				return ;
+		}
 	}
-	if (order)
-		return (f_error(ERR_ORDER, NULL));
-	if (data->r_tab[0].name == NULL)
-		return (f_error(ERR_LACK_BEGIN, NULL));
-	else if (data->r_tab[1].name == NULL)
-		return (f_error(ERR_LACK_END, NULL));
-	return (line);
 }

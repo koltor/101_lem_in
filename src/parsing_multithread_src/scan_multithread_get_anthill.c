@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_get_anthill.c                               .::    .:/ .      .::   */
+/*   scan_multithread_get_anthill.c                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/27 11:54:31 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:37:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/06/20 19:59:54 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/21 19:19:28 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "lem_in_thread.h"
 
-/*
-** stock_anthill:
-**	parameters
-**		need the file_line to recover information about it
-**	return value
-**		return true if the file_line is in good format
-**		and enough information collect
-**		otherwise return false
-*/
-
-t_bool	stock_anthill(char *file_line, t_data *data)
+t_bool	stock_anthill_for_threading(char *file_line, t_data *data)
 {
 	char *line;
 
@@ -33,15 +23,13 @@ t_bool	stock_anthill(char *file_line, t_data *data)
 		data->rooms = 0;
 		return (false);
 	}
-	if (!(line = get_room(file_line, data)))
+	if (multithread_get_room(file_line, data))
 	{
 		data->tubes = 0;
-		scan_line_line(NULL);
 		return (false);
 	}
-	get_tube(file_line, data, line);
-	scan_line_line(NULL);
-	if (get_nodes(data))
+	multithread_get_tube(file_line, data);
+	if (multithreading_get_nodes(data))
 		return (false);
 	return (true);
 }

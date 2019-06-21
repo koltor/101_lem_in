@@ -1,42 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   scan_get_tube.c                                  .::    .:/ .      .::   */
+/*   scan_multithread_get_tube.c                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:58:15 by matheme     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/21 19:00:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-
-static void	check_duplicate_tube(t_tube *t_tab, UINT size)
-{
-	UINT	i;
-	UINT	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-		 	if ((t_tab[i].salle1 == t_tab[j].salle1 &&
-			 	t_tab[i].salle2 == t_tab[j].salle2) ||
-				 (t_tab[i].salle1 == t_tab[j].salle2 &&
-				 t_tab[i].salle2 == t_tab[j].salle1))
-			{
-				f_error(ERR_DUPL_TUBE, NULL);
-				return ;
-			}
-			j += 1;
-		}
-		i += 1;
-	}
-}
+#include "lem_in_thread.h"
 
 /*
 ** check_room_exist:
@@ -118,43 +93,35 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 	return (exit_slft(-1, true, s1, s2));
 }
 
-/*
-** get_tube:
-**	transform the last part of the file into tube_data
-**	parameters
-**		the file_line of the file
-**		the struct data
-**		the previous line how the function get_room stop
-**	variable
-**	just an id to move on the tube_table
-**	return value
-**		affect an error if an error occurd
-*/
-
-void			get_tube(char *file_line, t_data *data, char *line)
+void	get_tube_thread_main(char *file_line, t_data *data, t_thread tube, char *line)
 {
 	UINT	id;
 	int		ret;
+    UINT	stop;
 
-	id = 1;
+	id = (tube.id - 1) * tube.section;
+	stop = tube.section;
 	if (!is_tube(line))
 	{
-		if (split_line_for_tube(line, data, &(data->t_tab[0])))
+		if (split_line_for_tube(line, data, &(data->t_tab[id])))
 		{
 			data->tubes = 0;
 			return ;
 		}
+		id++;
+		stop--;
 	}
-	while ((line = scan_line_line(file_line)))
+	while (stop)
 	{
+		if (!(line = scan_line_line_for_threading(file_line, tube.id - 1)))
+			break ;
 		if ((ret = is_tube(line)) == 1)
 			continue ;
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
 			break ;
+		stop--;
 		id += 1;
 	}
 	if (ret == -1)
 		f_error(ERR_TUBES_FORMAT, NULL);
-	data->tubes = id;
-	check_duplicate_tube(data->t_tab, data->tubes);
 }

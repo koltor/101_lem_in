@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 15:30:29 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/21 18:57:42 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,7 @@
 # include <stdio.h>
 
 # define UINT unsigned int
+# define NB_THREAD	8
 # define ROOM_START 0
 # define ROOM_END	1
 
@@ -37,7 +38,9 @@
 # define O_D (option & 1)
 # define O_V (option & 2)
 # define O_I (option & 4)
-# define LIST_OPTION "vid"
+# define O_M (option & 8)
+# define O_T (option & 16)
+# define LIST_OPTION "tdvim"
 
 enum	e_bool
 {
@@ -120,6 +123,8 @@ int					is_order(const char *s);
 t_bool				skip_ants_number(char *s);
 char				*skip_room(char *s);
 
+/*parsing for multithreading*/
+t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
 /*
 **************************************************
 ***********************PART 2*********************
@@ -170,6 +175,7 @@ void				fill_tabs_with_rooms(t_data *data);
 # define ERR_ORDER				20 // ordre invalide
 # define ERR_OVERFLOW			21 // overflow sur les salles
 # define ERR_ONLY_COMMENT		22 // que des commentaires
+# define ERR_ROOM_NOT_DEFINE	23 // que des commentaires
 
 void				usage(void);
 void				usage_option(char c);
