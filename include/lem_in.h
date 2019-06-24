@@ -53,6 +53,7 @@ typedef struct		s_room
 	int				y;
 	UINT			nb_link_tubes;
 	UINT			*link_tubes;
+	enum e_bool		used;
 }					t_room;
 
 typedef	struct		s_tube
@@ -130,7 +131,6 @@ char				*skip_room(char *s);
 t_bool				browse_map(t_data *data);
 void				recursive_bs_turn(t_data *d, t_turn *t, UINT nb, UINT lap);
 UINT				get_id_room(t_tube tubes, UINT id_room);
-
 UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 
 /*
@@ -147,6 +147,9 @@ UINT				count_bits(t_tube tube);
 UINT				get_bit_place(ULL path_list);
 UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
+UINT				max_paths(t_data data);
+void				path_sorter(t_data *data);
+void				path_sorter2(t_data *data, UINT max_paths);
 
 /*
 **************************************************

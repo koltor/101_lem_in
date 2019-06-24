@@ -88,7 +88,7 @@ void	print_potential_paths(t_data *data)
 	while (data->paths[i] != NULL)
 	{
 		j = 2;
-		FPF("tab num %u size = %u\n", i, data->paths[i][0]);
+		FPF("tab num %u id_path = %u size = %u\n", i, data->paths[i][0], data->paths[i][1]);
 		while (j < data->paths[i][1])
 		{
 			FPF("salle %u name = %s\n", j, data->r_tab[data->paths[i][j]].name);

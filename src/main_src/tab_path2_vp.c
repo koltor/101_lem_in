@@ -94,14 +94,14 @@ UINT	compare_both_tabs(UINT *ctab, UINT *ptab)
 {
 	UINT i;
 
-	i = ctab[1];
-	while (i >= 2)
+	i = 2;
+	while (i < ctab[1])
 	{
 		if (ctab[i] != ptab[i])
 		{
 			return (0);
 		}
-		i--;
+		i++;
 	}
 	return (1);
 }
@@ -111,8 +111,10 @@ UINT	compare_current_tab_with_prev(UINT *ctab, UINT **list_tabs, UINT index)
 	UINT i;
 
 	i = 0;
-	while (i < index - 1)
+	FPF("index %u\n", index);
+	while (i < index)
 	{
+		FPF("i = %u\n", i);
 		if (ctab[1] == list_tabs[i][1] && compare_both_tabs(ctab, list_tabs[i]) == 1)
 			return (1);
 		i++;
@@ -129,6 +131,7 @@ void	fill_tabs_with_rooms(t_data *data)
 	i = 0;
 	while (data->paths[i] != NULL)
 	{
+
 		j = data->paths[i][1] - 1;
 		data->paths[i][j] = 1;
 		j--;
@@ -138,8 +141,11 @@ void	fill_tabs_with_rooms(t_data *data)
 			id_room = fill_tabs_with_current_room(i, id_room, data, j);
 			j--;
 		}
-		if (i > 1 && compare_current_tab_with_prev(data->paths[i], data->paths, i))
+		if (i >= 1 && compare_current_tab_with_prev(data->paths[i], data->paths, i))// a refaire au propre, ptit bug dans compare tab
+		{
+			FPF("suce\n");
 			swap_current_tab(data->paths[i], i, data);
+		}
 		i++;
 	}
 	print_potential_paths(data);

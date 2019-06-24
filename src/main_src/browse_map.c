@@ -151,11 +151,9 @@ t_bool			browse_map(t_data *data)
 	if (!(turns = prepare_turn_to_start(data, ROOM_START)))
 		return (false);
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
-//	paths = get_id_path_list(data->r_tab[1], data);
-//	stock_rooms_to_go(paths, data);
 	fill_path_tab(data);
 	fill_tabs_with_rooms(data);
-//	print_number_paths(data);
+	path_sorter2(data, max_paths(*data));
 	free(turns);
 	return (true);
 }

@@ -36,6 +36,7 @@ t_room	*create_room(UINT size)
 		room_tab[size].x = 0;
 		room_tab[size].y = 0;
 		room_tab[size].nb_link_tubes = 0;
+		room_tab[size].used = false;
 	}
 	return (room_tab);
 }
