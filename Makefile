@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/24 18:00:47 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/24 22:02:55 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -59,7 +59,7 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(NAME_OBJ))
 PARSING_OBJ	= $(addprefix $(PARSING_OBJ_PATH)/,$(PARSING_NAME_OBJ))
 VISU_OBJ	= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
-CC			= gcc -g3 -fsanitize=address
+CC			= gcc #-g3 -fsanitize=address
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
 

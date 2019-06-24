@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 20:15:32 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 18:58:42 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,13 +31,14 @@ void	malloc_path_tabs(t_data *data)
 		while (j < qt)
 		{
 			pname = find_pname(&path_id_cp, data->r_tab[0].nb_link_tubes);
-			if (!(data->paths[j] = (UINT *)malloc(sizeof(UINT) * (data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname - 1] + 3))))
+			if (!(data->paths[j] = (UINT *)malloc(sizeof(UINT) * (data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname - 1] + 4))))
 			{
 				f_error(ERR_MALLOC, NULL);
 				return ;
 			}
 			data->paths[j][0] = pname;
-			data->paths[j][1] = data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname - 1] + 3;
+			data->paths[j][1] = data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname - 1] + 4;
+			data->paths[j][2] = NUSED;
 			j++;
 		}
 		i++;

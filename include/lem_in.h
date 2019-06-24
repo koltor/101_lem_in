@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 17:20:52 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 20:35:45 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,8 @@
 ** help for option's comprehention
 */
 
+# define USED 0
+# define NUSED 1
 # define O_D (option & 1)
 # define O_V (option & 2)
 # define O_I (option & 4)
@@ -151,6 +153,9 @@ UINT				max_paths(t_data data);
 void				reset_markers(t_data *data);
 void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths);
 void				bruteforce_sorter(t_data *data, UINT max_paths);
+void				set_used_rooms(UINT id_tab, t_data *data);
+UINT				is_valid(UINT *tab, t_data *data);
+UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
 
 /*
 **************************************************
