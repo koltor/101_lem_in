@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/24 14:09:30 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/24 16:05:47 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -48,7 +48,7 @@ NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_room.c \
 							scan_multithread_prepare_get_nodes.c scan_multithread_get_nodes.c \
 
 NAME_SRC_VISU			=	main_visu.c algo_bresenham.c print.c event.c ui.c \
-							ui2_legendary.c fill_pixel.c
+							ui2_legendary.c fill_pixel.c print2.c
 
 #nom des ficher objects (*.o)
 NAME_OBJ				= $(NAME_SRC:.c=.o)

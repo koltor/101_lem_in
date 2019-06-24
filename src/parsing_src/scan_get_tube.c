@@ -6,14 +6,14 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:58:15 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 15:59:15 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	check_duplicate_tube(t_tube *t_tab, UINT size)
+static void		check_duplicate_tube(t_tube *t_tab, UINT size)
 {
 	UINT	i;
 	UINT	j;
@@ -24,10 +24,10 @@ static void	check_duplicate_tube(t_tube *t_tab, UINT size)
 		j = i + 1;
 		while (j < size)
 		{
-		 	if ((t_tab[i].salle1 == t_tab[j].salle1 &&
-			 	t_tab[i].salle2 == t_tab[j].salle2) ||
-				 (t_tab[i].salle1 == t_tab[j].salle2 &&
-				 t_tab[i].salle2 == t_tab[j].salle1))
+			if ((t_tab[i].salle1 == t_tab[j].salle1 &&
+				t_tab[i].salle2 == t_tab[j].salle2) ||
+				(t_tab[i].salle1 == t_tab[j].salle2 &&
+				t_tab[i].salle2 == t_tab[j].salle1))
 			{
 				f_error(ERR_DUPL_TUBE, NULL);
 				return ;
@@ -49,19 +49,19 @@ static void	check_duplicate_tube(t_tube *t_tab, UINT size)
 **		-1 otherwise
 */
 
-static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT size, UINT *r)
+static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT s, UINT *r)
 {
-	while (--size)
+	while (--s)
 	{
-		if (!ft_strcmp(n, r_tab[size].name))
+		if (!ft_strcmp(n, r_tab[s].name))
 		{
-			*r = size; 
+			*r = s;
 			return (true);
 		}
 	}
-	if (!ft_strcmp(n, r_tab[size].name))
+	if (!ft_strcmp(n, r_tab[s].name))
 	{
-		*r = size; 
+		*r = s;
 		return (true);
 	}
 	return (false);
@@ -107,13 +107,13 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(ERR_MALLOC, false, NULL, NULL));
 	if (!(s2 = ft_revstrsub_c(line, '-')))
 		return (exit_slft(ERR_MALLOC, false, s1, NULL));
-	 if ((check_room_exist(s1, data->r_tab, data->rooms, &(tube->salle1))))
+	if ((check_room_exist(s1, data->r_tab, data->rooms, &(tube->salle1))))
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
 	if ((check_room_exist(s2, data->r_tab, data->rooms, &(tube->salle2))))
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
-	 if (tube->salle1 == tube->salle2)
+	if (tube->salle1 == tube->salle2)
 		return (exit_slft(ERR_LINK_TUBE_ITSELF, false, s1, s2));
- 	data->r_tab[tube->salle2].nb_link_tubes += 1;
+	data->r_tab[tube->salle2].nb_link_tubes += 1;
 	data->r_tab[tube->salle1].nb_link_tubes += 1;
 	return (exit_slft(-1, true, s1, s2));
 }

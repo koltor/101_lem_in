@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/20 20:31:35 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:00:07 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,8 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
 	{
 		if (tab_size != id)
 		{
-			if (r_tab[tab_size].name && !ft_strcmp(room.name, r_tab[tab_size].name))
+			if (r_tab[tab_size].name &&
+								!ft_strcmp(room.name, r_tab[tab_size].name))
 				return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
 			else if (r_tab[tab_size].name && room.x == r_tab[tab_size].x &&
 												room.y == r_tab[tab_size].y)

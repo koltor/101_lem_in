@@ -6,28 +6,28 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 20:11:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 15:52:25 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:56:13 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in_thread.h"
 
-static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT tab_size)
+static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT size)
 {
 	t_bool	ret;
 	t_room	room;
 
 	ret = false;
 	room = r_tab[id];
-	while (tab_size--)
+	while (size--)
 	{
-		if (tab_size != id)
+		if (size != id)
 		{
-			if (r_tab[tab_size].name && !ft_strcmp(room.name, r_tab[tab_size].name))
+			if (r_tab[size].name && !ft_strcmp(room.name, r_tab[size].name))
 				return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-			else if (r_tab[tab_size].name && room.x == r_tab[tab_size].x &&
-												room.y == r_tab[tab_size].y)
+			else if (r_tab[size].name && room.x == r_tab[size].x &&
+												room.y == r_tab[size].y)
 				return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
 		}
 	}
@@ -101,7 +101,7 @@ static t_bool	reset_one_room(t_room *room)
 static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 {
 	t_bool	value;
-	UINT 	tmp_id_room;
+	UINT	tmp_id_room;
 
 	value = false;
 	if (*order == 1 || *order == 2)
@@ -129,7 +129,7 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 	return (true);
 }
 
-void	get_room_thread_main(char *file_line, t_data *data, t_thread thread)
+void			get_room_thread_main(char *file_line, t_data *data, t_thread thread)
 {
 	char	*line;
 	UINT	ir;
@@ -141,8 +141,8 @@ void	get_room_thread_main(char *file_line, t_data *data, t_thread thread)
 	order = 0;
 	cpt = 0;
 	type = 0;
- 	while (cpt < thread.section || (thread.id == NB_THREAD && type != -1))
- 	{
+	while (cpt < thread.section || (thread.id == NB_THREAD && type != -1))
+	{
 		line = scan_line_line_for_threading(file_line, thread.id - 1);
 		if ((type = is_room(line)) == -1)
 			break ;

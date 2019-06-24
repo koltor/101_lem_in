@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 15:44:30 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:55:56 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,19 +24,19 @@
 **		-1 otherwise
 */
 
-static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT size, UINT *r)
+static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT s, UINT *r)
 {
-	while (--size)
+	while (--s)
 	{
-		if (!ft_strcmp(n, r_tab[size].name))
+		if (!ft_strcmp(n, r_tab[s].name))
 		{
-			*r = size; 
+			*r = s;
 			return (true);
 		}
 	}
-	if (!ft_strcmp(n, r_tab[size].name))
+	if (!ft_strcmp(n, r_tab[s].name))
 	{
-		*r = size; 
+		*r = s;
 		return (true);
 	}
 	return (false);
@@ -82,40 +82,28 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(ERR_MALLOC, false, NULL, NULL));
 	if (!(s2 = ft_revstrsub_c(line, '-')))
 		return (exit_slft(ERR_MALLOC, false, s1, NULL));
-	 if ((check_room_exist(s1, data->r_tab, data->rooms, &(tube->salle1))))
+	if ((check_room_exist(s1, data->r_tab, data->rooms, &(tube->salle1))))
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
 	if ((check_room_exist(s2, data->r_tab, data->rooms, &(tube->salle2))))
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
 	if (tube->salle1 == tube->salle2)
 		return (exit_slft(ERR_LINK_TUBE_ITSELF, false, s1, s2));
- 	data->r_tab[tube->salle2].nb_link_tubes += 1;
+	data->r_tab[tube->salle2].nb_link_tubes += 1;
 	data->r_tab[tube->salle1].nb_link_tubes += 1;
 	return (exit_slft(-1, true, s1, s2));
 }
 
-void	get_tube_thread_main(char *file_line, t_data *data, t_thread tube, char *line)
+void			get_tube_thread_main(char *file_line, t_data *data,
+												t_thread tube, char *line)
 {
 	UINT	id;
 	int		ret;
-    UINT	stop;
+	UINT	stop;
 
 	id = (tube.id - 1) * tube.section;
 	stop = tube.section;
-	if (!is_tube(line))
-	{
-		if (split_line_for_tube(line, data, &(data->t_tab[id])))
-		{
-			if (id < tube.thread->tubes)
-				tube.thread->tubes = id;
-			return ;
-		}
-		id++;
-		stop--;
-	}
 	while (stop)
 	{
-		if (!(line = scan_line_line_for_threading(file_line, tube.id - 1)))
-			break ;
 		if ((ret = is_tube(line)) == 1)
 			continue ;
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
@@ -124,9 +112,10 @@ void	get_tube_thread_main(char *file_line, t_data *data, t_thread tube, char *li
 				tube.thread->tubes = id;
 			break ;
 		}
-			
 		stop--;
 		id += 1;
+		if (!(line = scan_line_line_for_threading(file_line, tube.id - 1)))
+			break ;
 	}
 	if (ret == -1)
 		f_error(ERR_TUBES_FORMAT, NULL);

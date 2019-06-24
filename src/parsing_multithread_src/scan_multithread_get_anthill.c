@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 19:59:54 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 15:37:59 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:32:05 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,13 +16,13 @@
 void	set_thread_info(t_info_thread *thread_info, t_data *data)
 {
 	thread_info->rooms = data->rooms;
-	thread_info->tubes = data->tubes;	
+	thread_info->tubes = data->tubes;
 }
 
 t_bool	stock_anthill_for_threading(char *file_line, t_data *data)
 {
-	char *line;
-	t_info_thread thread_info;
+	char			*line;
+	t_info_thread	thread_info;
 
 	set_thread_info(&thread_info, data);
 	if (!(data->ants = get_number_of_ants(file_line)))

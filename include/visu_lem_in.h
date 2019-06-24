@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:11:51 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 16:14:43 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:05:01 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,6 +76,7 @@ typedef struct		s_env
 int					algo_bresenham(double index[4], t_env *env);
 int					fill_pixel(t_env *env, int x, int y);
 void				put_img(t_env *env, t_data data);
+void				show_name_room(t_env *env, t_data data);
 
 int					keyboard_events(int key, void *data);
 int					mouse_events(int button, int x, int y, void *data);

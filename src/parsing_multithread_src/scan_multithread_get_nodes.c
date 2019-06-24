@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 18:23:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:35:05 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 16:39:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@
 **		need the number of nodes already malloc
 */
 
-static void	exit_get_node_malloc_error(t_data *data, UINT size)
+static void		exit_get_node_malloc_error(t_data *data, UINT size)
 {
 	UINT cp_room;
 
@@ -30,7 +30,6 @@ static void	exit_get_node_malloc_error(t_data *data, UINT size)
 	while (size--)
 		free(data->r_tab[size].link_tubes);
 }
-
 
 /*
 ** malloc_link_tubes:
@@ -43,7 +42,7 @@ static void	exit_get_node_malloc_error(t_data *data, UINT size)
 **		the number of nodes already malloc otherwise
 */
 
-static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
+static UINT		malloc_link_tubes(t_room *r_tab, UINT rooms)
 {
 	UINT i;
 
@@ -58,19 +57,19 @@ static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
 	return (0);
 }
 
-t_bool  multithread_malloc_nodes(t_data *data)
+t_bool			multithread_malloc_nodes(t_data *data)
 {
-    UINT ret;
+	UINT ret;
 
 	if ((ret = malloc_link_tubes(data->r_tab, data->rooms)))
 	{
 		exit_get_node_malloc_error(data, ret + 1);
 		return (false);
 	}
-    return (true);
+	return (true);
 }
 
-static void	multithread_detect_tubes(t_data *data, UINT id_room)
+static void		multithread_detect_tubes(t_data *data, UINT id_room)
 {
 	UINT	id_tube;
 	t_room	*room;
@@ -90,11 +89,11 @@ static void	multithread_detect_tubes(t_data *data, UINT id_room)
 	}
 }
 
-void	get_nodes_thread_main(t_data *data, UINT start, UINT end)
+void			get_nodes_thread_main(t_data *data, UINT start, UINT end)
 {
-    UINT id_room;
+	UINT id_room;
 
-    id_room = start;
-    while (id_room < end)
+	id_room = start;
+	while (id_room < end)
 		multithread_detect_tubes(data, id_room++);
 }
