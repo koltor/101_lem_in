@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 20:11:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 19:19:22 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 15:52:25 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -129,7 +129,7 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 	return (true);
 }
 
-void	get_room_thread_main(char *file_line, t_data *data, UINT id_thread, UINT section)
+void	get_room_thread_main(char *file_line, t_data *data, t_thread thread)
 {
 	char	*line;
 	UINT	ir;
@@ -137,13 +137,13 @@ void	get_room_thread_main(char *file_line, t_data *data, UINT id_thread, UINT se
 	int		order;
 	char	type;
 
-	ir = (section * (id_thread - 1)) + 2;
+	ir = (thread.section * (thread.id - 1)) + 2;
 	order = 0;
 	cpt = 0;
 	type = 0;
- 	while (cpt < section || (id_thread == NB_THREAD && type != -1))
+ 	while (cpt < thread.section || (thread.id == NB_THREAD && type != -1))
  	{
-		line = scan_line_line_for_threading(file_line, id_thread - 1);
+		line = scan_line_line_for_threading(file_line, thread.id - 1);
 		if ((type = is_room(line)) == -1)
 			break ;
 		if (type == 1 && order == 0 && (order = is_order(line)))
@@ -152,8 +152,12 @@ void	get_room_thread_main(char *file_line, t_data *data, UINT id_thread, UINT se
 		{
 			if (order == 0)
 				cpt++;
-			if (select_ben(line, data, &order, &ir) && (data->rooms = ir))
+			if (select_ben(line, data, &order, &ir))
+			{
+				if (thread.thread->rooms >= ir)
+					thread.thread->rooms = 0;
 				return ;
+			}
 		}
 	}
 }

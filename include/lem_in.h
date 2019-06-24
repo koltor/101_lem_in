@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:57:42 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 14:52:54 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -170,7 +170,7 @@ void				fill_tabs_with_rooms(t_data *data);
 # define ERR_DUPL_ROOM			15 // 2 salles ont le meme nom
 # define ERR_DUPL_XY_ROOM		16 // 2 salles ont les meme coordonnées
 # define ERR_DUPL_TUBE			17 // Attention: 2 chemins sont identiques
-# define ERR_LINK_TUBE_ITSELF	18 // Attention: 2 chemins sont identiques
+# define ERR_LINK_TUBE_ITSELF	18 // Une salle est relier a elle même
 # define ERR_EMPTY_FILE			19 // fichier vide
 # define ERR_ORDER				20 // ordre invalide
 # define ERR_OVERFLOW			21 // overflow sur les salles

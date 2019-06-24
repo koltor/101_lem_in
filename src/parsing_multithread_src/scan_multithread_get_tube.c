@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 19:00:05 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 15:44:30 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,7 +86,7 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
 	if ((check_room_exist(s2, data->r_tab, data->rooms, &(tube->salle2))))
 		return (exit_slft(ERR_ROOM_NOT_DEFINE, false, s1, s2));
-	 if (tube->salle1 == tube->salle2)
+	if (tube->salle1 == tube->salle2)
 		return (exit_slft(ERR_LINK_TUBE_ITSELF, false, s1, s2));
  	data->r_tab[tube->salle2].nb_link_tubes += 1;
 	data->r_tab[tube->salle1].nb_link_tubes += 1;
@@ -105,7 +105,8 @@ void	get_tube_thread_main(char *file_line, t_data *data, t_thread tube, char *li
 	{
 		if (split_line_for_tube(line, data, &(data->t_tab[id])))
 		{
-			data->tubes = 0;
+			if (id < tube.thread->tubes)
+				tube.thread->tubes = id;
 			return ;
 		}
 		id++;
@@ -118,7 +119,12 @@ void	get_tube_thread_main(char *file_line, t_data *data, t_thread tube, char *li
 		if ((ret = is_tube(line)) == 1)
 			continue ;
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
+		{
+			if (id < tube.thread->tubes)
+				tube.thread->tubes = id;
 			break ;
+		}
+			
 		stop--;
 		id += 1;
 	}

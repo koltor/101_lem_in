@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 16:13:09 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:20:43 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 15:37:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,11 +32,12 @@ static void	*thread_main(void *arg)
 	{
 		if ((type = is_tube(line)) == -1)
 		{
-	//		dprintf(1, "ARRET thread:%u | %u\n", thread.id, stop);
+			//dprintf(1, "ARRET thread:%u | %u\n", thread.id, stop);
+			f_error(ERR_TUBES_FORMAT, NULL);
 			return (NULL);
 		}
-		else if (type == 0)
-				stop--;
+		if (type == 0)
+			stop--;
     	line = scan_line_line_for_threading(thread.file_line, thread.id - 1);
 	}
     if (!line)
@@ -83,7 +84,7 @@ static void	wait_thread(t_thread (*thread)[NB_THREAD], t_data *data)
 	}
 }
 
-static void	prepare_thread(t_thread (*thread)[NB_THREAD], t_data *data, char *file_line)
+static void	prepare_thread(t_thread (*thread)[NB_THREAD], t_data *data, char *file_line, t_info_thread *thread_info)
 {
 	UINT	i;
 	float	sec;
@@ -102,18 +103,20 @@ static void	prepare_thread(t_thread (*thread)[NB_THREAD], t_data *data, char *fi
 		(*thread)[i].pth = NULL;
 		(*thread)[i].section = (UINT)sec;
 		(*thread)[i].file_line = ft_strdup(file_line);
+		(*thread)[i].thread = thread_info;
 //		dprintf(1,"%u | sec: %u J'ai initialisé\n", (*thread)[i].id, (*thread)[i].section);
 		i++;
 	}
 }
 
-void    multithread_get_tube(char *file_line, t_data *data)
+void    multithread_get_tube(char *file_line, t_data *data, t_info_thread *thread_info)
 {
     t_thread thread[NB_THREAD];
 
-    prepare_thread(&thread, data, file_line);
+    prepare_thread(&thread, data, file_line, thread_info);
 	launch_thread(&thread, data);
 	wait_thread(&thread, data);
+	data->tubes = thread_info->tubes;
 	launch_check_tube_thread(&thread, data);
 	wait_thread(&thread, data);
 }
