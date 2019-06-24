@@ -1,25 +1,5 @@
 #include "lem_in.h"
 
-UINT	max_paths(t_data data)
-{
-	if (data.r_tab[0].nb_link_tubes < data.r_tab[1].nb_link_tubes)
-		return (data.r_tab[0].nb_link_tubes);
-	return (data.r_tab[1].nb_link_tubes);
-}
-
-void	reset_markers(t_data *data)
-{
-	UINT i;
-
-	i = 2; // attention segv si y aque start et end
-	while (i < data->rooms)
-	{
-		if (data->r_tab[i].used == true)
-			data->r_tab[i].used = false;
-		i++;
-	}
-}
-
 void	set_used_rooms(UINT id_tab, t_data *data)
 {
 	UINT i;
@@ -46,7 +26,7 @@ UINT	is_valid(UINT *tab, t_data *data)
 	return (1);
 }
 
-UINT	get_compatibe_tab_for_pid(UINT pid, t_data *data) // prend uniquement le plus petit
+UINT	get_compatibe_tab_for_pid(UINT pid, t_data *data)
 {
 	UINT i;
 	t_bool test;
@@ -87,17 +67,52 @@ UINT	get_pnum(UINT pid, t_data *data)
 	return (ret);
 }
 
-void	path_sorter2(t_data *data, UINT max_paths)
+void	small_path_sorter(t_data *data, UINT (*res)[], UINT max_paths, UINT pid)
 {
-	UINT res[max_paths];
+//	UINT res[max_paths];
+	UINT pnum;
+	UINT tmp;
+	t_bool test;
+
+	(*res)[pid - 1] = get_compatibe_tab_for_pid(pid - 1, data);
+	if ((*res)[pid - 1] != data->path_nbr)
+		set_used_rooms((*res)[0], data);
+	if (max_paths == pid)
+		return ;
+	while (pid <= max_paths)
+	{
+		pnum = get_pnum(pid, data);
+		test = false;
+		while (pnum)
+		{
+			if ((tmp = get_compatibe_tab_for_pid(pid, data)) != data->path_nbr + 1)
+			{
+				test = true;
+				(*res)[pid - 1] = tmp;
+				set_used_rooms((*res)[pid - 1], data);
+				break ;
+			}
+			pnum--;
+		}
+		if (test == false)
+			(*res)[pid - 1] = data->path_nbr;
+		pid++;
+	}
+	return ;
+} 
+
+
+void	path_sorter2(t_data *data, UINT (*res)[], UINT max_paths)
+{
+//	UINT res[max_paths];
 	UINT pid;
 	UINT pnum;
 	UINT tmp;
 	t_bool test;
 
-	res[0] = get_compatibe_tab_for_pid(1, data);
-	if (res[0] != data->path_nbr + 1)
-		set_used_rooms(res[0], data);
+	(*res)[0] = get_compatibe_tab_for_pid(1, data);
+	if ((*res)[0] != data->path_nbr)
+		set_used_rooms((*res)[0], data);
 	if (max_paths == 1)
 		return ;
 	pid = 2;
@@ -110,22 +125,112 @@ void	path_sorter2(t_data *data, UINT max_paths)
 			if ((tmp = get_compatibe_tab_for_pid(pid, data)) != data->path_nbr + 1)
 			{
 				test = true;
-				res[pid - 1] = tmp;
-				set_used_rooms(res[pid - 1], data);
+				(*res)[pid - 1] = tmp;
+				set_used_rooms((*res)[pid - 1], data);
 				break ;
 			}
 			pnum--;
 		}
 		if (test == false)
-			res[pid - 1] = data->path_nbr;
+			(*res)[pid - 1] = data->path_nbr;
 		pid++;
 	}
+	return ;
+} 
+
+UINT	check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr)
+{
+	UINT res;
+	UINT i;
+
+	res = 0;
+	i = 0;
+	while (i < max_paths)
+	{
+		if ((*curr)[i] != path_nbr)
+			res++;
+		i++;
+	}
+	return (res);
+}
+
+void	tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths)
+{
+	UINT i;
+
+	i = 0;
+	while (i < max_paths)
+	{
+		(*res)[i] = (*curr)[i];
+		i++;
+	}
+}
+
+void	print_tab(UINT (*res)[], UINT max_paths)
+{
 	UINT tst = 0;
+
+	FPF("==================================\n");
 	while (tst < max_paths)
 	{
-		FPF("case num %u tab num %u\n", tst, res[tst]);
+		FPF("case num %u tab num %u\n", tst, (*res)[tst]);
 		tst++;
 	}
-} 
+	FPF("==================================\n");
+}
+
+void	del_last_path(UINT (*curr)[], t_data *data, UINT max_paths, UINT index)
+{
+	UINT i;
+
+	i = 0;
+	while (i < max_paths)
+	{
+		data->r_tab[data->paths[(*curr)[index]][i]].used = false;
+		i++;
+	}
+}
+
+void	bruteforce_sorter(t_data *data, UINT max_paths)
+{
+	UINT res[max_paths];
+	UINT curr[max_paths];
+	UINT bfs;
+	UINT pid;
+
+	bfs = 0;
+	pid = max_paths;
+	path_sorter2(data, &curr, max_paths);
+	if (check_path_found(&curr, max_paths, data->path_nbr) == max_paths)
+	{
+		FPF("found the greatest solution on the 1st try\n");
+		return ;
+	}
+	while (bfs != 10)
+	{
+		FPF("hello\n");
+		while (pid != -1)
+		{
+			FPF("hola\n");
+			pid = del_last_path(&curr, data, max_paths, pid - 1);
+			small_path_sorter(data, &curr, max_paths, pid);
+			FPF("small sorter res \n");
+			print_tab(&curr, max_paths);
+			if (check_path_found(&curr, max_paths,data->path_nbr) == max_paths)
+			{
+				FPF("check les max paths\n");
+				tab_cp(&curr, &res, max_paths);
+				return ;
+			}
+			else if (check_path_found(&curr, max_paths,data->path_nbr) > check_path_found(&res, max_paths,data->path_nbr))
+			{
+				FPF("resize le tab\n");
+				tab_cp(&curr, &res, max_paths);
+			}
+			pid--;
+		}
+		bfs++;
+	}
+}
 
 /* BRUTE FORCE en partant de la fin des qu on arrive a max tab on s arrete */

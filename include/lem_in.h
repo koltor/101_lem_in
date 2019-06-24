@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 20:21:12 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 17:20:52 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -148,8 +148,9 @@ UINT				get_bit_place(ULL path_list);
 UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
 UINT				max_paths(t_data data);
-void				path_sorter(t_data *data);
-void				path_sorter2(t_data *data, UINT max_paths);
+void				reset_markers(t_data *data);
+void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths);
+void				bruteforce_sorter(t_data *data, UINT max_paths);
 
 /*
 **************************************************

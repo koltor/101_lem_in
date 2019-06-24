@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 14:13:39 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 20:24:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 18:52:59 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,10 +111,8 @@ UINT	compare_current_tab_with_prev(UINT *ctab, UINT **list_tabs, UINT index)
 	UINT i;
 
 	i = 0;
-	FPF("index %u\n", index);
 	while (i < index)
 	{
-		FPF("i = %u\n", i);
 		if (ctab[1] == list_tabs[i][1] && compare_both_tabs(ctab, list_tabs[i]) == 1)
 			return (1);
 		i++;
@@ -142,10 +140,7 @@ void	fill_tabs_with_rooms(t_data *data)
 			j--;
 		}
 		if (i >= 1 && compare_current_tab_with_prev(data->paths[i], data->paths, i))// a refaire au propre, ptit bug dans compare tab
-		{
-			FPF("suce\n");
 			swap_current_tab(data->paths[i], i, data);
-		}
 		i++;
 	}
 	print_potential_paths(data);
