@@ -6,28 +6,37 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 20:11:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:56:13 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 21:14:51 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in_thread.h"
 
-static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT size)
+static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT size, UINT section)
 {
 	t_bool	ret;
 	t_room	room;
+	long	i;
+	UINT	n;
 
 	ret = false;
 	room = r_tab[id];
-	while (size--)
+	i = -1;
+	n = 1;
+	while (++i < size)
 	{
-		if (size != id)
+		if (i != id)
 		{
-			if (r_tab[size].name && !ft_strcmp(room.name, r_tab[size].name))
+			if(!r_tab[i].name)
+			{
+				if (i > 1)
+					i = section * n++;
+				continue ;
+			}
+			if (!ft_strcmp(room.name, r_tab[i].name))
 				return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-			else if (r_tab[size].name && room.x == r_tab[size].x &&
-												room.y == r_tab[size].y)
+			else if (room.x == r_tab[i].x && room.y == r_tab[i].y)
 				return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
 		}
 	}
@@ -98,13 +107,23 @@ static t_bool	reset_one_room(t_room *room)
 **		false otherwise
 */
 
-static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
+static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir, UINT section)
 {
 	t_bool	value;
 	UINT	tmp_id_room;
 
 	value = false;
-	if (*order == 1 || *order == 2)
+	if (*order == 0)
+	{
+		if (*ir >= data->rooms)
+			return (false);
+		if (split_line_for_room(line, &data->r_tab[*ir]))
+			return (false);
+		if (check_duplicate_room(*ir, data->r_tab, data->rooms, section))
+			return (reset_one_room(&data->r_tab[*ir]));
+		*ir = *ir + 1;
+	}
+	else if (*order == 1 || *order == 2)
 	{
 		if (data->r_tab[0].name != NULL && *order == 1)
 			return (*(t_bool*)f_error(ERR_DUPLICATE_STR, &value));
@@ -112,18 +131,8 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 			return (*(t_bool*)f_error(ERR_DUPLICATE_END, &value));
 		if (split_line_for_room(line, &data->r_tab[*order - 1]))
 			return (false);
-		if (check_duplicate_room(*order - 1, data->r_tab, data->rooms))
+		if (check_duplicate_room(*order - 1, data->r_tab, data->rooms, section))
 			return (reset_one_room(&data->r_tab[*order - 1]));
-	}
-	else if (*order == 0)
-	{
-		if (*ir >= data->rooms)
-			return (false);
-		if (split_line_for_room(line, &data->r_tab[*ir]))
-			return (false);
-		if (check_duplicate_room(*ir, data->r_tab, data->rooms))
-			return (reset_one_room(&data->r_tab[*ir]));
-		*ir = *ir + 1;
 	}
 	*order = 0;
 	return (true);
@@ -152,7 +161,7 @@ void			get_room_thread_main(char *file_line, t_data *data, t_thread thread)
 		{
 			if (order == 0)
 				cpt++;
-			if (select_ben(line, data, &order, &ir))
+			if (select_ben(line, data, &order, &ir, thread.section))
 			{
 				if (thread.thread->rooms >= ir)
 					thread.thread->rooms = 0;

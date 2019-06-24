@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:00:07 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 20:54:35 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,7 +111,15 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 	t_bool value;
 
 	value = false;
-	if (*order == 1 || *order == 2)
+ 	if (*order == 0 && *ir < data->rooms)
+	{
+		if (split_line_for_room(line, &data->r_tab[*ir]))
+			return (false);
+		if (check_duplicate_room(*ir, data->r_tab, *ir))
+			return (reset_one_room(&data->r_tab[*ir]));
+		*ir = *ir + 1;
+	}
+	else if (*order == 1 || *order == 2)
 	{
 		if (data->r_tab[0].name != NULL && *order == 1)
 			return (*(t_bool*)f_error(ERR_DUPLICATE_STR, &value));
@@ -121,14 +129,6 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 			return (false);
 		if (check_duplicate_room(*order - 1, data->r_tab, *ir))
 			return (reset_one_room(&data->r_tab[*order - 1]));
-	}
-	else if (*order == 0 && *ir < data->rooms)
-	{
-		if (split_line_for_room(line, &data->r_tab[*ir]))
-			return (false);
-		if (check_duplicate_room(*ir, data->r_tab, *ir))
-			return (reset_one_room(&data->r_tab[*ir]));
-		*ir = *ir + 1;
 	}
 	*order = 0;
 	return (true);

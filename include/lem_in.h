@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 18:23:39 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 18:28:13 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@
 # define ULL unsigned long long int
 # define ROOM_START 0
 # define ROOM_END	1
-# define NB_THREAD	8
+# define NB_THREAD	16
 
 /*
 ** help for option's comprehention
