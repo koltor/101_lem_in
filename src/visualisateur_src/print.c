@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:48:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:04:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 18:23:20 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,18 +91,18 @@ static void		select_color_tube(t_env *env, UINT value)
 		0x33FFFA,
 		0x3338FF,
 		0xF933FF,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E,
-		0x5E450E
+		0x0096dc,
+		0xf39c05,
+		0xff80c0,
+		0x00a0ff,
+		0xffffff,
+		0x760a0a,
+		0xff69b4,
+		0xb1aaee,
+		0xaaeeb1,
+		0x8caba8,
+		0x494e6b,
+		0xff0080
 	};
 
 	if (!env->highlight_path)

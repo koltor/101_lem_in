@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 14:38:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/13 16:07:50 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/17 15:53:07 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,15 +33,16 @@ UINT	lap_r_managment(t_data *dt, t_turn *turns, UINT id_turn, UINT old_child)
 	old_t = turns[id_turn];
 	room = dt->r_tab[turns[id_turn].id_room];
 	while (++i < room.nb_link_tubes)
-		if (dt->t_tab[room.link_tubes[i]].path_id == ROOM_START)
+		if (!(dt->t_tab[room.link_tubes[i]].path_id & bin(old_t.id_path)))
 		{
-			dt->t_tab[room.link_tubes[i]].turn = turns[id_turn].turn + 1;
-			dt->t_tab[room.link_tubes[i]].path_id = old_t.id_path;
-			children += set_children(&turns[old_child + children],
-			turns[id_turn].turn + 1, get_id_room(dt->t_tab[room.link_tubes[i]],
+			dt->t_tab[room.link_tubes[i]].tmp_turn[old_t.id_path - 1] = turns[id_turn].turn + 1;
+			dt->t_tab[room.link_tubes[i]].path_id = dt->t_tab[room.link_tubes[i]].path_id | bin(old_t.id_path);
+			if (!(get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room) == ROOM_START || get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room) == ROOM_END))
+			{
+				children += set_children(&turns[old_child + children],
+				turns[id_turn].turn + 1, get_id_room(dt->t_tab[room.link_tubes[i]],
 				old_t.id_room), old_t.id_path);
-			if (get_id_room(dt->t_tab[room.link_tubes[i]], old_t.id_room) == ROOM_END)
-				return (destroy_turn(turns, old_child, id_turn, children));
+			}
 		}
 	return (children);
 }

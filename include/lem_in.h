@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 14:52:54 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 18:23:39 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,9 +27,10 @@
 # include <stdio.h>
 
 # define UINT unsigned int
-# define NB_THREAD	8
+# define ULL unsigned long long int
 # define ROOM_START 0
 # define ROOM_END	1
+# define NB_THREAD	8
 
 /*
 ** help for option's comprehention
@@ -55,14 +56,16 @@ typedef struct		s_room
 	int				y;
 	UINT			nb_link_tubes;
 	UINT			*link_tubes;
+	enum e_bool		used;
 }					t_room;
 
 typedef	struct		s_tube
 {
 	UINT			salle1;
 	UINT			salle2;
-	UINT			path_id;
+	ULL				path_id;
 	UINT			turn;
+	UINT			*tmp_turn;
 	enum e_bool		used;
 }					t_tube;
 
@@ -84,13 +87,6 @@ typedef struct		s_data
 	struct s_room	*r_tab;
 }					t_data;
 
-typedef struct		s_path
-{
-	UINT			path_id;
-	UINT			turn;
-	UINT			*rooms_to_go;
-}			t_path;
-
 typedef enum e_bool	t_bool;
 
 /*
@@ -98,6 +94,12 @@ typedef enum e_bool	t_bool;
 **********************PARSING*********************
 **************************************************
 */
+
+/* a enlever apres */
+
+#include "ft_printf.h"
+
+/******************/
 
 char				**get_option(int ac, char **av, int *option);
 char				*parsing_into_line(const char *path);
@@ -134,7 +136,6 @@ t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
 t_bool				browse_map(t_data *data);
 void				recursive_bs_turn(t_data *d, t_turn *t, UINT nb, UINT lap);
 UINT				get_id_room(t_tube tubes, UINT id_room);
-
 UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 
 /*
@@ -143,9 +144,17 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 **************************************************
 */
 
+void				print_potential_paths(t_data *data);
 void				fill_path_tab(t_data *data);
 void				fill_tabs_with_rooms(t_data *data);
-
+void				print_number_paths(t_data *data);
+UINT				count_bits(t_tube tube);
+UINT				get_bit_place(ULL path_list);
+UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
+UINT				potential_path_counter(t_data *data);
+UINT				max_paths(t_data data);
+void				path_sorter(t_data *data);
+void				path_sorter2(t_data *data, UINT max_paths);
 
 /*
 **************************************************
@@ -203,6 +212,7 @@ size_t				ft_strlenc(const char *s, char c);
 char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
 long				atol_id(const char *s, char c, UINT index);
+ULL					bin(char c);
 
 /*
 **************************************************
@@ -211,4 +221,7 @@ long				atol_id(const char *s, char c, UINT index);
 */
 
 void				main_visualisateur(t_data data);
+
+
+
 #endif

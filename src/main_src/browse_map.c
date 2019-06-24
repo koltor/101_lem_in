@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/17 15:30:59 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/19 16:19:26 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,15 +29,15 @@
 **		NULL otherwise
 */
 
-static t_turn	*init_turn(UINT tubes)
+static t_turn	*init_turn(UINT size)
 {
 	UINT	i;
 	t_turn	*turns;
 
 	i = 0;
-	if (!(turns = malloc(sizeof(t_turn) * tubes)))
+	if (!(turns = malloc(sizeof(t_turn) * size)))
 		return (f_error(ERR_MALLOC, NULL));
-	while (i < tubes)
+	while (i < size)
 	{
 		turns[i].id_room = 0;
 		turns[i].id_path = 0;
@@ -78,12 +78,14 @@ UINT			get_id_room(t_tube tubes, UINT id_room)
 static void		start_columns(t_room start, t_tube *tubes, t_turn *turns, UINT id_room)
 {
 	UINT i;
+	t_tube *tube;
 
 	i = 0;
 	while (i < start.nb_link_tubes)
 	{
-		tubes[start.link_tubes[i]].path_id = i % start.nb_link_tubes + 1;
-		tubes[start.link_tubes[i]].turn = 1;
+		tube = &tubes[start.link_tubes[i]];
+		tube->path_id = bin(i % start.nb_link_tubes + 1);
+		tube->tmp_turn[i] = 1;
 		turns[i].id_path = i % start.nb_link_tubes + 1;
 		turns[i].id_room = get_id_room(tubes[start.link_tubes[i]], id_room);
 		turns[i].turn = 1;
@@ -96,25 +98,62 @@ t_turn	*prepare_turn_to_start(t_data *data, UINT id_room)
 	t_turn	*turns;
 	UINT	nbr_col;
 
-	if (!(turns = init_turn(data->tubes)))
+	if (!(turns = init_turn(data->tubes * data->r_tab[id_room].nb_link_tubes)))
 		return (NULL);
 	start_columns(data->r_tab[id_room], data->t_tab, turns, id_room);
 	return (turns);
 }
 
+
+
+static t_bool	error_malloc_prepare(t_tube *tab, UINT size)
+{
+	UINT i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i].tmp_turn);
+		i += 1;
+	}
+	return (false);
+}
+
+static UINT		prepare_tubes(t_tube *tab, UINT size, UINT length)
+{
+	UINT i;
+	UINT j;
+
+	i = 0;
+	while (i < size)
+	{
+		if (!(tab[i].tmp_turn = malloc(sizeof(UINT) * length)))
+			return (i);
+		j = 0;
+		while (j < length)
+		{
+			tab[i].tmp_turn[j] = 0;
+			j++;
+		}
+		i += 1;
+	}
+	return (0);
+}
+
 t_bool			browse_map(t_data *data)
 {
 	t_turn	*turns;
+	UINT	ret;
 	t_list	*paths;
 
+	if ((ret = prepare_tubes(data->t_tab, data->tubes, data->r_tab[ROOM_START].nb_link_tubes)))
+		return (error_malloc_prepare(data->t_tab, ret));
 	if (!(turns = prepare_turn_to_start(data, ROOM_START)))
 		return (false);
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
-//	paths = get_id_path_list(data->r_tab[1], data);
-//	stock_rooms_to_go(paths, data);
 	fill_path_tab(data);
 	fill_tabs_with_rooms(data);
-	dprintf(1, "ALLO\n");
+	path_sorter2(data, max_paths(*data));
 	free(turns);
 	return (true);
 }
