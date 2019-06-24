@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 19:26:49 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:51:51 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 17:27:58 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,8 +34,11 @@ static void	*thread_main(void *arg)
 		if (type == 1 && order == 0 && (order = is_order(line)))
 			continue ;
 		if (type == 0)
-			if (order == 0 && (order = 0))
+		{
+			if (order == 0)
 				stop--;
+			order = 0;
+		}
 	}
 	get_room_thread_main(thread.file_line, thread.data, thread);
 	return (NULL);
