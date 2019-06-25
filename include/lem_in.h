@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:04:27 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 18:17:00 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -168,6 +168,7 @@ UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
 UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
 void				print_tab(UINT (*res)[], UINT max_paths);
+void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
 
 /*
 **************************************************

@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/24 16:46:51 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 14:59:26 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 16:30:46 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -124,12 +124,13 @@ UINT	get_compatible_tab_for_pid(UINT pid, t_data *data)
 		if (test == true && data->paths[i][0] == pid && data->paths[i][2] == NUSED && data->paths[i][1] < data->paths[ret][1] && is_valid(data->paths[i], data))
 		{
 			ret = i;
-			FPF("tamer ret = %u\n", ret);
+//			FPF("tamer pid = %u ret = %u\n", ret);
 		}
-		FPF("i = %u\n", i);
+//		FPF("i = %u\n", i);
 		i++;
 	}
 	if (test == false)
 		ret = data->path_nbr;
+//	FPF("tamer ret %u\n", ret);
 	return (ret);
 }
