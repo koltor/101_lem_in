@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/24 20:32:50 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 15:03:11 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 16:31:27 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ UINT	get_max_pid(t_data *data, UINT max_paths)
 	ret = data->paths[0][0];
 	if (max_paths == 1)
 		return (ret);
-	while (i < max_paths)
+	while (i <= max_paths)
 	{
 		if (data->paths[i][0] > ret)
 			ret = data->paths[i][0];
@@ -85,7 +85,7 @@ void	path_sorter2(t_data *data, UINT (*res)[], UINT max_paths)
 		return ;
 	pid = get_min_pid(data, max_paths) + 1;
 	max_pid = get_max_pid(data, max_paths);
-//	FPF("pid = %u max_path = %u\n", pid, max_paths);
+//	FPF("pid = %u max_pid= %u\n", pid, max_pid);
 	while (pid <= max_pid)
 	{
 		pnum = get_pnum(pid, data);
@@ -96,7 +96,7 @@ void	path_sorter2(t_data *data, UINT (*res)[], UINT max_paths)
 //			FPF("allo le pid %u\n", pid);
 			if ((tmp = get_compatible_tab_for_pid(pid, data)) != data->path_nbr)
 			{
-//				FPF("tmp = %u pid = %u\n", tmp, pid);
+//				FPF("tmp = %u pid = %u cell = %u\n", tmp, pid, cell);
 				test = true;
 				(*res)[cell] = tmp;
 				set_used_rooms((*res)[cell], data);
@@ -197,6 +197,7 @@ void	bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[])
 	UINT pid;
 
 	bfs2 = 0;
+	set_tab_for_bf(&curr, data->path_nbr, max_paths);
 	path_sorter2(data, &curr, max_paths);
 	print_tab(&curr, max_paths);
 	if (check_path_found(&curr, max_paths, data->path_nbr) == max_paths)
@@ -239,7 +240,6 @@ UINT	get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths)
 		if ((*res)[i] != data->path_nbr && data->paths[(*res)[i]][0] != 0)
 		{
 			data->paths[(*res)[i]][0] = 0;
-			FPF("bonjour dans quel tab sommes nous %u, taille originale = %u\n", (*res)[i], data->paths[(*res)[i]][1]);
 			return (data->paths[(*res)[i]][1] - 4);
 		}
 		i++;
