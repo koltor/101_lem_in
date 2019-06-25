@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 18:09:19 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:47:34 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 13:58:25 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,10 +20,12 @@ static void	*thread_main(void *arg)
 	thread = *(t_thread*)arg;
 	if (thread.id == NB_THREAD)
 		get_nodes_thread_main(thread.data, (thread.id - 1) * thread.section,
-		thread.data->rooms);
+		thread.data->rooms, thread.data->rooms);
 	else
+	{
 		get_nodes_thread_main(thread.data, (thread.id - 1) * thread.section,
-		thread.id * thread.section);
+		thread.id * thread.section, thread.data->rooms);
+	}
 	return (NULL);
 }
 

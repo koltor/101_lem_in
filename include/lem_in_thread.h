@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/18 19:00:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 15:26:12 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 13:58:28 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,7 +43,7 @@ void				launch_check_tube_thread(t_thread (*thread)[NB_THREAD], t_data *data);
 
 t_bool				multithread_malloc_nodes(t_data *data);
 t_bool				multithreading_get_nodes(t_data *data);
-void				get_nodes_thread_main(t_data *data, UINT start, UINT end);
+void				get_nodes_thread_main(t_data *data, UINT start, UINT end, UINT max_room);
 
 char				*scan_line_line_for_threading(char *s, unsigned int id);
 

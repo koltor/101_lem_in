@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/24 21:24:24 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/25 13:46:40 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -71,7 +71,7 @@ PARSING_MT_OBJ	= $(addprefix $(PARSING_MT_OBJ_PATH)/,$(PARSING_MT_NAME_OBJ))
 VISU_OBJ		= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc #-O3 #-g3 -fsanitize=address
+CC			= gcc #-g3 -fsanitize=address
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
 

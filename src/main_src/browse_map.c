@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 16:19:26 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 15:22:04 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,9 +86,12 @@ static void		start_columns(t_room start, t_tube *tubes, t_turn *turns, UINT id_r
 		tube = &tubes[start.link_tubes[i]];
 		tube->path_id = bin(i % start.nb_link_tubes + 1);
 		tube->tmp_turn[i] = 1;
-		turns[i].id_path = i % start.nb_link_tubes + 1;
-		turns[i].id_room = get_id_room(tubes[start.link_tubes[i]], id_room);
-		turns[i].turn = 1;
+		if (get_id_room(tubes[start.link_tubes[i]], id_room) != ROOM_END)
+		{
+			turns[i].id_path = i % start.nb_link_tubes + 1;
+			turns[i].id_room = get_id_room(tubes[start.link_tubes[i]], id_room);
+			turns[i].turn = 1;
+		}
 		i++;
 	}
 }

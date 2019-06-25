@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 18:23:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:39:53 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 13:58:52 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,11 +89,11 @@ static void		multithread_detect_tubes(t_data *data, UINT id_room)
 	}
 }
 
-void			get_nodes_thread_main(t_data *data, UINT start, UINT end)
+void			get_nodes_thread_main(t_data *data, UINT start, UINT end, UINT max_room)
 {
 	UINT id_room;
 
 	id_room = start;
-	while (id_room < end)
+	while (id_room < end && id_room < max_room)
 		multithread_detect_tubes(data, id_room++);
 }

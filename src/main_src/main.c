@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 21:25:16 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 14:34:02 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,8 +100,8 @@ t_bool			lem_in(const char *path, int option)
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	}
-//	if (browse_map(&data))
-//		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	if (browse_map(&data))
+		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }
