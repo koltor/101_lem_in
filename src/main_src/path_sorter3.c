@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 12:39:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 16:31:48 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 18:08:05 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,7 @@ void	swap_tab_to_res(UINT **rtab, UINT (*res)[], t_data *data, UINT index)
 		i++;
 	}
 }
-
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 void	print_final_path_tab(t_data *data)
 {
 	UINT i;
@@ -70,6 +70,7 @@ void	print_final_path_tab(t_data *data)
 		}
 		i++;
 	}
+	data->path_nbr = i; // ATTENTION A CHANGER QUAND J ENLEVERAI L AFFICHAGE
 }
 
 void	set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths)

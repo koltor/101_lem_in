@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:17:00 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 18:50:33 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,6 +36,7 @@
 ** help for option's comprehention
 */
 
+# define BUF_SIZE 100000
 # define USED 0
 # define NUSED 1
 # define O_D (option & 1)
@@ -86,6 +87,7 @@ typedef struct		s_data
 	UINT			**paths;
 	UINT			**ret;
 	UINT			path_nbr;
+	UINT			output_lenght;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
 }					t_data;
@@ -169,6 +171,14 @@ UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
 void				print_tab(UINT (*res)[], UINT max_paths);
 void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
+
+/*
+**************************************************
+***********************PART 4*********************
+**************************************************
+*/
+
+char	*fill_output(t_data *data);
 
 /*
 **************************************************
