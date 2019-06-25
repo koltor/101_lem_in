@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 12:46:11 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:51:23 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 18:53:35 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,9 +19,12 @@ UINT	biggest_tab(UINT **tab)
 	UINT ret;
 
 	ret = tab[0][1];
+	if (tab[1] == NULL)
+		return ;
 	i = 1;
 	while (tab[i])
 	{
+		if ()
 	}
 }
 
