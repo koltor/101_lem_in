@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 18:28:13 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 15:26:12 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,6 +36,8 @@
 ** help for option's comprehention
 */
 
+# define USED 0
+# define NUSED 1
 # define O_D (option & 1)
 # define O_V (option & 2)
 # define O_I (option & 4)
@@ -82,6 +84,7 @@ typedef struct		s_data
 	UINT			rooms;
 	UINT			tubes;
 	UINT			**paths;
+	UINT			**ret;
 	UINT			path_nbr;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
@@ -153,8 +156,18 @@ UINT				get_bit_place(ULL path_list);
 UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
 UINT				max_paths(t_data data);
-void				path_sorter(t_data *data);
-void				path_sorter2(t_data *data, UINT max_paths);
+void				reset_markers(t_data *data);
+void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths);
+void				bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[]);
+void				set_used_rooms(UINT id_tab, t_data *data);
+UINT				is_valid(UINT *tab, t_data *data);
+UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
+void				get_result_for_path_managment(t_data *data, UINT max_paths);
+UINT				get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
+UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
+UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
+void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
+void				print_tab(UINT (*res)[], UINT max_paths);
 
 /*
 **************************************************
