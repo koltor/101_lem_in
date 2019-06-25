@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 17:11:55 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 12:31:10 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -144,8 +144,8 @@ t_bool			browse_map(t_data *data)
 {
 	t_turn	*turns;
 	UINT	ret;
-	t_list	*paths;
 
+	data->ret = NULL;
 	if ((ret = prepare_tubes(data->t_tab, data->tubes, data->r_tab[ROOM_START].nb_link_tubes)))
 		return (error_malloc_prepare(data->t_tab, ret));
 	if (!(turns = prepare_turn_to_start(data, ROOM_START)))
@@ -153,7 +153,7 @@ t_bool			browse_map(t_data *data)
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
 	fill_path_tab(data);
 	fill_tabs_with_rooms(data);
-	bruteforce_sorter(data, max_paths(*data));
+	get_result_for_path_managment(data, max_paths(*data));
 	free(turns);
 	return (true);
 }
