@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/18 16:34:24 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 20:25:21 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 15:07:27 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,7 @@ void	print_potential_paths(t_data *data)
 	FPF("nb de chemins trouves = %u\n", potential_path_counter(data));
 	while (data->paths[i] != NULL)
 	{
-		j = 2;
+		j = 3;
 		FPF("tab num %u id_path = %u size = %u\n", i, data->paths[i][0], data->paths[i][1]);
 		while (j < data->paths[i][1])
 		{

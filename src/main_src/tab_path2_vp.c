@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 14:13:39 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 20:24:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/24 19:19:00 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,14 +24,16 @@ UINT	fill_tabs_with_current_room(UINT id_tab, UINT id_room, t_data *data, UINT c
 	i = 0;
 	j = 0;
 	qt = 0;
+//	FPF("ftwcr i = %u salle %s\n", i, data->r_tab[id_room].name);
 	while (i < data->r_tab[id_room].nb_link_tubes)
 	{
+//		FPF("ftwcr i = %u salle %s\n", i, data->r_tab[id_room].name);
 		path_id_cp = data->t_tab[data->r_tab[id_room].link_tubes[i]].path_id;
 		qt = qt + count_bits(data->t_tab[data->r_tab[id_room].link_tubes[i]]);
 		while (j < qt)
 		{
 			pname = find_pname(&path_id_cp, data->r_tab[0].nb_link_tubes);
-			if ((data->paths[id_tab][0] == pname) && (cell == data->t_tab[data->r_tab[id_room].link_tubes[i]].tmp_turn[pname - 1] + 1))
+			if ((data->paths[id_tab][0] == pname) && (cell == data->t_tab[data->r_tab[id_room].link_tubes[i]].tmp_turn[pname - 1] + 2))
 			{
 				data->paths[id_tab][cell] = get_id_room(data->t_tab[data->r_tab[id_room].link_tubes[i]], id_room);
 				break ;
@@ -40,6 +42,7 @@ UINT	fill_tabs_with_current_room(UINT id_tab, UINT id_room, t_data *data, UINT c
 		}
 		i++;
 	}
+//	FPF("allo le retour ta mere %s\n", data->r_tab[data->paths[id_tab][cell]].name);
 	return (data->paths[id_tab][cell]);
 }
 
@@ -61,7 +64,7 @@ UINT	fill_tabs_with_current_room2(UINT id_tab, UINT id_room, t_data *data, UINT 
 		while (j < qt)
 		{
 			pname = find_pname(&path_id_cp, data->r_tab[0].nb_link_tubes);
-			if ((data->paths[id_tab][0] == pname) && (cell == data->t_tab[data->r_tab[id_room].link_tubes[i]].tmp_turn[pname - 1] + 1))
+			if ((data->paths[id_tab][0] == pname) && (cell == data->t_tab[data->r_tab[id_room].link_tubes[i]].tmp_turn[pname - 1] + 2))
 			{
 				data->paths[id_tab][cell] = get_id_room(data->t_tab[data->r_tab[id_room].link_tubes[i]], id_room);
 				return (data->paths[id_tab][cell]);
@@ -82,7 +85,7 @@ void	swap_current_tab(UINT *ctab, UINT i, t_data *data)
 	data->paths[i][j] = 1;
 	j--;
 	id_room = 1;
-	while (j >= 2)
+	while (j >= 3)
 	{
 		id_room = fill_tabs_with_current_room2(i, id_room, data, j);
 		j--;
@@ -94,7 +97,7 @@ UINT	compare_both_tabs(UINT *ctab, UINT *ptab)
 {
 	UINT i;
 
-	i = 2;
+	i = 3;
 	while (i < ctab[1])
 	{
 		if (ctab[i] != ptab[i])
@@ -111,10 +114,8 @@ UINT	compare_current_tab_with_prev(UINT *ctab, UINT **list_tabs, UINT index)
 	UINT i;
 
 	i = 0;
-	FPF("index %u\n", index);
 	while (i < index)
 	{
-		FPF("i = %u\n", i);
 		if (ctab[1] == list_tabs[i][1] && compare_both_tabs(ctab, list_tabs[i]) == 1)
 			return (1);
 		i++;
@@ -131,21 +132,18 @@ void	fill_tabs_with_rooms(t_data *data)
 	i = 0;
 	while (data->paths[i] != NULL)
 	{
-
 		j = data->paths[i][1] - 1;
 		data->paths[i][j] = 1;
 		j--;
 		id_room = 1;
-		while (j >= 2)
+		while (j >= 3)
 		{
+//			FPF("j = %u room = %s\n", j, data->r_tab[id_room].name);
 			id_room = fill_tabs_with_current_room(i, id_room, data, j);
 			j--;
 		}
 		if (i >= 1 && compare_current_tab_with_prev(data->paths[i], data->paths, i))// a refaire au propre, ptit bug dans compare tab
-		{
-			FPF("suce\n");
 			swap_current_tab(data->paths[i], i, data);
-		}
 		i++;
 	}
 	print_potential_paths(data);
