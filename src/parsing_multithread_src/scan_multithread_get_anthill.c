@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 19:59:54 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 13:49:22 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 17:54:38 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@ t_bool	stock_anthill_for_threading(char *file_line, t_data *data)
 		return (false);
 	}
 	multithread_get_tube(file_line, data, &thread_info);
-	if (multithreading_get_nodes(data))
+	if (get_nodes(data))
 		return (false);
 	return (true);
 }

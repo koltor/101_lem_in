@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 15:59:15 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 18:14:13 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,17 +17,19 @@ static void		check_duplicate_tube(t_tube *t_tab, UINT size)
 {
 	UINT	i;
 	UINT	j;
+	t_tube	tube;
 
 	i = 0;
 	while (i < size)
 	{
+		tube = t_tab[i];
 		j = i + 1;
 		while (j < size)
 		{
-			if ((t_tab[i].salle1 == t_tab[j].salle1 &&
-				t_tab[i].salle2 == t_tab[j].salle2) ||
-				(t_tab[i].salle1 == t_tab[j].salle2 &&
-				t_tab[i].salle2 == t_tab[j].salle1))
+			if ((tube.salle1 == t_tab[j].salle1 &&
+				tube.salle2 == t_tab[j].salle2) ||
+				(tube.salle1 == t_tab[j].salle2 &&
+				tube.salle2 == t_tab[j].salle1))
 			{
 				f_error(ERR_DUPL_TUBE, NULL);
 				return ;
@@ -51,8 +53,15 @@ static void		check_duplicate_tube(t_tube *t_tab, UINT size)
 
 static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT s, UINT *r)
 {
+	char	c;
+	char	d;
+
+	c = n[0];
+	d = n[1];
 	while (--s)
 	{
+		if (c != r_tab[s].name[0] || d != r_tab[s].name[1])
+			continue ;
 		if (!ft_strcmp(n, r_tab[s].name))
 		{
 			*r = s;

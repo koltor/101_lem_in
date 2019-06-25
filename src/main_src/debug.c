@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 15:09:01 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 17:10:54 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,6 +75,8 @@ static void		show_tab_tubes(UINT id_r, t_data *data)
 		dprintf(1, "[");
 		while (j < data->r_tab[ROOM_START].nb_link_tubes)
 		{
+			if (data->t_tab[data->r_tab[id_r].link_tubes[i]].tmp_turn == NULL)
+				break ;
 			dprintf(1, "%5d ", data->t_tab[data->r_tab[id_r].link_tubes[i]].tmp_turn[j]);
 			j++;
 		}

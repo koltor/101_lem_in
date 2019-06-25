@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/20 18:47:07 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 17:38:51 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,6 +52,7 @@ static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
 		if (!(r_tab[i].link_tubes = (UINT *)malloc(sizeof(UINT) *
 											r_tab[i].nb_link_tubes)))
 			return (*(UINT*)f_error(ERR_MALLOC, &i));
+		r_tab[i].nb_link_tubes = 0;
 		i++;
 	}
 	return (0);
@@ -68,24 +69,15 @@ static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
 **		the number of nodes already malloc otherwise
 */
 
-static void	detect_tubes(t_data *data, UINT id_room)
+static void	detect_tubes(t_data *data, UINT id_tube)
 {
-	UINT	id_tube;
-	t_room	*room;
 	t_tube	*t_tab;
-	UINT	j;
+	t_room	*r_tab;
 
-	id_tube = 0;
 	t_tab = data->t_tab;
-	room = &data->r_tab[id_room];
-	j = 0;
-	while (j < room->nb_link_tubes)
-	{
-		if (t_tab[id_tube].salle1 == id_room ||
-			t_tab[id_tube].salle2 == id_room)
-			room->link_tubes[j++] = id_tube;
-		id_tube++;
-	}
+	r_tab = data->r_tab;
+	r_tab[t_tab[id_tube].salle1].link_tubes[r_tab[t_tab[id_tube].salle1].nb_link_tubes++] = id_tube;
+	r_tab[t_tab[id_tube].salle2].link_tubes[r_tab[t_tab[id_tube].salle2].nb_link_tubes++] = id_tube;
 }
 
 /*
@@ -101,16 +93,16 @@ static void	detect_tubes(t_data *data, UINT id_room)
 
 t_bool		get_nodes(t_data *data)
 {
-	UINT id_room;
+	UINT id_tubes;
 	UINT ret;
 
-	id_room = 0;
+	id_tubes = 0;
 	if ((ret = malloc_link_tubes(data->r_tab, data->rooms)))
 	{
 		exit_get_node_malloc_error(data, ret + 1);
 		return (false);
 	}
-	while (id_room < data->rooms)
-		detect_tubes(data, id_room++);
+	while (id_tubes < data->tubes)
+		detect_tubes(data, id_tubes++);
 	return (true);
 }

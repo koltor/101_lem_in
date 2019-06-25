@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 14:34:02 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 17:08:44 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,8 +100,8 @@ t_bool			lem_in(const char *path, int option)
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	}
-	if (browse_map(&data))
-		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+//	if (browse_map(&data))
+//		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }
@@ -120,8 +120,11 @@ void	print_time(struct timeval start, clock_t start_t, char **av)
 		dprintf(1, "%s ", *av);
 		av++;
 	}
-	dprintf(1, " cpu %.2fs user %ld.%lds\n",(double)(end_t - start_t) / CLOCKS_PER_SEC,
-			micros / 1000000, (micros - ((micros / 1000000) * 1000000)) / 10000);
+	dprintf(1, " cpu %.2fs user %ld.",(double)(end_t - start_t) / CLOCKS_PER_SEC,
+			micros / 1000000);
+	if ((micros - ((micros / 1000000) * 1000000)) / 10000 < 10)
+		dprintf(1, "0");
+	dprintf(1, "%lds\n", (micros - ((micros / 1000000) * 1000000)) / 10000);
 }
 
 /*

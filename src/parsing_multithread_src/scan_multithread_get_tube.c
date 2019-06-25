@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:55:56 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 17:24:04 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,8 +26,15 @@
 
 static t_bool	check_room_exist(const char *n, t_room *r_tab, UINT s, UINT *r)
 {
+	char	c;
+	char	d;
+
+	c = n[0];
+	d = n[1];
 	while (--s)
 	{
+		if (c != r_tab[s].name[0] || d != r_tab[s].name[1])
+			continue ;
 		if (!ft_strcmp(n, r_tab[s].name))
 		{
 			*r = s;

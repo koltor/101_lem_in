@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 20:11:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 21:14:51 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/25 16:37:27 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,10 +18,12 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT size, UINT secti
 	t_bool	ret;
 	t_room	room;
 	long	i;
+	char	c;
 	UINT	n;
 
 	ret = false;
 	room = r_tab[id];
+	c = room.name[0];
 	i = -1;
 	n = 1;
 	while (++i < size)
@@ -34,10 +36,12 @@ static t_bool	check_duplicate_room(UINT id, t_room *r_tab, UINT size, UINT secti
 					i = section * n++;
 				continue ;
 			}
+			if (room.x == r_tab[i].x && room.y == r_tab[i].y)
+				return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
+			if (c != r_tab[i].name[0])
+				continue ;
 			if (!ft_strcmp(room.name, r_tab[i].name))
 				return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-			else if (room.x == r_tab[i].x && room.y == r_tab[i].y)
-				return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
 		}
 	}
 	return (true);
