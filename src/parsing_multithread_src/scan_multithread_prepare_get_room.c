@@ -60,7 +60,7 @@ static void	prepare_thread(t_thread (*thread)[NB_THREAD], t_data *data,
 	{
 		(*thread)[i].data = data;
 		(*thread)[i].id = i + 1;
-		(*thread)[i].pth = NULL;
+		(*thread)[i].pth = (pthread_t)NULL;
 		(*thread)[i].section = (UINT)sec;
 		(*thread)[i].file_line = ft_strdup(file_line);
 		(*thread)[i].thread = thread_info;

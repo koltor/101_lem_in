@@ -24,5 +24,5 @@ void	*ft_memchr(const void *b, int c, size_t len)
 		i++;
 	if (i == len)
 		return (NULL);
-	return (&((void*)b)[i]);
+	return (&((unsigned char*)b)[i]);
 }

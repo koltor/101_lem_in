@@ -14,60 +14,64 @@
 #include "lem_in.h"
 
 
-static t_bool	check_duplicate_room_se(UINT id, t_room *r_tab, UINT size)
+static t_bool	check_duplicate_room_se(UINT id, t_room *r_tab, UINT st, UINT size)
 {
+	char	d;
 	t_bool	ret;
-	t_room	room;
-	char c;
+	t_room room;
 
 	ret = false;
 	room = r_tab[id];
-	c = room.name[0];
-	while (--size >= 2)
+	d = room.name[1];
+	st--;
+	while (++st < size)
 	{
-		if (c != r_tab[size].name[0])
+		if (!r_tab[st].name)
+			break ;
+		if (room.x == r_tab[st].x && room.y == r_tab[st].y)
+			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
+		if (d != r_tab[st].name[1])
 			continue ;
-		if (!ft_strcmp(room.name, r_tab[size].name))
+		if (!ft_strcmp(room.name, r_tab[st].name))
 			return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-		if (room.x == r_tab[size].x && room.y == r_tab[size].y)
-			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
 	}
-	size = id == 1 ? 0 : 1; 
-	if (r_tab[size].name)
-	{
-		if (!ft_strcmp(room.name, r_tab[size].name))
-			return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
-		if (room.x == r_tab[size].x && room.y == r_tab[size].y)
-			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
-	}
+	size = (id == 1) ? 0 : 1;
+	if (!r_tab[size].name)
+		return (true);
+	if (room.x == r_tab[size].x && room.y == r_tab[size].y)
+		return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
+	if (d != r_tab[size].name[1])
+		return (true);
+	if (!ft_strcmp(room.name, r_tab[size].name))
+		return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
 	return (true);
 }
 
-static t_bool	check_duplicate_room_g(t_room room, t_room *r_tab, UINT size)
+static t_bool	check_duplicate_room_g(t_room room, t_room *r_tab, UINT st, UINT size)
 {
-	char	c;
 	char	d;
 	t_bool	ret;
 
 	ret = false;
-	c = room.name[0];
 	d = room.name[1];
-	while (size-- > 2)
+	st--;
+	while (++st < size)
 	{
-		if (room.x == r_tab[size].x && room.y == r_tab[size].y)
+		if (room.x == r_tab[st].x && room.y == r_tab[st].y)
 			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
-		if (c != r_tab[size].name[0] || d != r_tab[size].name[1])
+		if (d != r_tab[st].name[1])
 			continue ;
-		if (!ft_strcmp(room.name, r_tab[size].name))
+		if (!ft_strcmp(room.name, r_tab[st].name))
 			return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
 	}
+	size = 2;
 	while (size--)
 	{
-		if (r_tab[size].name)
+		if (!r_tab[size].name)
 			continue ;
 		if (room.x == r_tab[size].x && room.y == r_tab[size].y)
 			return (*(t_bool*)f_error(ERR_DUPL_XY_ROOM, &ret));
-		if (c != r_tab[size].name[0] || d != r_tab[size].name[1])
+		if (d != r_tab[size].name[1])
 			continue ;
 		if (!ft_strcmp(room.name, r_tab[size].name))
 			return (*(t_bool*)f_error(ERR_DUPL_ROOM, &ret));
@@ -139,18 +143,22 @@ static t_bool	reset_one_room(t_room *room)
 **		false otherwise
 */
 
-static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
+static t_bool	select_ben(char *line, t_data *data, int *order, UINT (*abc)[128])
 {
-	t_bool value;
+	t_bool	value;
+	UINT	id;
+	UINT	start;
 
 	value = false;
- 	if (*order == 0 && *ir < data->rooms)
+	start = data->abc_start[line[0]];
+	id = (*abc)[line[0]];
+ 	if (*order == 0)
 	{
-		if (split_line_for_room(line, &data->r_tab[*ir]))
+		if (split_line_for_room(line, &data->r_tab[id]))
 			return (false);
-		if (check_duplicate_room_g(data->r_tab[*ir], data->r_tab, *ir))
-			return (reset_one_room(&data->r_tab[*ir]));
-		*ir = *ir + 1;
+		if (check_duplicate_room_g(data->r_tab[id], data->r_tab, start, id))
+			return (reset_one_room(&data->r_tab[id]));
+		(*abc)[line[0]]++;
 	}
 	else if (*order == 1 || *order == 2)
 	{
@@ -160,11 +168,23 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 			return (*(t_bool*)f_error(ERR_DUPLICATE_END, &value));
 		if (split_line_for_room(line, &data->r_tab[*order - 1]))
 			return (false);
-		if (check_duplicate_room_se(*order - 1, data->r_tab, *ir))
+		if (check_duplicate_room_se(*order - 1, data->r_tab, start, id))
 			return (reset_one_room(&data->r_tab[*order - 1]));
 	}
 	*order = 0;
 	return (true);
+}
+
+void show_abc(UINT abc[128])
+{
+	int i;
+
+	i = 0;
+	while (i < 128)
+	{
+		dprintf(1, " %c: %u \n", i, abc[i]);
+		i++;
+	}
 }
 
 /*
@@ -186,11 +206,11 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT *ir)
 char			*get_room(char *file_line, t_data *data)
 {
 	char	*line;
-	UINT	ir;
+	UINT	abc_id[128];
 	int		order;
 	char	type;
 
-	ir = 2;
+	get_abc_id_for_room(&abc_id, data->abc_len);
 	order = 0;
 	skip_ants_number(file_line);
 	while ((line = scan_line_line(file_line)))
@@ -199,8 +219,7 @@ char			*get_room(char *file_line, t_data *data)
 			break ;
 		if (type == 1 && order == 0 && (order = is_order(line)))
 			continue ;
-		if (type == 0 && select_ben(line, data, &order, &ir) &&
-												(data->rooms = ir))
+		if (type == 0 && select_ben(line, data, &order, &abc_id))
 			return (NULL);
 	}
 	if (order)

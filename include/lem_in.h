@@ -30,7 +30,7 @@
 # define ULL unsigned long long int
 # define ROOM_START 0
 # define ROOM_END	1
-# define NB_THREAD	16
+# define NB_THREAD	3
 
 /*
 ** help for option's comprehention
@@ -84,6 +84,8 @@ typedef struct		s_data
 	UINT			ants;
 	UINT			rooms;
 	UINT			tubes;
+	UINT      		abc_len[128];
+	UINT      		abc_start[128];
 	UINT			**paths;
 	UINT			**ret;
 	UINT			path_nbr;
@@ -130,8 +132,12 @@ int					is_order(const char *s);
 t_bool				skip_ants_number(char *s);
 char				*skip_room(char *s);
 
-/*parsing for multithreading*/
+/*parsing in multithreading*/
 t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
+
+/*parsing with alphabet_trie*/
+void				get_abc_for_room(const char *s, UINT (*abc)[128]);
+void				get_abc_id_for_room(UINT (*abc_id)[128], UINT abc[128]);
 /*
 **************************************************
 ***********************PART 2*********************

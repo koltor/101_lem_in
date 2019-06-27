@@ -84,7 +84,7 @@ $(NAME) : $(OBJ)
 
 %.o : %.c
 	@echo  "\033[0;32m [OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
-	@gcc -I$(HEADER) $(CC) -c $^ -o $@
+	@gcc -L$(HEADER) $(CC) -c $^ -o $@
 	@ar rs $(NAME) $@
 
 clean :

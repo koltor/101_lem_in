@@ -105,5 +105,5 @@ void			debug_lem_in(t_data *data)
 {
 	show_room(data->r_tab, data->rooms);
 	show_tube(data->t_tab, data->tubes, data->r_tab);
-	g_show_tab_tubes(data);
+	//g_show_tab_tubes(data);
 }

@@ -90,6 +90,8 @@ t_bool			lem_in(const char *path, int option)
 		return (exit_lem_in_error(file_line, NULL, NULL));
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(file_line, data.r_tab, NULL));
+	get_abc_for_room(file_line, &data.abc_len);
+	get_abc_id_for_room(&data.abc_start, data.abc_len);
 	if (O_M)
 	{
 		if (stock_anthill_for_threading(file_line, &data))
