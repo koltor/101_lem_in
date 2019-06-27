@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/25 18:41:13 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/27 15:17:55 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -35,7 +35,7 @@ NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c tab_potential_paths.c tab_path_vp.c \
 						tab_path2_vp.c path_sorter.c path_sorter2.c \
-						path_sorter3.c output.c\
+						path_sorter3.c
 
 NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
