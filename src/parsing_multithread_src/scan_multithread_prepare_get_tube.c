@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 16:13:09 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 16:37:42 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 18:03:04 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,6 +104,6 @@ void		multithread_get_tube(char *file_line, t_data *data,
 	launch_thread(&thread, data);
 	wait_thread(&thread, data);
 	data->tubes = thread_info->tubes;
-	launch_check_tube_thread(&thread, data);
-	wait_thread(&thread, data);
+	//launch_check_tube_thread(&thread, data);
+	//wait_thread(&thread, data);
 }

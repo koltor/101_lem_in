@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 16:07:36 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 18:02:29 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -146,6 +146,6 @@ t_bool			get_tube(char *file_line, t_data *data, char *line)
 			return (exit_get_tube(ERR_TUBES_FORMAT, data, id));
 		id += 1;
 	}
-	check_duplicate_tube(data->t_tab, data->tubes);
+//	check_duplicate_tube(data->t_tab, data->tubes);
 	return (true);
 }
