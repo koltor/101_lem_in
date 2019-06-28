@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 15:12:41 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:39:11 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -131,6 +131,10 @@ char				*get_room(char *file_line, t_data *data);
 t_bool				get_tube(char *file_line, t_data *data, char *line);
 t_bool				get_nodes(t_data *data);
 
+void				check_duplicate_tube(t_tube *t_tab, UINT size);
+t_bool				check_dup_room_se(UINT id, t_room *r_tab, UINT st, UINT s);
+t_bool				check_dup_room_g(t_room room, t_room *r_tab, UINT st, UINT size);
+
 int					is_room(const char *s);
 int					is_tube(const char *s);
 int					is_order(const char *s);
@@ -142,8 +146,8 @@ char				*skip_room(char *s);
 t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
 
 /*parsing with alphabet_trie*/
-void				get_abc_for_room(const char *s, UINT (*abc)[128]);
-void				get_abc_id_for_room(UINT (*abc_id)[128], UINT abc[128]);
+void				get_abc_for_room(const char *s, UINT (*abc)[]);
+void				get_abc_id_for_room(UINT (*abc_id)[], UINT abc[]);
 /*
 **************************************************
 ***********************PART 2*********************

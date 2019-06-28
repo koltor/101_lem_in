@@ -6,39 +6,12 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 15:21:55 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:07:36 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static void		check_duplicate_tube(t_tube *t_tab, UINT size)
-{
-	UINT	i;
-	UINT	j;
-	t_tube	tube;
-
-	i = 0;
-	while (i < size)
-	{
-		tube = t_tab[i];
-		j = i + 1;
-		while (j < size)
-		{
-			if ((tube.salle1 == t_tab[j].salle1 &&
-				tube.salle2 == t_tab[j].salle2) ||
-				(tube.salle1 == t_tab[j].salle2 &&
-				tube.salle2 == t_tab[j].salle1))
-			{
-				f_error(ERR_DUPL_TUBE, NULL);
-				return ;
-			}
-			j += 1;
-		}
-		i += 1;
-	}
-}
 
 /*
 ** check_room_exist:
@@ -51,7 +24,8 @@ static void		check_duplicate_tube(t_tube *t_tab, UINT size)
 **		-1 otherwise
 */
 
-static t_bool	check_room_exist(const char *n, t_room *r_tab, t_data *data, UINT *r)
+static t_bool	check_room_exist(const char *n, t_room *r_tab,
+													t_data *data, UINT *r)
 {
 	char	d;
 	UINT	s;
@@ -70,18 +44,16 @@ static t_bool	check_room_exist(const char *n, t_room *r_tab, t_data *data, UINT 
 			return (true);
 		}
 	}
-	if (!ft_strcmp(n, r_tab[0].name))
-	{
-		*r = 0;
-		return (true);
-	}
-		if (!ft_strcmp(n, r_tab[1].name))
-	{
-		*r = 1;
-		return (true);
-	}
+	s = 0;
+	while (s++ <= 1)
+		if (!ft_strcmp(n, r_tab[s - 1].name))
+		{
+			*r = s - 1;
+			return (true);
+		}
 	return (false);
 }
+
 /*
 ** check_room_exist:
 **	parameters
@@ -133,6 +105,13 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 	return (exit_slft(-1, true, s1, s2));
 }
 
+t_bool			exit_get_tube(char error, t_data *data, UINT value)
+{
+	f_error(ERR_ORDER, NULL);
+	data->tubes = value;
+	return (true);
+}
+
 /*
 ** get_tube:
 **	transform the last part of the file into tube_data
@@ -153,33 +132,20 @@ t_bool			get_tube(char *file_line, t_data *data, char *line)
 
 	id = 1;
 	if (!is_tube(line))
-	{
 		if (split_line_for_tube(line, data, &(data->t_tab[0])))
-		{
-			data->tubes = 0;
 			return (false);
-		}
-	}
 	while ((line = scan_line_line(file_line)))
 	{
 		if ((ret = is_tube(line)) == 1)
 		{
 			if (is_order(line))
-			{
-			f_error(ERR_ORDER, NULL);
-			data->tubes = id;
-			return (true);	
-			}
+				return (exit_get_tube(ERR_ORDER, data, id));
 			continue ;
 		}
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
-		{
-			f_error(ERR_TUBES_FORMAT, NULL);
-			data->tubes = id;
-			return (true);
-		}
+			return (exit_get_tube(ERR_TUBES_FORMAT, data, id));
 		id += 1;
 	}
-	//check_duplicate_tube(data->t_tab, data->tubes);
+	check_duplicate_tube(data->t_tab, data->tubes);
 	return (true);
 }

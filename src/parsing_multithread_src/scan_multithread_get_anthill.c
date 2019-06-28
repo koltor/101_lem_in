@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/20 19:59:54 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 17:30:39 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:37:28 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ t_bool	stock_anthill_for_threading(char *file_line, t_data *data)
 	t_info_thread	thread_info;
 
 	set_thread_info(&thread_info, data);
-	if(!(file_line_cpy = ft_strdup(file_line)))
+	if (!(file_line_cpy = ft_strdup(file_line)))
 		return (false);
 	if (!(data->ants = get_number_of_ants(file_line)))
 	{

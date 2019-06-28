@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/06 15:05:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 14:42:31 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:46:26 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,12 +61,9 @@ static int	ft_option(int ac, char **av)
 	i = 1;
 	if ((*av)[0] != '-' || !(*av)[1])
 	{
-		if (ac != 1)
-		{
-			usage();
-			exit(1);
-		}
-			return (option);
+		ac != 1 ? usage() : 0;
+		ac != 1 ? exit(1) : 0;
+		return (option);
 	}
 	while ((*av)[i])
 	{

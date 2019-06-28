@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 19:17:03 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 17:38:51 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:54:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,12 +72,14 @@ static UINT	malloc_link_tubes(t_room *r_tab, UINT rooms)
 static void	detect_tubes(t_data *data, UINT id_tube)
 {
 	t_tube	*t_tab;
-	t_room	*r_tab;
+	t_room	*r_tab1;
+	t_room	*r_tab2;
 
 	t_tab = data->t_tab;
-	r_tab = data->r_tab;
-	r_tab[t_tab[id_tube].salle1].link_tubes[r_tab[t_tab[id_tube].salle1].nb_link_tubes++] = id_tube;
-	r_tab[t_tab[id_tube].salle2].link_tubes[r_tab[t_tab[id_tube].salle2].nb_link_tubes++] = id_tube;
+	r_tab1 = &data->r_tab[t_tab[id_tube].salle1];
+	r_tab2 = &data->r_tab[t_tab[id_tube].salle2];
+	r_tab1->link_tubes[r_tab1->nb_link_tubes++] = id_tube;
+	r_tab2->link_tubes[r_tab2->nb_link_tubes++] = id_tube;
 }
 
 /*

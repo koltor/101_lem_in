@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/28 14:29:38 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/28 16:38:33 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -41,7 +41,7 @@ NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
 							scan_is_room.c scan_is_tube.c scan_other.c \
 							scan_room.c scan_skip.c scan_tube.c scan_get_nodes.c \
-							scan_abc.c
+							scan_abc.c scan_check_tube.c scan_check_room.c
 
 NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_anthill.c \
 							scan_multithread.skip.c scan_multithread_get_tube.c \

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 15:16:55 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:43:54 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,5 +88,6 @@ void	str_error(int error)
 	"salle non defini\n", "invalide positions sur les salles\n",
 	"manque les fourmis\n", "\n", "\n", "\n", "\n",
 	};
+
 	ft_putstr(tab[error]);
 }

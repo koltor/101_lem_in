@@ -6,14 +6,14 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:27:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 15:50:18 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:20:32 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	set_abc_zero(UINT (*abc)[128])
+static void	set_abc_zero(UINT (*abc)[])
 {
 	int i;
 
@@ -25,18 +25,27 @@ static void	set_abc_zero(UINT (*abc)[128])
 	}
 }
 
-void get_abc_for_room(const char *s, UINT (*abc)[128])
+static char	*cpy_s(const char *s)
+{
+	char	*s_cpy;
+
+	if (!(s_cpy = ft_strdup(s)))
+	{
+		f_error(ERR_MALLOC, NULL);
+		return (NULL);
+	}
+	return (s_cpy);
+}
+
+void		get_abc_for_room(const char *s, UINT (*abc)[])
 {
 	char	*s_cpy;
 	char	*line;
 	char	ret;
 	int		order;
 
-	if (!(s_cpy = ft_strdup(s)))
-	{
-		f_error(ERR_MALLOC, NULL);
+	if (!(s_cpy = cpy_s(s)))
 		return ;
-	}
 	if (skip_ants_number(s_cpy))
 		return ;
 	set_abc_zero(abc);
@@ -57,7 +66,7 @@ void get_abc_for_room(const char *s, UINT (*abc)[128])
 	free(s_cpy);
 }
 
-void get_abc_id_for_room(UINT (*abc_id)[128], UINT abc[128])
+void		get_abc_id_for_room(UINT (*abc_id)[], UINT abc[])
 {
 	UINT id;
 	UINT i;

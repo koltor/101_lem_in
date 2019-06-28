@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 17:30:53 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 16:41:51 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,8 @@
 **		-1 otherwise
 */
 
-static t_bool	check_room_exist(const char *n, t_room *r_tab, t_data *data, UINT *r)
+static t_bool	check_room_exist(const char *n, t_room *r_tab,
+													t_data *data, UINT *r)
 {
 	char	d;
 	UINT	s;
@@ -43,16 +44,13 @@ static t_bool	check_room_exist(const char *n, t_room *r_tab, t_data *data, UINT 
 			return (true);
 		}
 	}
-	if (!ft_strcmp(n, r_tab[0].name))
-	{
-		*r = 0;
-		return (true);
-	}
-		if (!ft_strcmp(n, r_tab[1].name))
-	{
-		*r = 1;
-		return (true);
-	}
+	s = 0;
+	while (s++ <= 1)
+		if (!ft_strcmp(n, r_tab[s - 1].name))
+		{
+			*r = s - 1;
+			return (true);
+		}
 	return (false);
 }
 
