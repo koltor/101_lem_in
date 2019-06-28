@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/27 18:14:53 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/28 13:43:22 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -35,11 +35,7 @@ NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c tab_potential_paths.c tab_path_vp.c \
 						tab_path2_vp.c path_sorter.c path_sorter2.c \
-<<<<<<< HEAD
-						path_sorter3.c opti_paths.c #output.c\
-=======
-						path_sorter3.c
->>>>>>> 21bdbc3440f190caf912782bbc46abfcd10ae03f
+						path_sorter3.c opti_paths.c output.c
 
 NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
@@ -51,7 +47,7 @@ NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_room.c \
 							scan_multithread_get_anthill.c scan_multithread.skip.c \
 							scan_multithread_prepare_get_room.c scan_multithread_get_tube.c \
 							scan_multithread_prepare_get_tube.c scan_multithread_get_tube2.c \
-							scan_multithread_prepare_get_nodes.c scan_multithread_get_nodes.c \
+							scan_multithread_prepare_get_nodes.c scan_multithread_get_nodes.c
 
 NAME_SRC_VISU			=	main_visu.c algo_bresenham.c print.c event.c ui.c \
 							ui2_legendary.c fill_pixel.c print2.c
@@ -77,11 +73,7 @@ PARSING_MT_OBJ	= $(addprefix $(PARSING_MT_OBJ_PATH)/,$(PARSING_MT_NAME_OBJ))
 VISU_OBJ		= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
 #compilateur + flags + framework
-<<<<<<< HEAD
-CC			= gcc -g3 -fsanitize=address
-=======
 CC			= gcc #-O3#-g3 -fsanitize=address
->>>>>>> 21bdbc3440f190caf912782bbc46abfcd10ae03f
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
 
