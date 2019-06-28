@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:22:48 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 17:10:54 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/27 17:20:13 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,5 +105,5 @@ void			debug_lem_in(t_data *data)
 {
 	show_room(data->r_tab, data->rooms);
 	show_tube(data->t_tab, data->tubes, data->r_tab);
-	g_show_tab_tubes(data);
+	//g_show_tab_tubes(data);
 }

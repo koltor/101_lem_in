@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:50:33 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/27 17:32:53 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@
 # define ULL unsigned long long int
 # define ROOM_START 0
 # define ROOM_END	1
-# define NB_THREAD	16
+# define NB_THREAD	8
 
 /*
 ** help for option's comprehention
@@ -79,6 +79,13 @@ typedef	struct		s_turn
 	UINT			turn;
 }					t_turn;
 
+typedef struct		s_abc
+{
+	UINT      		abc_len[128];
+	UINT      		abc_start[128];
+	UINT			abc_id[128];
+}					t_abc;
+
 typedef struct		s_data
 {
 	UINT			ants;
@@ -91,6 +98,7 @@ typedef struct		s_data
 	UINT			lap;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
+	struct s_abc	abc;
 }					t_data;
 
 typedef enum e_bool	t_bool;
@@ -133,6 +141,10 @@ char				*skip_room(char *s);
 
 /*parsing for multithreading*/
 t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
+
+/*parsing with alphabet_trie*/
+void				get_abc_for_room(const char *s, UINT (*abc)[128]);
+void				get_abc_id_for_room(UINT (*abc_id)[128], UINT abc[128]);
 /*
 **************************************************
 ***********************PART 2*********************
