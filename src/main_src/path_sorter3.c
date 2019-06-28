@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 12:39:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 18:08:05 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 13:23:26 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,12 +87,14 @@ void	set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths)
 
 void	get_lap(t_data *data)
 {
-	if (data->ants % data->path_nbr == 0)
+	if (data->ants % data->path_nbr == 0 ||
+			data->ret[data->ants % data->path_nbr - 1][0] <
+			data->ret[data->path_nbr - 1][0])
 	{
-		data->lap = data->ret[path_nbr - 1][0] - 1 + data->ants;
+		data->lap = data->ret[data->path_nbr - 1][0] - 2 + data->ants / data->path_nbr;
 		return ;
 	}
-	data->lap = data->ret[path_nbr - 1][0] - 1 + data->ants; + 
+	data->lap = data->ret[data->path_nbr - 1][0] - 1 + data->ants / data->path_nbr; // normalemeent c bon car les precedents sont d une taille inf ou egale
 }
 
 void	get_result_for_path_managment(t_data *data, UINT max_paths)
@@ -130,5 +132,6 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 	}
 	data->path_nbr = size_tab;
 	get_lap(data);
+	FPF("nb de fourmis = %u lap = %u\n", data->ants, data->lap);
 	print_final_path_tab(data);
 }

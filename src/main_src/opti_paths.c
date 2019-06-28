@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   opti_paths.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/06/28 13:05:39 by ocrossi      #+#   ##    ##    #+#       */
+/*   Updated: 2019/06/28 13:17:22 by ocrossi     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 void	set_tab_zero(UINT (*tabc)[], UINT max_paths)
@@ -64,20 +77,6 @@ void	set_tab_with_opti(UINT (*res)[], UINT (*tabc)[], UINT max_paths, UINT path_
 		i++;
 	}
 }
-/*
-void	get_lap(UINT lap, t_data *data, UINT ret, UINT (*res)[])
-{
-	FPF("debut de get lap ants %u lap %u ret = %u\n", data->ants, lap, ret);
-	if (data->ants % ret == 0)
-	{
-		data->lap = lap;
-		return ;
-	}
-	FPF("le calcul avant assignation %u, valeur de l assignation %u\n", data->ants % ret, data->paths[(*res)[data->ants % ret]][1] - 4);
-	data->lap = lap - (lap / data->ants) + data->paths[(*res)[data->ants % ret]][1] - 4;
-	FPF("fin de get lap lap = %u\n", data->lap);
-	data->ants = ants / ret
-}*/
 
 void	sort_tab_crescent_order(UINT (*res)[], UINT (*tabc)[], UINT max_paths, t_data *data)
 {
@@ -87,7 +86,6 @@ void	sort_tab_crescent_order(UINT (*res)[], UINT (*tabc)[], UINT max_paths, t_da
 	UINT j;
 
 	set_tab_for_bf(&tabc2, data->path_nbr, max_paths);
-	//`set_tab_zero(&tabc2, max_paths);
 	i = 0;
 	j = 0;
 	ret = 1;
@@ -96,16 +94,18 @@ void	sort_tab_crescent_order(UINT (*res)[], UINT (*tabc)[], UINT max_paths, t_da
 		if ((*tabc)[i] == ret)
 		{
 			tabc2[j] = (*res)[i];
-			i = 0;
 			j++;
 			ret++;
+			i = 0;
+			continue ;
 		}
 		i++;
 	}
-//	print_tab(&tabc2, max_paths);
+	FPF("tamer\n");
+	print_tab(&tabc2, max_paths);
 	tab_cp(&tabc2, res, max_paths);
-//	FPF("res a la fin\n");
-//	print_tab(res, max_paths);
+	FPF("res a la fin\n");
+	print_tab(res, max_paths);
 }
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
@@ -121,14 +121,18 @@ void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
 	set_tab_zero(&tabc, max_paths);
 	index = get_smallest_tab(res, &tabc, data, max_paths);
 	lap = data->ants / ret + data->paths[(*res)[index]][1] - 4;
-//	FPF("on 1st turn lap = %u size du chemin %u infrx = %u\n", lap, data->paths[(*res)[index]][1] - 4, index);
+	FPF("on 1st turn lap = %u size du chemin %u index = %u\n", lap, data->paths[(*res)[index]][1] - 4, index);
 	tabc[index] = ret;
 	while (ret < max_paths)
 	{
 		ret++;
 		index = get_smallest_tab(res, &tabc, data, max_paths);
+		FPF("apres get smallest tab index = %u\n", index);
 		if (index == data->path_nbr)
+		{
+			FPF("why\n");
 			break ;
+		}
 		if (data->ants / ret + data->paths[(*res)[index]][1] - 4 > lap)
 		{
 			lap = data->ants / ret + data->paths[(*res)[index]][1] - 4;
@@ -136,9 +140,12 @@ void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
 		}
 		lap = data->ants / ret + data->paths[(*res)[index]][1] - 4;
 		tabc[index] = ret;
-//		FPF("on turn num lap = %u ret = %u index = %u\n", lap, ret, index);
-//		print_tab(&tabc, max_paths);
+		FPF("on turn num lap = %u ret = %u index = %u\n", lap, ret, index);
 	}
+	FPF("wtf sortie de boucle tabc\n");
+	print_tab(&tabc, max_paths);
 	set_tab_with_opti(res, &tabc, max_paths, data->path_nbr);
+	print_tab(res, max_paths);
 	sort_tab_crescent_order(res, &tabc, max_paths, data);
+	print_tab(res, max_paths);
 }
