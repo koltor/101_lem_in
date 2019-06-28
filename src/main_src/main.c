@@ -100,8 +100,8 @@ t_bool			lem_in(const char *path, int option)
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	}
-//	if (browse_map(&data))
-//		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	if (browse_map(&data))
+		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }

@@ -156,7 +156,9 @@ t_bool			browse_map(t_data *data)
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
 	fill_path_tab(data);
 	fill_tabs_with_rooms(data);
+	//FPF("ta grande\n");
 	get_result_for_path_managment(data, max_paths(*data));
+	//FPF("darone\n");
 	free(turns);
 	return (true);
 }

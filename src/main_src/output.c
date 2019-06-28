@@ -41,7 +41,6 @@ UINT	get_line_num(t_data data)
 	ret = div * biggest_tab(data->ret) + mod * biggest_tab_left(data->ret);
 	return (ret);
 }
-
 char	*fill_output(t_data *data)
 {
 	char *buf;

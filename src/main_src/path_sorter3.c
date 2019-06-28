@@ -85,6 +85,16 @@ void	set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths)
 	}
 }
 
+void	get_lap(t_data *data)
+{
+	if (data->ants % data->path_nbr == 0)
+	{
+		data->lap = data->ret[path_nbr - 1][0] - 1 + data->ants;
+		return ;
+	}
+	data->lap = data->ret[path_nbr - 1][0] - 1 + data->ants; + 
+}
+
 void	get_result_for_path_managment(t_data *data, UINT max_paths)
 {
 	UINT res[max_paths];
@@ -95,7 +105,9 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 
 	i = 0;
 	bruteforce_sorter(data, max_paths, &res);
+	FPF("end of bruteforce sorter\n");
 	print_tab(&res, max_paths);
+	opti_paths(&res, max_paths, data);
 	size_tab = check_path_found(&res, max_paths, data->path_nbr);
 	if (!(data->ret = (UINT**)malloc(sizeof(UINT*) * (size_tab + 1))))
 	{
@@ -116,5 +128,7 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 		swap_tab_to_res(&(data->ret[i]), &res, data, index);
 		i++;
 	}
+	data->path_nbr = size_tab;
+	get_lap(data);
 	print_final_path_tab(data);
 }

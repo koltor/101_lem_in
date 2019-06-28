@@ -88,6 +88,7 @@ typedef struct		s_data
 	UINT			**ret;
 	UINT			path_nbr;
 	UINT			output_lenght;
+	UINT			lap;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
 }					t_data;
@@ -171,6 +172,7 @@ UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
 void				print_tab(UINT (*res)[], UINT max_paths);
 void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
+void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 
 /*
 **************************************************
@@ -178,6 +180,7 @@ void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
 **************************************************
 */
 
+void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
 char	*fill_output(t_data *data);
 
 /*
