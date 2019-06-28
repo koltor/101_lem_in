@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 16:00:35 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:23:19 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,31 +103,10 @@ t_bool			lem_in(const char *path, int option)
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	}
-	if (browse_map(&data))
-		return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
+	//if (browse_map(&data))
+	//	return (exit_lem_in_error(file_line, data.r_tab, data.t_tab));
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
-}
-
-void	print_time(struct timeval start, clock_t start_t, char **av)
-{
-	struct timeval end;
-	clock_t			end_t;
-
-	gettimeofday(&end, NULL);
-	long seconds = (end.tv_sec - start.tv_sec);
-	long micros = ((seconds * 1000000) + end.tv_usec) - (start.tv_usec);
-	end_t = clock();
-	while (*av)
-	{
-		dprintf(1, "%s ", *av);
-		av++;
-	}
-	dprintf(1, " cpu %.2fs user %ld.",(double)(end_t - start_t) / CLOCKS_PER_SEC,
-			micros / 1000000);
-	if ((micros - ((micros / 1000000) * 1000000)) / 10000 < 10)
-		dprintf(1, "0");
-	dprintf(1, "%lds\n", (micros - ((micros / 1000000) * 1000000)) / 10000);
 }
 
 /*
@@ -143,23 +122,16 @@ void	print_time(struct timeval start, clock_t start_t, char **av)
 int				main(int ac, char **av)
 {
 	int				option;
-	char			**av2;
-	struct timeval	start;
-	clock_t			start_t;
 
-	start_t = clock();
-	gettimeofday(&start, NULL);
-	av2 = av;
 	if (ac >= 2)
 	{
 		av = get_option(ac - 1, &av[1], &option);
-		lem_in(*av, option);
+		if (lem_in(*av, option) && !O_D && !O_I)
+			str_error(*(int*)f_error(0, NULL));
 	}
 	else
 		usage();
 	if (O_D || O_I)
 		debug_main(option);
-	if (O_T)
-		print_time(start, start_t, av2);
 	return (0);
 }

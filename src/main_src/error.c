@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/21 18:57:57 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:16:55 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,7 +76,7 @@ void	str_error(int error)
 	"2 end dans la fourmiliere\n", "erreur format de tube\n",
 	"Le nombre de chemin doit etre au minimum de 1\n",
 	"Le nombre de salle doit etre au minimum de 2\n",
-	"Le nombre de fourmis ne peut pas etre negatif ou nul ou absent\n",
+	"Le nombre de fourmis n'est pas correct\n",
 	"Le nombre de fourmis n'est pas au bon format\n",
 	"Manque le debut de la fourmilere\n",
 	"Manque la fin de la fourmiliere\n", "erreur format de room\n",
@@ -85,10 +85,8 @@ void	str_error(int error)
 	"Une salle est relier a elle même\n",
 	"fichier vide\n", "ordre invalide\n", "overflow sur les salles\n",
 	"que des commentaires dans le fichier\n",
-	"salle non defini\n", "\n", "\n", "\n", "\n", "\n", "\n",
+	"salle non defini\n", "invalide positions sur les salles\n",
+	"manque les fourmis\n", "\n", "\n", "\n", "\n",
 	};
-
-	ft_putstr("------------------------\n");
-	ft_putstr("message d'erreur: \n");
 	ft_putstr(tab[error]);
 }

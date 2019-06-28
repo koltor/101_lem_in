@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 17:32:53 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:12:41 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,8 +43,7 @@
 # define O_V (option & 2)
 # define O_I (option & 4)
 # define O_M (option & 8)
-# define O_T (option & 16)
-# define LIST_OPTION "tdvim"
+# define LIST_OPTION "dvim"
 
 enum	e_bool
 {
@@ -129,7 +128,7 @@ UINT				get_number_of_ants(const char *s);
 
 t_bool				stock_anthill(char *file_line, t_data *data);
 char				*get_room(char *file_line, t_data *data);
-void				get_tube(char *file_line, t_data *data, char *line);
+t_bool				get_tube(char *file_line, t_data *data, char *line);
 t_bool				get_nodes(t_data *data);
 
 int					is_room(const char *s);
@@ -223,7 +222,9 @@ char	*fill_output(t_data *data);
 # define ERR_ORDER				20 // ordre invalide
 # define ERR_OVERFLOW			21 // overflow sur les salles
 # define ERR_ONLY_COMMENT		22 // que des commentaires
-# define ERR_ROOM_NOT_DEFINE	23 // que des commentaires
+# define ERR_ROOM_NOT_DEFINE	23 // salle utilise dans les tubes non defini
+# define ERR_ROOM_WRONG_POS		24 //invalide positions sur les salles
+# define ERR_NO_ANTS			25 //invalide positions sur les salles
 
 void				usage(void);
 void				usage_option(char c);
@@ -250,7 +251,7 @@ void				show_turns(t_turn *turns, UINT size);
 size_t				ft_strlenc(const char *s, char c);
 char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
-long				atol_id(const char *s, char c, UINT index);
+long				atol_id(const char *s, char c, UINT index, t_bool *boule);
 ULL					bin(char c);
 
 /*

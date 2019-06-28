@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 16:41:19 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/10 16:44:58 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:08:26 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,13 +39,14 @@ static UINT	exit_get_nb_of_ant(char *line, UINT ants_number, char error)
 
 static char	*skip_first_comment(char *s_cpy)
 {
-	char *line;
+	char	*line;
+	int		ret;
 
 	while ((line = scan_line_line(s_cpy)))
 	{
 		if (!line)
 			return (NULL);
-		if (is_room(line) != 1)
+		if ((ret = is_room(line)) != 1)
 			break ;
 	}
 	return (line);

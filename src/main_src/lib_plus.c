@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/21 18:12:13 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/18 15:13:14 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:02:02 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,6 +64,32 @@ char	*ft_revstrsub_c(const char *src, char c)
 	return (ft_strsub(src, ft_strlenc(src, c) + 1, ft_strlen(src)));
 }
 
+long	ft_atol_modify(const char *str, t_bool *boule)
+{
+	int		i;
+	int		neg;
+	long	result;
+
+	neg = 1;
+	result = 0;
+	i = 0;
+	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			neg = -1;
+		i++;
+	}
+	str = &str[i];
+	i = -1;
+	while (str[++i] >= '0' && str[i] <= '9')
+		result = result * 10 + str[i] - '0';
+	if (str[i] != ' ' && str[i] != '\0')
+		*boule = false;
+	return (result * neg);
+}
+
 /*
 ** atoi_id:
 **	parameters
@@ -74,7 +100,7 @@ char	*ft_revstrsub_c(const char *src, char c)
 **		a number afer skip a certain number of skipping char
 */
 
-long	atol_id(const char *s, char c, UINT index)
+long	atol_id(const char *s, char c, UINT index, t_bool *boule)
 {
 	long i;
 
@@ -86,7 +112,7 @@ long	atol_id(const char *s, char c, UINT index)
 		index -= 1;
 		i++;
 	}
-	return (ft_atol(&s[i]));
+	return (ft_atol_modify(&s[i], boule));
 }
 
 ULL		bin(char c)

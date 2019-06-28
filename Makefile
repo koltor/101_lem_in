@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/28 13:46:00 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/06/28 14:29:38 by matheme     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -43,11 +43,9 @@ NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_room.c scan_skip.c scan_tube.c scan_get_nodes.c \
 							scan_abc.c
 
-NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_room.c \
-							scan_multithread_get_anthill.c scan_multithread.skip.c \
-							scan_multithread_prepare_get_room.c scan_multithread_get_tube.c \
+NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_anthill.c \
+							scan_multithread.skip.c scan_multithread_get_tube.c \
 							scan_multithread_prepare_get_tube.c scan_multithread_get_tube2.c \
-							scan_multithread_prepare_get_nodes.c scan_multithread_get_nodes.c
 
 NAME_SRC_VISU			=	main_visu.c algo_bresenham.c print.c event.c ui.c \
 							ui2_legendary.c fill_pixel.c print2.c

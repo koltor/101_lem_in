@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:48:04 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 15:59:52 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:21:55 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -146,7 +146,7 @@ static t_bool	split_line_for_tube(char *line, t_data *data, t_tube *tube)
 **		affect an error if an error occurd
 */
 
-void			get_tube(char *file_line, t_data *data, char *line)
+t_bool			get_tube(char *file_line, t_data *data, char *line)
 {
 	UINT	id;
 	int		ret;
@@ -157,19 +157,29 @@ void			get_tube(char *file_line, t_data *data, char *line)
 		if (split_line_for_tube(line, data, &(data->t_tab[0])))
 		{
 			data->tubes = 0;
-			return ;
+			return (false);
 		}
 	}
 	while ((line = scan_line_line(file_line)))
 	{
 		if ((ret = is_tube(line)) == 1)
+		{
+			if (is_order(line))
+			{
+			f_error(ERR_ORDER, NULL);
+			data->tubes = id;
+			return (true);	
+			}
 			continue ;
+		}
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
-			break ;
+		{
+			f_error(ERR_TUBES_FORMAT, NULL);
+			data->tubes = id;
+			return (true);
+		}
 		id += 1;
 	}
-	if (ret == -1)
-		f_error(ERR_TUBES_FORMAT, NULL);
-	data->tubes = id;
 	//check_duplicate_tube(data->t_tab, data->tubes);
+	return (true);
 }

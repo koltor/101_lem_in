@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 16:25:52 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:32:45 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,8 +100,12 @@ static t_bool	split_line_for_room(char *line, t_room *room)
 		return (*(t_bool*)f_error(ERR_ROOM_FORMAT, &value));
 	if (!(room->name = ft_strsub_c(line, ' ')))
 		return (*(t_bool*)f_error(ERR_MALLOC, &value));
-	x1 = atol_id(line, ' ', 1);
-	y1 = atol_id(line, ' ', 2);
+	value = true;
+	x1 = atol_id(line, ' ', 1, &value);
+	y1 = atol_id(line, ' ', 2, &value);
+	if (value == false)
+		return (*(t_bool*)f_error(ERR_ROOM_WRONG_POS, &value));
+	value = false;
 	if (x1 < -2147483648 || y1 < -2147483648 ||
 		x1 > 2147483647 || y1 > 2147483647)
 		return (*(t_bool*)f_error(ERR_OVERFLOW, &value));
@@ -175,18 +179,6 @@ static t_bool	select_ben(char *line, t_data *data, int *order, UINT (*abc)[128])
 	return (true);
 }
 
-void show_abc(UINT abc[128])
-{
-	int i;
-
-	i = 0;
-	while (i < 128)
-	{
-		dprintf(1, " %c: %u \n", i, abc[i]);
-		i++;
-	}
-}
-
 /*
 ** get_room:
 **	transform the middle part of the file into room_data
@@ -219,6 +211,8 @@ char			*get_room(char *file_line, t_data *data)
 			break ;
 		if (type == 1 && order == 0 && (order = is_order(line)))
 			continue ;
+		if (type == 1 && order != 0)
+			return(f_error(ERR_ORDER, NULL));
 		if (type == 0 && select_ben(line, data, &order, abc_id))
 			return (NULL);
 	}

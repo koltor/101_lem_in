@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/27 11:54:31 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/27 16:25:22 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 15:11:24 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,8 @@ t_bool	stock_anthill(char *file_line, t_data *data)
 		scan_line_line(NULL);
 		return (false);
 	}
-	get_tube(file_line, data, line);
+	if (get_tube(file_line, data, line))
+		return (false);
 	scan_line_line(NULL);
 	if (get_nodes(data))
 		return (false);

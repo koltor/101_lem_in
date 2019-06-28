@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/04 22:18:29 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/05 18:12:04 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/06/28 14:47:58 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,5 +39,7 @@ void			debug_main(int option)
 
 	d = *(char*)f_error(0, NULL);
 	dprintf(1, "  option: %d         error: %d\n", option, (int)d);
+	ft_putstr("------------------------\n");
+	ft_putstr("message d'erreur: \n");
 	str_error((int)d);
 }
