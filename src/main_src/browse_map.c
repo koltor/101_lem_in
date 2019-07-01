@@ -158,6 +158,7 @@ t_bool			browse_map(t_data *data)
 	fill_tabs_with_rooms(data);
 	//FPF("ta grande\n");
 	get_result_for_path_managment(data, max_paths(*data));
+	fill_output(data);
 	//FPF("darone\n");
 	free(turns);
 	return (true);

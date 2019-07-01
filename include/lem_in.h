@@ -54,6 +54,7 @@ enum	e_bool
 typedef struct		s_room
 {
 	char			*name;
+	UINT			len_name;
 	int				x;
 	int				y;
 	UINT			nb_link_tubes;
@@ -85,6 +86,14 @@ typedef struct		s_abc
 	UINT			abc_id[128];
 }					t_abc;
 
+typedef struct		s_output
+{
+	char			**out;
+	UINT			lap;
+	UINT			ants;
+	UINT			room_id;
+}					t_opt;
+
 typedef struct		s_data
 {
 	UINT			ants;
@@ -93,7 +102,6 @@ typedef struct		s_data
 	UINT			**paths;
 	UINT			**ret;
 	UINT			path_nbr;
-	UINT			output_lenght;
 	UINT			lap;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
@@ -196,7 +204,7 @@ void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 */
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
-char	*fill_output(t_data *data);
+void	fill_output(t_data *data);
 
 /*
 **************************************************
@@ -257,6 +265,7 @@ char				*ft_strsub_c(const char *src, char c);
 char				*ft_revstrsub_c(const char *src, char c);
 long				atol_id(const char *s, char c, UINT index, t_bool *boule);
 ULL					bin(char c);
+UINT				count_digits(UINT num);
 
 /*
 **************************************************

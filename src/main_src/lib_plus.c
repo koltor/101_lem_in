@@ -115,6 +115,21 @@ long	atol_id(const char *s, char c, UINT index, t_bool *boule)
 	return (ft_atol_modify(&s[i], boule));
 }
 
+UINT	count_digits(UINT num)
+{
+	UINT cpt;
+
+	cpt = 0;
+	if (num == 0)
+		return (1);
+	while (num)
+	{
+		num = num / 10;
+		cpt++;
+	}
+	return (cpt);
+}
+
 ULL		bin(char c)
 {
 	const ULL tab[64] = {
