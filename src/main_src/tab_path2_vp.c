@@ -146,5 +146,5 @@ void	fill_tabs_with_rooms(t_data *data)
 			swap_current_tab(data->paths[i], i, data);
 		i++;
 	}
-	print_potential_paths(data);
+//	print_potential_paths(data);
 }

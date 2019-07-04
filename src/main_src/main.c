@@ -82,6 +82,7 @@ t_bool			lem_in(const char *path, int option)
 			f_error(ERR_EMPTY_FILE, NULL);
 		return (exit_lem_in_error(file_line, NULL, NULL));
 	}
+	stock_file_line(&data, file_line);
 	if ((data.rooms = get_number_of_room(file_line)) < 2)
 		return (exit_lem_in_error(file_line, NULL, NULL));
 	if ((data.tubes = get_number_of_tube(file_line)) < 1)

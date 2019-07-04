@@ -199,7 +199,7 @@ void	bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[])
 	bfs2 = 0;
 	set_tab_for_bf(&curr, data->path_nbr, max_paths);
 	path_sorter2(data, &curr, max_paths);
-	print_tab(&curr, max_paths);
+//	print_tab(&curr, max_paths);
 	if (check_path_found(&curr, max_paths, data->path_nbr) == max_paths)
 	{
 		tab_cp(&curr, res, max_paths);

@@ -53,6 +53,7 @@ char	*parsing_into_line(const char *path)
 	}
 	if (line_return == NULL)
 		free(tmp);
+//	FPF("yo line ret %s\n", line_return);
 	return (line_return);
 }
 

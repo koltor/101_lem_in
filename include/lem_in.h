@@ -36,7 +36,7 @@
 ** help for option's comprehention
 */
 
-# define BUF_SIZE 100000
+# define BUF_SIZE 5
 # define USED 0
 # define NUSED 1
 # define O_D (option & 1)
@@ -103,6 +103,9 @@ typedef struct		s_data
 	UINT			**ret;
 	UINT			path_nbr;
 	UINT			lap;
+	UINT			len_opt;
+	char			*bopt;
+	char			*opt;
 	struct s_tube	*t_tab;
 	struct s_room	*r_tab;
 	struct s_abc	abc;
@@ -205,6 +208,7 @@ void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
 void	fill_output(t_data *data);
+void	stock_file_line(t_data *data, const char *s);
 
 /*
 **************************************************

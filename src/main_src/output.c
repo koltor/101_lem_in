@@ -13,6 +13,21 @@
 
 #include "lem_in.h"
 
+void	stock_file_line(t_data *data, const char *s)
+{
+	char *s1;
+
+//	FPF("hey stock file line |%s|\n\n", s);
+
+	data->len_opt = ft_strlen(s);
+	if (s[data->len_opt - 1] != '\n')
+		s1 = "\n\n";
+	else
+		s1 = "\n";
+	data->bopt = ft_strjoin(s, s1);
+//	FPF("c0 = %c c1 = %c c2 = %c\n", s[data->len_opt - 1], s[data->len_opt - 2], s[data->len_opt - 3]);
+}
+
 char	**fill_buffer(t_data *data, UINT (*lenght)[])
 {
 	char **buf;
@@ -37,15 +52,29 @@ void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data, UINT lap_cp)
 	char *r1;
 	char *r2;
 	char *r3;
+	UINT ovf;
+	UINT save;
 
+	save = (*lenght)[lap_cp];
 	(*lenght)[lap_cp] = 3 + data->r_tab[opt->room_id].len_name + count_digits(opt->ants) + (*lenght)[lap_cp];
-	FPF("get ant move lap_cp = %u len = %u\n", lap_cp, (*lenght)[lap_cp]);
+	if ((*lenght)[lap_cp] >= BUF_SIZE)
+	{
+		ovf = BUF_SIZE + save;
+		while (ovf <= (*lenght)[lap_cp])
+		{
+			r1 = ft_strnew(BUF_SIZE);
+			r2 = ft_strdup(opt->out[lap_cp]);
+			ft_strdel(&(opt->out[lap_cp]));
+			opt->out[lap_cp] = ft_strjoin(r2, r1);
+			ft_strdel(&r2);
+			ft_strdel(&r1);
+			ovf += BUF_SIZE;
+		}
+	}
 	r1 = ft_strjoin("L", ft_litoa((ULL)opt->ants));
 	r2 = ft_strjoin(r1, ft_strjoin("-", ft_strjoin(data->r_tab[opt->room_id].name, " ")));
 	ft_strdel(&r1);
-//	FPF("allo get ant move r2 = %s\n", r2);
 	r3 = ft_strdup(opt->out[lap_cp]);
-//	FPF("allo get ant move r3 = %s\n", r3);
 	ft_strdel(&(opt->out[lap_cp]));
 	opt->out[lap_cp] = ft_strjoin(r3, r2);
 	ft_strdel(&r2);
@@ -100,31 +129,68 @@ void	get_name_lenght(t_data *data)
 	}
 }
 
-	void	insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data)
+void	insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data)
 {
 	UINT i;
 
 	i = 0;
-	while (i < data->lap - 1)
+	while (i < data->lap)
 	{
 //`printf("linefeed on en est a %s\n", &(opt->out[i][((*lenght)[i] - 2)]));
 		opt->out[i][((*lenght)[i] - 1)] = '\n';
 		i++;
 	}
 //	FPF("i = %u data->lap %u size = %u\n", i, data->lap, (*lenght)[i]);
-	opt->out[data->lap - 1][((*lenght)[i] - 1)] = '\0';
+//	opt->out[data->lap - 1][((*lenght)[i] - 1)] = '\0';
 }
 
-void	print_int_tab(UINT (*lenght)[], UINT lap)
+void	len_tab_into_data(UINT (*lenght)[], t_data *data)
 {
 	UINT i;
 
 	i = 0;
-	while (i < lap)
+	while (i < data->lap)
 	{
-		FPF("indice %u len = %u\n", i, (*lenght)[i]);
+//		FPF("line %u len %u\n", i, (*lenght)[i]);
+		data->len_opt += (*lenght)[i];
 		i++;
 	}
+//	FPF("end of len tab len output = %u\n", data->len_opt);
+}
+
+void	join_output_tab(t_opt *opt, t_data *data)
+{
+	UINT i;
+	char *s1;
+	char *s2;
+	char *s3;
+
+	i = 1;
+	if (data->lap == 1)
+	{
+		data->opt = ft_strdup(opt->out[i - 1]);
+		return ;
+	}
+	s1 = ft_strdup(opt->out[i - 1]);
+	s2 = ft_strdup(opt->out[i]);
+	while (1)
+	{
+		s3 = ft_strjoin(s1, s2);
+	//	FPF("allo s3 %s\n", s3);
+		if (i == data->lap - 1)
+			break ;
+		ft_strdel(&s1);
+		ft_strdel(&s2);
+		s1 = ft_strdup(s3);
+		ft_strdel(&s3);
+		i++;
+		s2 = ft_strdup(opt->out[i]);
+	}
+//	FPF("end of join output s3 = %s\n lan prevue %u len actu %u \n", s3, data->len_opt, ft_strlen(s3));
+	data->opt = ft_strjoin(data->bopt, s3);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	ft_strdel(&s3);
 }
 
 void	fill_output(t_data *data)
@@ -142,13 +208,15 @@ void	fill_output(t_data *data)
 		i = 0;
 		while (data->ret[i])
 		{
-			FPF("small boucle i = %u lap = %u ants = %u\n", i, opt.lap, opt.ants);
+		//	FPF("small boucle i = %u lap = %u ants = %u\n", i, opt.lap, opt.ants);
 			if (opt.ants == data->ants + 1)
 			{
-				FPF("end of treatment\n");
+		//		FPF("end of treatment\n");
 				insert_linefeed(&opt, &lenght, data);
-				print_int_tab(&lenght, data->lap);
-				ft_putstr_2d(opt.out);
+				len_tab_into_data(&lenght, data);
+				join_output_tab(&opt, data);
+				ft_putstr(data->opt);
+				//ft_putstr_2d(opt.out);
 				return ;
 			}
 			//FPF("avant ant march opt lap %u\n", opt.lap);

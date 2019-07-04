@@ -101,11 +101,11 @@ void	sort_tab_crescent_order(UINT (*res)[], UINT (*tabc)[], UINT max_paths, t_da
 		}
 		i++;
 	}
-	FPF("tamer\n");
-	print_tab(&tabc2, max_paths);
+//	FPF("tamer\n");
+//	print_tab(&tabc2, max_paths);
 	tab_cp(&tabc2, res, max_paths);
-	FPF("res a la fin\n");
-	print_tab(res, max_paths);
+//	FPF("res a la fin\n");
+//	print_tab(res, max_paths);
 }
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
@@ -121,16 +121,16 @@ void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
 	set_tab_zero(&tabc, max_paths);
 	index = get_smallest_tab(res, &tabc, data, max_paths);
 	lap = data->ants / ret + data->paths[(*res)[index]][1] - 4;
-	FPF("on 1st turn lap = %u size du chemin %u index = %u\n", lap, data->paths[(*res)[index]][1] - 4, index);
+//	FPF("on 1st turn lap = %u size du chemin %u index = %u\n", lap, data->paths[(*res)[index]][1] - 4, index);
 	tabc[index] = ret;
 	while (ret < max_paths)
 	{
 		ret++;
 		index = get_smallest_tab(res, &tabc, data, max_paths);
-		FPF("apres get smallest tab index = %u\n", index);
+//		FPF("apres get smallest tab index = %u\n", index);
 		if (index == data->path_nbr)
 		{
-			FPF("why\n");
+//			FPF("why\n");
 			break ;
 		}
 		if (data->ants / ret + data->paths[(*res)[index]][1] - 4 > lap)
@@ -140,12 +140,12 @@ void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data) // a revoir
 		}
 		lap = data->ants / ret + data->paths[(*res)[index]][1] - 4;
 		tabc[index] = ret;
-		FPF("on turn num lap = %u ret = %u index = %u\n", lap, ret, index);
+//		FPF("on turn num lap = %u ret = %u index = %u\n", lap, ret, index);
 	}
-	FPF("wtf sortie de boucle tabc\n");
-	print_tab(&tabc, max_paths);
+//	FPF("wtf sortie de boucle tabc\n");
+//	print_tab(&tabc, max_paths);
 	set_tab_with_opti(res, &tabc, max_paths, data->path_nbr);
-	print_tab(res, max_paths);
+//	print_tab(res, max_paths);
 	sort_tab_crescent_order(res, &tabc, max_paths, data);
-	print_tab(res, max_paths);
+//	print_tab(res, max_paths);
 }

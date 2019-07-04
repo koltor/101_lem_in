@@ -107,8 +107,8 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 
 	i = 0;
 	bruteforce_sorter(data, max_paths, &res);
-	FPF("end of bruteforce sorter\n");
-	print_tab(&res, max_paths);
+//	FPF("end of bruteforce sorter\n");
+//	print_tab(&res, max_paths);
 	opti_paths(&res, max_paths, data);
 	size_tab = check_path_found(&res, max_paths, data->path_nbr);
 	if (!(data->ret = (UINT**)malloc(sizeof(UINT*) * (size_tab + 1))))
@@ -132,6 +132,6 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 	}
 	data->path_nbr = size_tab;
 	get_lap(data);
-	FPF("nb de fourmis = %u lap = %u\n", data->ants, data->lap);
-	print_final_path_tab(data);
+//	FPF("nb de fourmis = %u lap = %u\n", data->ants, data->lap);
+//	print_final_path_tab(data);
 }
