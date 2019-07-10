@@ -128,7 +128,7 @@ int				main(int ac, char **av)
 	{
 		av = get_option(ac - 1, &av[1], &option);
 		if (lem_in(*av, option) && !O_D && !O_I)
-			str_error(*(int*)f_error(0, NULL));
+			str_error(*(char*)f_error(0, NULL));
 	}
 	else
 		usage();

@@ -59,7 +59,7 @@ static void	wait_thread(t_thread (*thread)[NB_THREAD], t_data *data)
 	UINT i;
 
 	i = 0;
-	while (i < NB_THREAD && i < data->rooms)
+	while (i < NB_THREAD && i < data->tubes)
 	{
 		pthread_join((*thread)[i].pth, NULL);
 		if ((*thread)[i].file_line)
@@ -83,7 +83,7 @@ static void	prepare_thread(t_thread (*thread)[NB_THREAD], t_data *data,
 		sec += 0.5;
 	if (sec < 1.0F)
 		sec = 1.0F;
-	while (i < NB_THREAD && i < data->rooms)
+	while (i < NB_THREAD && i < data->tubes)
 	{
 		(*thread)[i].data = data;
 		(*thread)[i].id = i + 1;
