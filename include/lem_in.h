@@ -92,6 +92,8 @@ typedef struct		s_output
 	UINT			lap;
 	UINT			ants;
 	UINT			room_id;
+	UINT			save;
+	UINT			lap_cp;
 }					t_opt;
 
 typedef struct		s_data
@@ -176,6 +178,14 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 **************************************************
 */
 
+/* path sorter utils */
+UINT				get_pnum(UINT pid, t_data *data);
+UINT				get_min_pid(t_data *data, UINT max_paths);
+UINT				get_max_pid(t_data *data, UINT max_paths);
+UINT				get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
+UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
+
+
 void				print_potential_paths(t_data *data);
 void				fill_path_tab(t_data *data);
 void				fill_tabs_with_rooms(t_data *data);
@@ -192,8 +202,6 @@ void				set_used_rooms(UINT id_tab, t_data *data);
 UINT				is_valid(UINT *tab, t_data *data);
 UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
 void				get_result_for_path_managment(t_data *data, UINT max_paths);
-UINT				get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
-UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
 UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
 void				print_tab(UINT (*res)[], UINT max_paths);
@@ -205,6 +213,21 @@ void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 ***********************PART 4*********************
 **************************************************
 */
+
+/* output utils */
+
+void	del_temp_str(char **s1, char **s2, char **s3);
+void	stock_file_line(t_data *data, const char *s);
+char	**fill_buffer(t_data *data, UINT (*lenght)[]);
+void	insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data);
+void	get_name_lenght(t_data *data);
+
+/* output ants */
+
+void	get_ant_move_ovf(t_opt *opt, char **s1, char **s2, UINT len);
+void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data);
+void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[]);
+
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
 void	fill_output(t_data *data);
