@@ -13,6 +13,19 @@
 
 #include "lem_in.h"
 
+void	del_2d_int_tab(UINT **tab)
+{
+	UINT i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 void	malloc_path_tabs(t_data *data)
 {
 	UINT i;
@@ -49,17 +62,19 @@ void	malloc_path_tabs(t_data *data)
 	}
 }
 
-void	fill_path_tab(t_data *data)
+UINT	fill_path_tab(t_data *data)
 {
 	UINT path_nb;
 
-	path_nb = potential_path_counter(data);
+	if (!(path_nb = potential_path_counter(data)))
+		return (0);
 	data->path_nbr = path_nb;
 	if (!(data->paths = (UINT **)malloc(sizeof(UINT *) * (path_nb + 1))))
 	{
 		f_error(ERR_MALLOC, NULL);
-		return ;
+		return (0);
 	}
 	data->paths[path_nb] = NULL;
 	malloc_path_tabs(data);
+	return (1);
 }

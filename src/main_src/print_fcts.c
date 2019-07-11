@@ -34,3 +34,24 @@ void	print_potential_paths(t_data *data)
 		i++;
 	}
 }
+
+void	print_final_path_tab(t_data *data)
+{
+	UINT i;
+	UINT j;
+
+	i = 0;
+	while (data->ret[i])
+	{
+		j = 1;
+		while (j < data->ret[i][0])
+		{
+			FPF("alle %s\n", data->r_tab[data->ret[i][j]].name);
+			j++;
+		}
+		i++;
+	}
+	data->path_nbr = i;
+}
+
+

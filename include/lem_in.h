@@ -98,6 +98,8 @@ typedef struct		s_output
 
 typedef struct		s_data
 {
+	UINT			max_paths;
+	UINT			pid;
 	UINT			ants;
 	UINT			rooms;
 	UINT			tubes;
@@ -185,9 +187,13 @@ UINT				get_max_pid(t_data *data, UINT max_paths);
 UINT				get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
 UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
 
+void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths,
+					UINT cell);
+
+
 
 void				print_potential_paths(t_data *data);
-void				fill_path_tab(t_data *data);
+UINT				fill_path_tab(t_data *data);
 void				fill_tabs_with_rooms(t_data *data);
 void				print_number_paths(t_data *data);
 UINT				count_bits(t_tube tube);
@@ -196,7 +202,6 @@ UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
 UINT				max_paths(t_data data);
 void				reset_markers(t_data *data);
-void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths);
 void				bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[]);
 void				set_used_rooms(UINT id_tab, t_data *data);
 UINT				is_valid(UINT *tab, t_data *data);
@@ -232,7 +237,7 @@ void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[]);
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
 void	fill_output(t_data *data);
 void	stock_file_line(t_data *data, const char *s);
-
+void	del_2d_int_tab(UINT **tab);
 /*
 **************************************************
 ***********************ERROR**********************
