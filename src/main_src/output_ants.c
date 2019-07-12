@@ -1,4 +1,29 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   output_ants.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/07/11 13:33:07 by ocrossi      #+#   ##    ##    #+#       */
+/*   Updated: 2019/07/11 18:26:41 by ocrossi     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "lem_in.h"
+
+void	len_tab_into_data(t_data *data, UINT (*lenght)[])
+{
+	UINT i;
+
+	i = 0;
+	while (i < data->lap)
+	{
+		data->len_opt = data->len_opt + (*lenght)[i];
+		i++;
+	}
+}
 
 void	get_ant_move_ovf(t_opt *opt, char **s1, char **s2, UINT len)
 {
@@ -22,7 +47,9 @@ void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data)
 	char *r2;
 	char *r3;
 
+//	FPF("lap = %u\n", opt->lap_cp);
 	opt->save = (*lenght)[opt->lap_cp];
+//	FPF("opt->save %u\n", opt->save);
 	(*lenght)[opt->lap_cp] = 3 + data->r_tab[opt->room_id].len_name +
 			count_digits(opt->ants) + (*lenght)[opt->lap_cp];
 	if ((*lenght)[opt->lap_cp] >= BUF_SIZE)
@@ -43,8 +70,11 @@ void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[])
 
 	j = 1;
 	opt->lap_cp = opt->lap - 1;
+//	FPF("opt->lap = %u data->lap %u taille du chemin a inserer %u\n", opt->lap, data->lap, data->ret[i][0]);
+	//print_final_path_tab(data);
 	while (j < data->ret[i][0])
 	{
+	//	FPF("j = %u\n", j);
 		opt->room_id = data->ret[i][j];
 		get_ant_move(opt, lenght, data);
 		opt->lap_cp++;

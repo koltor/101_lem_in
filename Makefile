@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/28 16:38:33 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/07/12 16:42:58 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -34,9 +34,10 @@ LIB_PATH				= librairies
 NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c tab_potential_paths.c tab_path_vp.c \
-						tab_path2_vp.c path_sorter.c path_sorter2.c \
+						tab_path2_vp.c tab_path1_vp.c path_sorter.c path_sorter2.c \
 						path_sorter3.c path_sorter_utils.c opti_paths.c output.c \
-						output_utils.c output_ants.c
+						output_utils.c output_ants.c opti_path1.c  \
+						tab_path_creator.c generic_sorter.c print_fcts.c
 
 NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
@@ -72,9 +73,10 @@ PARSING_MT_OBJ	= $(addprefix $(PARSING_MT_OBJ_PATH)/,$(PARSING_MT_NAME_OBJ))
 VISU_OBJ		= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc -g3 -fsanitize=address
+CC			= gcc 
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
+FSN			= -g3 -fsanitize=address
 
 #librairies
 LIBFT				= $(LIB_PATH)/libft
@@ -139,3 +141,7 @@ re: fclean all
 
 nonor :
 	@norminette $(SRC_PATH)/*.c $(PARSING_SRC_PATH)/*.c $(PARSING_MT_SRC_PATH)/*.c $(VISU_SRC_PATH) $(INC_PATH)/*.h
+
+sgf : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(VISU_OBJ) $(LIBFT.A)
+	@$(CC) $(FSN) -I $(LIBFT_INC) -L $(LIBFT) -I $(MINILIBX_INC) -L $(MINILIBX) $(LIBPF.A) $^ -o $@ $(FRAMEWORKS)
+

@@ -6,25 +6,12 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/13 12:46:11 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 13:40:34 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/11 14:48:38 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
-void	len_tab_into_data(UINT (*lenght)[], t_data *data)
-{
-	UINT i;
-
-	i = 0;
-	while (i < data->lap)
-	{
-		data->len_opt += (*lenght)[i];
-		i++;
-	}
-}
 
 void	join_output_tab(t_opt *opt, t_data *data)
 {
@@ -52,7 +39,8 @@ void	join_output_tab(t_opt *opt, t_data *data)
 		i++;
 		s2 = ft_strdup(opt->out[i]);
 	}
-	data->opt = ft_strjoin(data->bopt, s3);
+//	data->opt = ft_strjoin(data->bopt, s3);
+	data->opt = ft_strdup(s3);
 	del_temp_str(&s1, &s2, &s3);
 }
 
@@ -79,8 +67,11 @@ void	fill_output(t_data *data)
 			if (opt.ants == data->ants + 1)
 			{
 				insert_linefeed(&opt, &lenght, data);
-				len_tab_into_data(&lenght, data);
+				len_tab_into_data(data, &lenght);
 				join_output_tab(&opt, data);
+				//FPF("len opt %d my len %u\n", ft_strlen(data->opt), data->len_opt);
+				//UINT len = ft_strlen(data->opt);
+				//write(1, &(data->opt), len);
 				ft_putstr(data->opt);
 				return ;
 			}

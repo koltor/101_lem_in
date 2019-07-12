@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 15:52:20 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/12 14:43:48 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,9 +56,9 @@ static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free(file_line);
 	free(data->t_tab);
 	free_room(data->r_tab, data->rooms);
-	ft_strdel(&(data->opt));
-	del_2d_int_tab(data->ret);
-	del_2d_int_tab(data->paths);
+//	ft_strdel(&(data->opt));
+//	del_2d_int_tab(data->ret);
+//	del_2d_int_tab(data->paths);
 	return (true);
 }
 
@@ -111,6 +111,8 @@ t_bool			lem_in(const char *path, int option)
 	}
 	if (browse_map(&data))
 		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
+	if (!generic_sorter(&data))
+		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, NULL));	
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }

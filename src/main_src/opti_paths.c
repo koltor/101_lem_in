@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/28 13:05:39 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 13:17:22 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/11 17:37:52 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,52 +23,6 @@ void	set_tab_zero(UINT (*tabc)[], UINT max_paths)
 		(*tabc)[i] = 0;
 		i++;
 	}
-}
-
-UINT	get_smallest_tab2(UINT (*res)[], UINT (*tabc)[], t_data *data, t_bool *test, UINT *ret)
-{
-	UINT i;
-	UINT index;
-
-	i = 0;
-	while (i < data->max_paths)
-	{
-		if ((*tabc)[i] < 1 && (*res)[i] != data->path_nbr)
-		{
-			*ret = data->paths[(*res)[i]][1];
-			index = i;
-			*test = true;
-			break ;
-		}
-		i++;
-	}
-	return (index);
-}
-
-UINT	get_smallest_tab(UINT (*res)[], UINT (*tabc)[], t_data *data, UINT max_paths)
-{
-	UINT i;
-	UINT ret;
-	UINT index;
-	t_bool test;
-
-	test = false;
-	i = 0;
-	ret = 0;
-	index = get_smallest_tab2(res, tabc, data, &test, &ret);
-	while (i < max_paths)
-	{
-		if ((*tabc)[i] < 1 && (*res)[i] != data->path_nbr && ret > data->paths[(*res)[i]][1])
-		{
-			ret = data->paths[(*res)[i]][1];
-			index = i;
-			test = true;
-		}
-		i++;
-	}
-	if (test == false)
-		return (data->path_nbr);
-	return (index);
 }
 
 void	set_tab_with_opti(UINT (*res)[], UINT (*tabc)[], UINT max_paths, UINT path_nbr)

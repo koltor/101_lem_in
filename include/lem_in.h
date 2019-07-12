@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 16:39:11 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/12 16:47:19 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -98,6 +98,8 @@ typedef struct		s_output
 
 typedef struct		s_data
 {
+	enum e_bool		test;
+	UINT			pp; // potentail paths counter
 	UINT			max_paths;
 	UINT			pid;
 	UINT			ants;
@@ -193,7 +195,10 @@ void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths,
 
 
 void				print_potential_paths(t_data *data);
+void				print_one_potential_path(t_data *data, UINT i);
 UINT				fill_path_tab(t_data *data);
+UINT				fill_tabs_with_current_room(UINT id_tab, UINT id_room, t_data *data, UINT cell);
+UINT				fill_tabs_with_current_room2(UINT id_tab, UINT id_room, t_data *data, UINT cell);
 void				fill_tabs_with_rooms(t_data *data);
 void				print_number_paths(t_data *data);
 UINT				count_bits(t_tube tube);
@@ -212,6 +217,17 @@ void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
 void				print_tab(UINT (*res)[], UINT max_paths);
 void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
 void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
+
+/* nouvelle partie sans ff */
+
+UINT				generic_sorter(t_data *data);
+t_bool				init_stocker_tab(t_data *data);
+t_bool				fill_comp_tab(t_data *data);
+
+/* aff des res */
+
+void				print_comp_tab(t_data *data);
+void				print_cp_tab_binary(t_data *data);
 
 /*
 **************************************************
@@ -232,7 +248,11 @@ void	get_name_lenght(t_data *data);
 void	get_ant_move_ovf(t_opt *opt, char **s1, char **s2, UINT len);
 void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data);
 void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[]);
+void	len_tab_into_data(t_data *data, UINT (*lenght)[]);
 
+/* opti_path 1 */
+UINT	get_smallest_tab2(UINT (*res)[], UINT (*tabc)[], t_data *data, UINT *ret);
+UINT	get_smallest_tab(UINT (*res)[], UINT (*tabc)[], t_data *data, UINT max_paths);
 
 void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
 void	fill_output(t_data *data);

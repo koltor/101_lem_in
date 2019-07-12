@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/24 20:32:50 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 16:31:27 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/11 18:29:23 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,14 +27,20 @@ UINT	path_sorter2_1(t_data *data, UINT (*res)[], UINT cell, UINT pid)
 		{
 			test = true;
 			(*res)[cell] = tmp;
+		//	FPF("tmp = %u\n", tmp);
 			set_used_rooms((*res)[cell], data);
 			cell++;
 			break ;
 		}
 		pnum--;
 	}
-	if (test == false)
+	if (test == false && pid < data->max_paths)
+	{
+	//	FPF("path nbr = %u max_paths = %u\n", data->path_nbr, data->max_paths);
+	//	FPF("pid = %u\n", pid);
+	//	print_tab(res, data->max_paths);
 		(*res)[pid - 1] = data->path_nbr;
+	}
 	return (cell);
 }
 
@@ -53,6 +59,7 @@ void	path_sorter2(t_data *data, UINT (*res)[], UINT max_paths, UINT cell)
 		return ;
 	pid = get_min_pid(data, max_paths) + 1;
 	max_pid = get_max_pid(data, max_paths);
+//	FPF("min pid = %u max pid = %u\n", pid, max_pid);
 	while (pid <= max_pid)
 	{
 		cell = path_sorter2_1(data, res, cell, pid);
@@ -67,8 +74,8 @@ UINT	del_last_path(UINT (*curr)[], t_data *data, UINT max_paths)
 	UINT index;
 
 	i = 4;
-	index = data->pid;
-	while (index)
+	index = 0;
+	while (index < data->max_paths)
 	{
 		if ((*curr)[index] != data->path_nbr)
 			break ;
@@ -93,6 +100,7 @@ void	browse_potential_tabs(UINT pnum, t_data *data, UINT (*res)[], t_bool *test)
 		{
 			*test = true;
 			(*res)[data->pid - 1] = tmp;
+//			FPF("allo dans browse potential tab (donc petit sorter) tmp %u\n", tmp);
 			set_used_rooms((*res)[data->pid - 1], data);
 			return ;
 		}
@@ -135,11 +143,15 @@ UINT	init_bf(UINT (*curr)[], UINT max_paths, t_data *data, UINT (*res)[])
 	cell = 1;
 	set_tab_for_bf(curr, data->path_nbr, max_paths);
 	path_sorter2(data, curr, max_paths, cell);
+//	FPF("in init bf\n");
+//	print_tab(curr, max_paths);
+
 	if (check_path_found(curr, max_paths, data->path_nbr) == max_paths)
 	{
 		tab_cp(curr, res, max_paths);
 		return (1);
 	}
+	tab_cp(curr, res, max_paths);
 	return (0);
 }
 
@@ -151,6 +163,8 @@ void	bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[])
 	cell = 1;
 	if (init_bf(&curr, max_paths, data, res) == 1)
 		return ;
+//	FPF("after init bf\n");
+//	print_tab(res, max_paths);
 	data->pid = max_paths - 1;
 	while (data->pid != 1)
 	{

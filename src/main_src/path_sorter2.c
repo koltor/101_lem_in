@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/24 16:46:51 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 16:30:46 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/12 16:13:23 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,11 +79,6 @@ void	set_used_rooms(UINT id_tab, t_data *data)
 
 	i = 4;
 //	FPF("id tab = %u\n", id_tab);
-	if (id_tab == data->path_nbr)
-	{
-//		FPF("allo\n");
-		return ;
-	}
 	while (i < data->paths[id_tab][1] - 1)
 	{
 		data->r_tab[data->paths[id_tab][i]].used = true;

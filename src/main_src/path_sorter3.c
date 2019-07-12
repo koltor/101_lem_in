@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/25 12:39:15 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 13:23:26 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/11 18:26:08 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -115,29 +115,13 @@ void	get_result_for_path_managment(t_data *data, UINT max_paths)
 	UINT index;
 
 	i = 0;
+	data->max_paths = max_paths;
 	bruteforce_sorter(data, max_paths, &res);
+//	FPF("apres bruteforce\n");
+	//print_tab(&res, max_paths);
 	opti_paths(&res, max_paths, data);
 	size_tab = check_path_found(&res, max_paths, data->path_nbr);
 	malloc_res_pm(data, size_tab, &res);
-/*	if (!(data->ret = (UINT**)malloc(sizeof(UINT*) * (size_tab + 1))))
-	{
-		f_error(ERR_MALLOC, NULL);
-		return ;
-	}
-	data->ret[size_tab] = NULL;
-	while (i < size_tab)
-	{
-		index = get_index_valid_tab(data, &res, max_paths);
-		size_small_tabs = get_size_valid_tab(data, &res, max_paths);
-		if (!(data->ret[i] = (UINT*)malloc(sizeof(UINT) * (size_small_tabs + 1))))
-		{
-			f_error(ERR_MALLOC, NULL);
-			return ;
-		}
-		data->ret[i][0] = size_small_tabs + 1;
-		swap_tab_to_res(&(data->ret[i]), &res, data, index);
-		i++;
-	}*/
 	data->path_nbr = size_tab;
 	get_lap(data);
 }
