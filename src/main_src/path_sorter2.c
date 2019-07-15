@@ -65,6 +65,8 @@ void	reset_markers(t_data *data)
 	UINT i;
 
 	i = 2; // attention segv si y aque start et end
+	if (data->rooms == 2)
+		return ;
 	while (i < data->rooms)
 	{
 		if (data->r_tab[i].used == true)
@@ -78,9 +80,11 @@ void	set_used_rooms(UINT id_tab, t_data *data)
 	UINT i;
 
 	i = 4;
-//	FPF("id tab = %u\n", id_tab);
+	if (data->paths[id_tab][i] == 1)
+		return ;
 	while (i < data->paths[id_tab][1] - 1)
 	{
+	//	FPF("i = %u name tab = %s\n", i, data->r_tab[data->paths[id_tab][i]].name);
 		data->r_tab[data->paths[id_tab][i]].used = true;
 		i++;
 	}
@@ -94,7 +98,10 @@ UINT	is_valid(UINT *tab, t_data *data)
 	while (i < tab[1] - 1)
 	{
 		if (data->r_tab[tab[i]].used == true)
+		{
+		//	FPF("dans is valid i = %u\n", i);
 			return (0);
+		}
 		i++;
 	}
 	return (1);

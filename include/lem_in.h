@@ -223,11 +223,15 @@ void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 UINT				generic_sorter(t_data *data);
 t_bool				init_stocker_tab(t_data *data);
 t_bool				fill_comp_tab(t_data *data);
+void				get_new_solution(t_data *data, UINT index);
+UINT				superposition_tab(t_data *data, UINT index);
+UINT				set_solution_for_ppath(t_data *data, UINT index);
 
 /* aff des res */
 
 void				print_comp_tab(t_data *data);
 void				print_cp_tab_binary(t_data *data);
+void				aprint_tab(UINT *tab, UINT len);
 
 /*
 **************************************************

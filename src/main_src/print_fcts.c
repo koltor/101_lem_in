@@ -89,6 +89,11 @@ void	print_cp_tab_binary(t_data *data)
 	i = 0;
 	while (data->ret[i])
 	{
+		if (data->ret[i][data->pp + 1] == 0)
+		{
+			FPF("heyyyyy le break ?\n");
+	//		break ;
+		}
 		j = 0;
 		FPF("\nret index %u nb de chemins trouves = %u taille du plus grand chemin trouve = %u\n", i, data->ret[i][data->pp + 1], data->ret[i][data->pp]);
 		while (j < data->pp)
@@ -115,11 +120,12 @@ void	print_comp_tab(t_data *data)
 		{
 			if (data->ret[i][j] == 1)
 			{
-				FPF("le tab %u est compatible\n", j);
+				FPF("\nle tab %u est compatible\n", j);
 				print_one_potential_path(data, j);
 			}
 			j++;
 		}
+		FPF("\n---------------------------\n");
 		i++;
 	}
 }

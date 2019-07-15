@@ -13,7 +13,20 @@
 
 #include "lem_in.h"
 
-void	set_solution_for_ppath(t_data *data, UINT index)
+void	aprint_tab(UINT *tab, UINT len)
+{
+	UINT i;
+
+	i = 0;
+	while (i < len)
+	{
+		FPF(" %u ", tab[i]);
+		i++;
+	}
+	FPF("\n+++++++++++++++++++++++++++++++++++++\n");
+}
+
+UINT	set_solution_for_ppath(t_data *data, UINT index)
 {
 	UINT i;
 
@@ -25,36 +38,79 @@ void	set_solution_for_ppath(t_data *data, UINT index)
 	while (i < data->pp)
 	{
 		if (i == index)
-		{
-			i++;
+		//{
+		//	i++;
 			continue ;
-		}
-		if (is_valid(data->paths[i], data))
+		//}
+		if (is_valid(data->paths[i], data) && data->paths[i][2] == NUSED)
 		{
 			if (data->ret[index][data->pp] < data->paths[i][1] - 3)
 				data->ret[index][data->pp] = data->paths[i][1] - 3;
 			data->ret[index][i] = 1;
-			data->ret[index][data->pp + 1]++;
+			data->ret[index][data->pp + 1] = data->ret[index][data->pp + 1] + 1;
 			set_used_rooms(i, data);
 		}
 		else
 			data->ret[index][i] = 0;
 		i++;
 	}
+	if (data->ret[index][data->pp + 1] == data->pp)
+		return (1);
+	return (0);
 }
 
-t_bool	fill_comp_tab(t_data *data)
+UINT	comp_unit_tab(t_data *data, UINT i1, UINT i2)
 {
 	UINT i;
 
 	i = 0;
 	while (i < data->pp)
 	{
-		set_solution_for_ppath(data, i);
-		// a rajouter la partie opti paths
-		reset_markers(data);
+		if (data->ret[i1][i] != data->ret[i2][i])
+			return (0);
 		i++;
 	}
+	return (1);
+}
+
+UINT	superposition_tab(t_data *data, UINT index)
+{
+	UINT i;
+
+	i = 0;
+	while (1)
+	{
+		if (i == index)
+			break ;
+		if (comp_unit_tab(data, i, index))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+t_bool	fill_comp_tab(t_data *data)
+{
+	UINT i;
+	t_bool test;
+
+	i = 0;
+	test = false;
+	while (i < data->pp)
+	{
+	//	FPF("hey hey\n");
+		if (set_solution_for_ppath(data, i))
+		{
+			test = true;
+			break ;
+		}
+		if (i >= 1 && superposition_tab(data, i))
+			get_new_solution(data, i);
+		reset_markers(data);
+		i++;
+
+	}
+	// ici rajouter la partie opti de la taille de chemins, ou a voir si c est pas mieux direct dans la boucle
 	return (true);
 }
 
@@ -79,6 +135,7 @@ t_bool	init_stocker_tab(t_data *data)
 			f_error(ERR_MALLOC, NULL);
 			return (false);
 		}
+		data->ret[i][data->pp + 1] = 0;
 		i++;
 	}
 	return (true);

@@ -25,6 +25,8 @@ UINT	generic_sorter(t_data *data)
 		FPF("fill comp tab bug\n");
 		return (0);
 	}
+	FPF("\n===================================================\n");
 	print_cp_tab_binary(data);
+//	print_comp_tab(data);
 	return (1);
 }
