@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/12 14:43:48 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/16 13:15:00 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ static t_bool	exit_lem_in_error(char *line, char *line2, t_room *room, t_tube *t
 	if (line)
 		free(line);
 	if (line2)
-		free(line);
+		free(line2);
 	if (room)
 		free(room);
 	if (tube)

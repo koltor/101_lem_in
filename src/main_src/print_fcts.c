@@ -6,12 +6,27 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 16:29:55 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/12 16:49:52 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/16 14:00:39 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	aprint_tab(UINT *tab, UINT len)
+{
+	UINT i;
+
+	i = 0;
+	while (i < len)
+	{
+		FPF(" %u ", tab[i]);
+		i++;
+	}
+	FPF("\n+++++++++++++++++++++++++++++++++++++\n");
+}
+
+
 
 void	print_tab(UINT (*res)[], UINT max_paths)
 {
@@ -37,7 +52,7 @@ void	print_potential_paths(t_data *data)
 	while (data->paths[i] != NULL)
 	{
 		j = 3;
-		FPF("tab num %u id_path = %u size = %u\n", i, data->paths[i][0], data->paths[i][1]);
+		FPF("tab num %u id_path = %u size = %u\n", i, data->paths[i][0], data->paths[i][1] - 4);
 		while (j < data->paths[i][1])
 		{
 			FPF("salle %u name = %s\n", j, data->r_tab[data->paths[i][j]].name);
@@ -91,8 +106,8 @@ void	print_cp_tab_binary(t_data *data)
 	{
 		if (data->ret[i][data->pp + 1] == 0)
 		{
-			FPF("heyyyyy le break ?\n");
-	//		break ;
+	//		FPF("heyyyyy le break ?\n");
+			break ;
 		}
 		j = 0;
 		FPF("\nret index %u nb de chemins trouves = %u taille du plus grand chemin trouve = %u\n", i, data->ret[i][data->pp + 1], data->ret[i][data->pp]);

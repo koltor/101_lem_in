@@ -6,25 +6,12 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 18:50:31 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/12 16:49:23 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/16 16:37:50 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void	aprint_tab(UINT *tab, UINT len)
-{
-	UINT i;
-
-	i = 0;
-	while (i < len)
-	{
-		FPF(" %u ", tab[i]);
-		i++;
-	}
-	FPF("\n+++++++++++++++++++++++++++++++++++++\n");
-}
 
 UINT	set_solution_for_ppath(t_data *data, UINT index)
 {
@@ -32,7 +19,7 @@ UINT	set_solution_for_ppath(t_data *data, UINT index)
 
 	i = 0;
 	data->ret[index][index] = 1;
-	data->ret[index][data->pp] = data->paths[index][1] - 3;
+	data->ret[index][data->pp] = data->paths[index][1] - 4;
 	data->ret[index][data->pp + 1] = 1;
 	set_used_rooms(index, data);
 	while (i < data->pp)
@@ -44,8 +31,8 @@ UINT	set_solution_for_ppath(t_data *data, UINT index)
 		}
 		if (is_valid(data->paths[i], data) && data->paths[i][2] == NUSED)
 		{
-			if (data->ret[index][data->pp] < data->paths[i][1] - 3)
-				data->ret[index][data->pp] = data->paths[i][1] - 3;
+			if (data->ret[index][data->pp] < data->paths[i][1] - 4)
+				data->ret[index][data->pp] = data->paths[i][1] - 4;
 			data->ret[index][i] = 1;
 			data->ret[index][data->pp + 1] = data->ret[index][data->pp + 1] + 1;
 			set_used_rooms(i, data);
@@ -92,25 +79,24 @@ UINT	superposition_tab(t_data *data, UINT index)
 t_bool	fill_comp_tab(t_data *data)
 {
 	UINT i;
-	t_bool test;
 
 	i = 0;
-	test = false;
 	while (i < data->pp)
 	{
 		if (set_solution_for_ppath(data, i))
 		{
 			FPF("all possible path found\n");
-			test = true;
 			break ;
 		}
 		if (i >= 1 && superposition_tab(data, i))
+		{
+
 			get_new_solution(data, i);
+		}
 		reset_markers(data);
 		i++;
 
 	}
-	// ici rajouter la partie opti de la taille de chemins, ou a voir si c est pas mieux direct dans la boucle
 	return (true);
 }
 
