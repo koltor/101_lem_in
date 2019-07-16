@@ -38,10 +38,10 @@ UINT	set_solution_for_ppath(t_data *data, UINT index)
 	while (i < data->pp)
 	{
 		if (i == index)
-		//{
-		//	i++;
+		{
+			i++;
 			continue ;
-		//}
+		}
 		if (is_valid(data->paths[i], data) && data->paths[i][2] == NUSED)
 		{
 			if (data->ret[index][data->pp] < data->paths[i][1] - 3)
@@ -98,9 +98,9 @@ t_bool	fill_comp_tab(t_data *data)
 	test = false;
 	while (i < data->pp)
 	{
-	//	FPF("hey hey\n");
 		if (set_solution_for_ppath(data, i))
 		{
+			FPF("all possible path found\n");
 			test = true;
 			break ;
 		}
