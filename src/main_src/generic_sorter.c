@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 19:00:29 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/16 16:38:38 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/17 14:41:57 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,7 @@ UINT	generic_sorter(t_data *data)
 	}
 	FPF("\n===================================================\n");
 	print_cp_tab_binary(data);
+	FPF("nombre de fourmis a faire passer %u\n", data->ants);
 	FPF("\n===================================================\n");
 
 //	print_comp_tab(data);

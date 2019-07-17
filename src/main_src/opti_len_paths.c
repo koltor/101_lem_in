@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/16 13:05:25 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/16 16:58:27 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/17 20:45:54 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,6 @@ UINT	get_smallest_path(t_data *data, UINT index)
 	//	FPF("i = %u marker path %u index tab %u size %u\n", i, data->paths[i][2], index, size);
 		if (data->ret[index][i] == 1 && size >= data->paths[i][1] - 4 && data->paths[i][2] != USED)
 		{
-
 			size = data->paths[i][1] - 4;
 			ret = i;
 		}
@@ -37,7 +36,27 @@ UINT	get_smallest_path(t_data *data, UINT index)
 	return (ret);
 }
 
-void	set_opti_tab(t_data *data, UINT index)// pb de lap counter
+UINT	manage_lap_ovf(t_data *data, UINT i, UINT ids)
+{
+	UINT lap;
+
+	FPF("on test le mod du lap : %u\n", data->ants % i);
+	if ((data->ants % i))
+		FPF("on test le mod du lap : %u\nles tailles des chemins a comparer : 1 %u | 2 %u\n", data->ants % i, data->paths[data->ants % i - 1][1], data->paths[ids][1]);
+	if (data->ants % i != 0 && data->paths[data->ants % i - 1][1] == data->paths[ids][1])
+	{
+		lap = data->ants / i + data->paths[ids][1] - 3; 
+		FPF("all l overflow lap = %u\n", lap);
+	}
+	else
+	{
+		lap = data->ants / i + data->paths[ids][1] - 4;
+		FPF("cas normal lap = %u\n", lap);
+	}
+	return (lap);
+}
+
+UINT	set_opti_tab(t_data *data, UINT index)// pb de lap counter
 {
 	UINT i;
 	UINT ids;
@@ -45,28 +64,26 @@ void	set_opti_tab(t_data *data, UINT index)// pb de lap counter
 
 	i = 1;
 	ids = get_smallest_path(data, index);
-	lap = (data->ants % i != 0 && data->paths[data->ants % i - 1][1] == data->paths[ids][1]) ? data->ants / i + data->paths[ids][1] - 3 : data->ants / i + data->paths[ids][1] - 4; // il faut raj l overflow
-	//lap = data->ants / i + data->paths[ids][1] - 4; // il faut raj l overflow
-	FPF("debut lap = %u\n", lap);
+	lap = manage_lap_ovf(data, i, ids);
+	data->ret[index][ids]++;
+	data->ret[index][data->pp + 1] = i;
 	while (i < data->pp)
 	{
 		i++;
-		ids = get_smallest_path(data, index); //  penser a set le tab a used
-		if (data->ants / i + data->paths[ids][1] - 4 > lap) // pb de calcul
+		ids = get_smallest_path(data, index);
+		if (manage_lap_ovf(data, i, ids) > lap)
 		{
-			FPF("we should break tameri i = %u\n", i);
-			//lap = data->ants / i + data->paths[ids][1] - 4;
-				lap = (data->ants % i != 0 && data->paths[data->ants % i - 1][1] == data->paths[ids][1]) ? data->ants / i + data->paths[ids][1] - 3 : data->ants / i + data->paths[ids][1] - 4; // il faut raj l overflow
-			data->ret[index][ids]++;
+		//	lap = manage_lap_ovf(data, i, ids);
+		//	data->ret[index][ids]++;
 			break ;
 		}
-		//lap = data->ants / i + data->paths[ids][1] - 4;
-		lap = (data->ants % i != 0 && data->paths[data->ants % i - 1][1] == data->paths[ids][1]) ? data->ants / i + data->paths[ids][1] - 3 : data->ants / i + data->paths[ids][1] - 4; // il faut raj l overflow
-		FPF("dans traitement lap = %u ids = %u\n", lap, ids);
+		lap = manage_lap_ovf(data, i, ids);
 		data->ret[index][ids]++;
+		data->ret[index][data->pp + 1] = i;
 	}
-	FPF("fin traitement lap = %u ids = %u\n", lap, ids);
-	// raj le +1 si on prend un tab precedent avec une valeur egale
+	reset_marker_values(data);
+	set_opti_tab_2(data, index, lap);
+	return (lap);
 }
 
 t_bool	opti_path_len(t_data *data)
@@ -81,7 +98,7 @@ t_bool	opti_path_len(t_data *data)
 			FPF("break tamer\n");
 			break ;
 		}
-		set_opti_tab(data, i);
+		data->ret[i][data->pp] = set_opti_tab(data, i);
 		i++;
 	}
 	return (true);

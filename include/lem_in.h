@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/16 16:04:43 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/17 20:28:19 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -227,7 +227,9 @@ void				get_new_solution(t_data *data, UINT index);
 UINT				superposition_tab(t_data *data, UINT index);
 UINT				set_solution_for_ppath(t_data *data, UINT index);
 t_bool				opti_path_len(t_data *data);
+UINT				set_opti_tab_2(t_data *data, UINT index, UINT lap);
 void				set_tab_zero(UINT (*tab)[], UINT len);
+UINT				manage_lap_ovf(t_data *data, UINT i, UINT ids);
 
 /* aff des res */
 
