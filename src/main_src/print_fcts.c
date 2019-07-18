@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 16:29:55 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/16 14:00:39 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/18 17:03:51 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,23 @@ void	print_tab(UINT (*res)[], UINT max_paths)
 	}
 	FPF("====================================================================\n");
 }
+
+void	print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths)
+{
+	UINT tst = 0;
+
+	FPF("====================================================================\n");
+	while (tst < max_paths)
+	{
+		if ((*res)[tst])
+			FPF("case num %u tab num %u size = %u\n", tst, (*res)[tst], data->paths[tst][1] - 4);
+		else
+			FPF("case num %u tab num %u\n", tst, (*res)[tst]);
+		tst++;
+	}
+	FPF("====================================================================\n");
+}
+
 
 void	print_potential_paths(t_data *data)
 {
