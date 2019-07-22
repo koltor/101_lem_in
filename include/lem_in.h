@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/18 16:59:39 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/22 20:14:59 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 /*
 *************************************
-***************INCLUDES**************
+**************INCLUDES***************
 *************************************
 */
 
@@ -214,8 +214,6 @@ UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
 void				get_result_for_path_managment(t_data *data, UINT max_paths);
 UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
-void				print_tab(UINT (*res)[], UINT max_paths);
-void				print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths);
 void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
 void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
 
@@ -233,12 +231,18 @@ void				set_tab_zero(UINT (*tab)[], UINT len);
 UINT				manage_lap_ovf(t_data *data, UINT i, UINT ids);
 void				reset_marker_values(t_data *data);
 
+UINT				get_smallest_path(t_data *data, UINT index);
+t_bool				sort_opti(t_data *data);
+
 /* aff des res */
 
 void				print_comp_tab(t_data *data);
 void				print_cp_tab_binary(t_data *data);
 void				aprint_tab(UINT *tab, UINT len);
-
+void				print_tab(UINT (*res)[], UINT max_paths);
+void				print_tab2(t_data *data, UINT (*res)[], UINT size);
+void				print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths);
+void				print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size);
 /*
 **************************************************
 ***********************PART 4*********************

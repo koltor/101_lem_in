@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 16:29:55 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/18 17:03:51 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/22 20:16:43 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,20 @@ void	print_tab(UINT (*res)[], UINT max_paths)
 	}
 	FPF("====================================================================\n");
 }
+
+void	print_tab2(t_data *data, UINT (*res)[], UINT size)
+{
+	UINT tst = 0;
+
+	FPF("====================================================================\n");
+	while (tst < size)
+	{
+		FPF("case num %u tab num %u len du tab %u\n", tst, (*res)[tst], data->paths[(*res)[tst]][1] - 4);
+		tst++;
+	}
+	FPF("====================================================================\n");
+}
+
 
 void	print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths)
 {
@@ -158,6 +172,18 @@ void	print_comp_tab(t_data *data)
 			j++;
 		}
 		FPF("\n---------------------------\n");
+		i++;
+	}
+}
+
+void	print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size)
+{
+	UINT i;
+
+	i = 0;
+	while (i < size)
+	{
+		FPF("i = %u | res = %u | len = %u | path %u\n", i, ((*rtab)[(*id_tab)[i]] - (data->paths[(*id_tab)[i]][1] - 4)),(*rtab)[(*id_tab)[i]], (*id_tab)[i]);
 		i++;
 	}
 }

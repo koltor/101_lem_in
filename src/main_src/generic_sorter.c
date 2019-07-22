@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 19:00:29 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/18 19:59:52 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/22 11:05:28 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ UINT	generic_sorter(t_data *data) // ! cas p
 	FPF("\n===================================================\n");
 	print_cp_tab_binary(data);
 	FPF("\n===================================================\n");
-	if (opti_path_len(data))
+	if (sort_opti(data))
 	{
 		FPF("opti path bug\n");
 		return (0);

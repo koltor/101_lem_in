@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/07/17 16:35:58 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/07/22 11:01:26 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -38,7 +38,7 @@ NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						path_sorter3.c path_sorter_utils.c opti_paths.c output.c \
 						output_utils.c output_ants.c opti_path1.c  \
 						tab_path_creator.c generic_sorter.c print_fcts.c tab_path_manager.c\
-						opti_len_paths.c opti_len_paths1.c
+						opti_len_paths.c opti_len_paths1.c sort_paths_opti.c
 
 NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
