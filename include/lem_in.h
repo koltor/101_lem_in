@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/22 20:14:59 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/23 14:34:30 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -243,6 +243,7 @@ void				print_tab(UINT (*res)[], UINT max_paths);
 void				print_tab2(t_data *data, UINT (*res)[], UINT size);
 void				print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths);
 void				print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size);
+void				print_final_path_tab(t_data *data);
 /*
 **************************************************
 ***********************PART 4*********************

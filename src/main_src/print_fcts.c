@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 16:29:55 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/22 20:16:43 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/23 19:28:56 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -179,11 +179,16 @@ void	print_comp_tab(t_data *data)
 void	print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size)
 {
 	UINT i;
+	UINT res;
+	UINT sub;
 
 	i = 0;
+	FPF("nb de fourmis tot %u\n", data->ants);
 	while (i < size)
 	{
-		FPF("i = %u | res = %u | len = %u | path %u\n", i, ((*rtab)[(*id_tab)[i]] - (data->paths[(*id_tab)[i]][1] - 4)),(*rtab)[(*id_tab)[i]], (*id_tab)[i]);
+		sub = data->paths[(*id_tab)[i]][1] - 5;
+		res = (*rtab)[(*id_tab)[i]] - sub;
+		printf("i = %u | res = %u | len = %u | substract = %u | path %u\n", i, res, sub, (*rtab)[(*id_tab)[i]], (*id_tab)[i]);
 		i++;
 	}
 }
