@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/12 16:29:55 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/23 19:28:56 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/24 13:52:59 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@ void	print_tab2(t_data *data, UINT (*res)[], UINT size)
 {
 	UINT tst = 0;
 
-	FPF("====================================================================\n");
+	FPF("====================================================================\nsize = %u\n", size);
 	while (tst < size)
 	{
 		FPF("case num %u tab num %u len du tab %u\n", tst, (*res)[tst], data->paths[(*res)[tst]][1] - 4);
@@ -184,6 +184,7 @@ void	print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size)
 
 	i = 0;
 	FPF("nb de fourmis tot %u\n", data->ants);
+	FPF("size qu on nous donne en params %u\n", size);
 	while (i < size)
 	{
 		sub = data->paths[(*id_tab)[i]][1] - 5;
