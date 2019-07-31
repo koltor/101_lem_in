@@ -13,8 +13,7 @@
 
 #include "lem_in.h"
 
-void	set_tabs_with_order(t_data *data, UINT (*tab)[], UINT (*rtab)[],
-		UINT index)
+void	set_tabs_with_order(t_data *data, UINT (*tab)[], UINT (*rtab)[], UINT index)
 {
 	UINT i;
 	UINT size;
@@ -24,13 +23,14 @@ void	set_tabs_with_order(t_data *data, UINT (*tab)[], UINT (*rtab)[],
 	while (i < size)
 	{
 		(*tab)[i] = get_smallest_path(data, index);
-		(*rtab)[(*tab)[i]] = data->paths[(*tab)[i]][1] - 5; // psk au 1er tou ca va faire la taille de la len du chemin et paas de la len du chemin + 1 d ou le - 5
+		data->ret[index][(*tab)[i]] = data->paths[(*tab)[i]][1] - 5;
 		//(*rtab)[i] = data->paths[(*tab)[i]][1] - 4;
 		i++;
 	}
-	FPF("end of set tab with order\n");
-	print_tab2(data, tab, size);
+//	FPF("end of set tab with order\n");
+//	print_tab2(data, tab, size);
 }
+
 
 void	cp_ret_tab(t_data *data, UINT (*rtab)[])
 {

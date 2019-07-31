@@ -26,9 +26,9 @@ UINT	generic_sorter(t_data *data) // ! cas p
 		return (0);
 	}
 	FPF("\n===================================================\n");
-	print_cp_tab_binary(data);
+//	print_cp_tab_binary(data);
 	FPF("\n===================================================\n");
-	if (sort_opti(data))
+	if (sort_opti2(data))
 	{
 		FPF("opti path bug\n");
 		return (0);

@@ -99,6 +99,7 @@ typedef struct		s_output
 typedef struct		s_data
 {
 	enum e_bool		test;
+	UINT			npath;
 	UINT			pp; // potentail paths counter
 	UINT			max_paths;
 	UINT			pid;
@@ -233,6 +234,7 @@ void				reset_marker_values(t_data *data);
 
 UINT				get_smallest_path(t_data *data, UINT index);
 t_bool				sort_opti(t_data *data);
+t_bool				sort_opti2(t_data *data);
 
 /* aff des res */
 
