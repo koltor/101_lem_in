@@ -1,4 +1,62 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   sort_paths_opti2.c                               .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/08/01 16:17:43 by ocrossi      #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/01 16:47:17 by ocrossi     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+
 #include "lem_in.h"
+
+/*
+UINT gb = 0;
+t_bool	fill_ret_tab(t_data *data, UINT (*id_tab)[], UINT i, UINT index)// pb d overflow voir pour la fin du tab de i
+{
+	UINT j;
+
+	if (i == data->npath && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[0]])
+	{
+		fill_all_paths(data, id_tab, index);
+		return (true);
+	}
+	//while (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
+	while (1)
+	{
+//		if (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
+//		{
+//			data->ret[index][(*id_tab)[i]]++;
+//			(*id_tab)[data->npath]--;
+//		}
+		j = 0;
+//		gb++;
+		while (j < data->npath)
+		{
+			if (j == i - 1 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
+				return (false);
+
+	//		if (j == 0 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
+	//				return (false);
+			if (i == j)// || data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
+					return (false);
+		//	FPF("yay fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
+			if ((*id_tab)[data->npath] == 0)
+				return (true);
+			data->ret[index][(*id_tab)[j]]++;
+			(*id_tab)[data->npath]--;
+			j++;
+		}
+	//		FPF("yay grande boucle fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
+	//	FPF("TGGGG i = %u j = %u\n", i, j);
+	}
+	return (false);
+}
+*/
 
 void	set_tab_with_order(t_data *data, UINT (*tab)[], UINT index)
 {
@@ -56,48 +114,34 @@ void	fill_all_paths(t_data *data, UINT (*id_tab)[], UINT index)
 		}
 	}
 }
-
-UINT gb = 0;
 t_bool	fill_ret_tab(t_data *data, UINT (*id_tab)[], UINT i, UINT index)// pb d overflow voir pour la fin du tab de i
 {
 	UINT j;
 
-	if (i == data->npath && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[0]])
+	if (i == data->npath && data->ret[index][(*id_tab)[i - 1]] == data->ret[index][(*id_tab)[0]])
 	{
 		fill_all_paths(data, id_tab, index);
 		return (true);
 	}
-	//while (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
-	while (1)
+	while ((*id_tab)[data->npath])
 	{
-//		if (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
-//		{
-//			data->ret[index][(*id_tab)[i]]++;
-//			(*id_tab)[data->npath]--;
-//		}
 		j = 0;
-//		gb++;
-		while (j < data->npath)
+		if (data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
+			return (false);
+		while (j < i)
 		{
 			if (j == i - 1 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
 				return (false);
-
-	//		if (j == 0 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
-	//				return (false);
-			if (i == j)// || data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
-					return (false);
-		//	FPF("yay fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
 			if ((*id_tab)[data->npath] == 0)
 				return (true);
 			data->ret[index][(*id_tab)[j]]++;
 			(*id_tab)[data->npath]--;
 			j++;
 		}
-	//		FPF("yay grande boucle fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
-	//	FPF("TGGGG i = %u j = %u\n", i, j);
 	}
 	return (false);
 }
+
 
 UINT	get_biggest_turn(t_data *data, UINT (*id_tab)[],  UINT index)
 {
@@ -112,7 +156,7 @@ UINT	get_biggest_turn(t_data *data, UINT (*id_tab)[],  UINT index)
 			res = data->ret[index][(*id_tab)[i]] + data->paths[(*id_tab)[i]][1] - 4;
 		i++;
 	}
-	return (res);
+	return (res - 1);
 }
 
 void	substract_path_len(t_data *data, UINT (*id_tab)[], UINT index)
@@ -137,12 +181,9 @@ UINT	set_res(t_data *data, UINT index)
 	id_tab[data->npath] = data->ants;
 	reset_marker_values(data);
 	set_tab_with_order(data, &id_tab, index);
-	while (1)
+	while (id_tab[data->npath])
 	{
-	//	if (gb == 2)
-	//		break ;
 		i = set_ref(data,&id_tab, index);
-//		FPF("set ref tu nous fais quoi la %u\n", i);
 		if (!fill_ret_tab(data, &id_tab, i, index))
 			break ;
 	}
@@ -180,11 +221,22 @@ void	print_smallest_opt(t_data *data)
 	i = 0;
 	idx = get_smallest_opt(data);
 	FPF("\n---------------------------\n");
-	FPF("idx = %u\n", idx);
+	FPF("idx = %u\nants = %u\n", idx, data->ants);
 	FPF("ret index %u nb de chemins trouves = %u taille du plus grand chemin trouve = %u\n", idx, data->ret[idx][data->pp + 1], data->ret[idx][data->pp]);
 	while (i < data->pp)
 	{
 		FPF(" %u ", data->ret[idx][i]);
+		i++;
+	}
+	FPF("\n---------------------------\n");
+	i = 0;
+	FPF("avec taille des chemins ca donne\n");
+	while (i < data->pp)
+	{
+		if (data->ret[idx][i] != 0)
+			FPF(" %u ", data->ret[idx][i] + (data->paths[i][1] - 5));
+		else
+			FPF(" 0 ");
 		i++;
 	}
 	FPF("\n---------------------------\n");
