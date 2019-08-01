@@ -6,35 +6,14 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/16 13:05:25 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/22 13:30:54 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/01 17:25:39 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-UINT	get_smallest_path(t_data *data, UINT index)
-{
-	UINT size;
-	UINT ret;
-	UINT i;
 
-	i = 0;
-	size = data->ret[index][data->pp];
-	ret = index;
-	while (i < data->pp)
-	{
-	//	FPF("i = %u marker path %u index tab %u size %u\n", i, data->paths[i][2], index, size);
-		if (data->ret[index][i] == 1 && size >= data->paths[i][1] - 4 && data->paths[i][2] != USED)
-		{
-			size = data->paths[i][1] - 4;
-			ret = i;
-		}
-		i++;
-	}
-	data->paths[ret][2] = USED;
-	return (ret);
-}
 
 UINT	manage_lap_ovf(t_data *data, UINT i, UINT ids)
 {

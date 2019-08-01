@@ -85,3 +85,28 @@ void	get_new_solution(t_data *data, UINT index)
 		}
 	}
 }
+
+void	get_new_solution2(t_data *data, UINT index, UINT (*id_tab)[])
+{
+	UINT new_tab[data->pp];
+	UINT i;
+
+//	FPF("on a un doublon de tab sur l index %u\n", index);
+
+	i = 0;
+	while (1)
+	{
+		if (!superposition_tab(data, index) || smallest_output_possible(data, index))
+		{
+			reset_markers(data);
+			reset_marker_values(data);
+			return ;
+		}
+		else
+		{
+			i = unset_path(data, index, i);
+			set_ppath_from_smallest(data, index, id_tab);
+			i++;
+		}
+	}
+}

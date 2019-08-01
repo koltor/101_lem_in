@@ -6,57 +6,35 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/01 16:17:43 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/01 16:47:17 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/01 17:25:54 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include "lem_in.h"
 
-/*
-UINT gb = 0;
-t_bool	fill_ret_tab(t_data *data, UINT (*id_tab)[], UINT i, UINT index)// pb d overflow voir pour la fin du tab de i
+UINT	get_smallest_path(t_data *data, UINT index)
 {
-	UINT j;
+	UINT size;
+	UINT ret;
+	UINT i;
 
-	if (i == data->npath && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[0]])
+	i = 0;
+	size = data->ret[index][data->pp];
+	ret = index;
+	while (i < data->pp)
 	{
-		fill_all_paths(data, id_tab, index);
-		return (true);
-	}
-	//while (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
-	while (1)
-	{
-//		if (data->ret[index][(*id_tab)[i]] != data->ret[index][(*id_tab)[j]])
-//		{
-//			data->ret[index][(*id_tab)[i]]++;
-//			(*id_tab)[data->npath]--;
-//		}
-		j = 0;
-//		gb++;
-		while (j < data->npath)
+	//	FPF("i = %u marker path %u index tab %u size %u\n", i, data->paths[i][2], index, size);
+		if (data->ret[index][i] == 1 && size >= data->paths[i][1] - 4 && data->paths[i][2] != USED)
 		{
-			if (j == i - 1 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
-				return (false);
-
-	//		if (j == 0 && data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
-	//				return (false);
-			if (i == j)// || data->ret[index][(*id_tab)[i]] == data->ret[index][(*id_tab)[j]])
-					return (false);
-		//	FPF("yay fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
-			if ((*id_tab)[data->npath] == 0)
-				return (true);
-			data->ret[index][(*id_tab)[j]]++;
-			(*id_tab)[data->npath]--;
-			j++;
+			size = data->paths[i][1] - 4;
+			ret = i;
 		}
-	//		FPF("yay grande boucle fill ret tab i = %u res = %u  j = %u res = %u\n", i, data->ret[index][(*id_tab)[i]], j, data->ret[index][(*id_tab)[j]]);
-	//	FPF("TGGGG i = %u j = %u\n", i, j);
+		i++;
 	}
-	return (false);
+	data->paths[ret][2] = USED;
+	return (ret);
 }
-*/
 
 void	set_tab_with_order(t_data *data, UINT (*tab)[], UINT index)
 {
@@ -217,8 +195,10 @@ void	print_smallest_opt(t_data *data)
 {
 	UINT idx;
 	UINT i;
+	UINT ret;
 
 	i = 0;
+	ret = 0;
 	idx = get_smallest_opt(data);
 	FPF("\n---------------------------\n");
 	FPF("idx = %u\nants = %u\n", idx, data->ants);
@@ -234,13 +214,16 @@ void	print_smallest_opt(t_data *data)
 	while (i < data->pp)
 	{
 		if (data->ret[idx][i] != 0)
+		{
 			FPF(" %u ", data->ret[idx][i] + (data->paths[i][1] - 5));
+			ret++;
+		}
 		else
 			FPF(" 0 ");
 		i++;
 	}
-	FPF("\n---------------------------\n");
-
+	FPF("\n---------------------------\nnb de chemins utilises = %u\n", ret);
+	
 }
 
 
