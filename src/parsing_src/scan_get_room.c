@@ -89,10 +89,10 @@ static t_bool	select_ben(char *line, t_data *data, int *ord, UINT (*abc)[128])
 	UINT	start;
 
 	value = false;
+	id = (*ord == 0) ? (*abc)[line[0]]++ : (*abc)[line[0]];
 	start = data->abc.abc_start[line[0]];
 	if (*ord == 0)
 	{
-		id = (*abc)[line[0]]++;
 		if (split_line_for_room(line, &data->r_tab[id]))
 			return (false);
 		if (check_dup_room_g(data->r_tab[id], data->r_tab, start, id))

@@ -13,14 +13,14 @@
 
 #include "lem_in.h"
 
-static void	set_abc_zero(UINT (*abc)[])
+static void	set_abc_zero(int value, UINT (*abc)[])
 {
 	int i;
 
 	i = 0;
 	while (i < 128)
 	{
-		(*abc)[i] = 0;
+		(*abc)[i] = value;
 		i++;
 	}
 }
@@ -48,7 +48,7 @@ void		get_abc_for_room(const char *s, UINT (*abc)[])
 		return ;
 	if (skip_ants_number(s_cpy))
 		return ;
-	set_abc_zero(abc);
+	set_abc_zero(0, abc);
 	while ((line = scan_line_line(s_cpy)))
 	{
 		if ((ret = is_room(line)) == 0)

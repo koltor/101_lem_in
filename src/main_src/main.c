@@ -56,9 +56,9 @@ static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free(file_line);
 	free(data->t_tab);
 	free_room(data->r_tab, data->rooms);
-	ft_strdel(&(data->opt));
-	del_2d_int_tab(data->ret);
-	del_2d_int_tab(data->paths);
+	//ft_strdel(&(data->opt));
+	//del_2d_int_tab(data->ret);
+	//del_2d_int_tab(data->paths);
 	return (true);
 }
 
@@ -108,7 +108,7 @@ t_bool			lem_in(const char *path, int option)
 	{
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
-	//	FPF("lem_in [2]\n"); probleme ici avec le test 250k map
+		//FPF("lem_in [2]\n"); probleme ici avec le test 250k map
 	}
 	if (browse_map(&data))
 		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
