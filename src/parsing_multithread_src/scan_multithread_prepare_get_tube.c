@@ -104,6 +104,4 @@ void		multithread_get_tube(char *file_line, t_data *data,
 	launch_thread(&thread, data);
 	wait_thread(&thread, data);
 	data->tubes = thread_info->tubes;
-	//launch_check_tube_thread(&thread, data);
-	//wait_thread(&thread, data);
 }

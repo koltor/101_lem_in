@@ -146,6 +146,5 @@ t_bool			get_tube(char *file_line, t_data *data, char *line)
 			return (exit_get_tube(ERR_TUBES_FORMAT, data, id));
 		id += 1;
 	}
-//	check_duplicate_tube(data->t_tab, data->tubes);
 	return (true);
 }
