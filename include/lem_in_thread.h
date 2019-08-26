@@ -6,13 +6,14 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/18 19:00:39 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:42:51 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:49:11 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_THREAD
-# define LEM_IN_THREAD
+#ifndef LEM_IN_THREAD_H
+# define LEM_IN_THREAD_H
+
 # include "lem_in.h"
 # include <pthread.h>
 
