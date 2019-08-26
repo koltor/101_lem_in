@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/18 17:05:05 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/19 15:15:58 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:41:38 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,7 +89,6 @@ void						ft_print_hexa(va_list ap, t_func *tab);
 void						ft_print_hexac(va_list ap, t_func *tab);
 void						ft_print_fl(va_list ap, t_func *tab);
 void						ft_print_percent(va_list ap, t_func *tab);
-//int							ft_atoi(char *str);
 char						*ft_litoa(unsigned long long n);
 int							ft_count_lnumber(unsigned long long n);
 char						*ft_strdup(const char *s1);
@@ -97,7 +96,6 @@ char						*ft_strjoin(char const *s1, char const *s2);
 size_t						ft_strlen(const char *s);
 char						*ft_strnew(size_t t);
 void						ft_putchar(char c);
-//void						ft_putstr(char *str);
 char						*ft_strcapitalize(char *str);
 char						*ft_strcat(char *s1, const char *s2);
 void						ft_strdel(char **as);

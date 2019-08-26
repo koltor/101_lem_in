@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/31 11:11:51 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/24 16:05:01 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:41:05 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,26 +51,26 @@
 
 typedef struct		s_env
 {
-	struct s_data	*data;//pointeur vers la struct data
+	struct s_data	*data;
 
-	void			*mlx_ptr;//pointeur vers la mlx
-	void			*win_ptr;//pointeur vers la fenetre
-	void			*img_ptr;//pointeur vers l'image
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
 
-	char			*img_str;//str de l'image
-	int				bpp;//besoin pour generer l'image
-	int				s_l;//besoin pour generer l'image
-	int				endian;//besoin pour generer l'image
+	char			*img_str;
+	int				bpp;
+	int				s_l;
+	int				endian;
 
-	double			zoom;//zoomer dans ou dezoomer dans la map
-	unsigned char	speedo;//rapidite de deplacement
-	int				marge;//mettre une marge minimum entre les salles
-	int				x_img;//bouger l'image en X
-	int				y_img;//bouger l'image en Y
-	int				color;// coulor des salles
+	double			zoom;
+	unsigned char	speedo;
+	int				marge;
+	int				x_img;
+	int				y_img;
+	int				color;
 
-	t_bool			highlight_path;//pour surligner les chemins
-	t_bool			help;//active ou desactive les aide de UI
+	t_bool			highlight_path;
+	t_bool			help;
 }					t_env;
 
 int					algo_bresenham(double index[4], t_env *env);
