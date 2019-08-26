@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:09:03 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:14:36 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -110,7 +110,7 @@ typedef struct		s_data
 {
 	enum e_bool		test;
 	UINT			npath;
-	UINT			pp; // potentail paths counter
+	UINT			pp;
 	UINT			max_paths;
 	UINT			pid;
 	UINT			ants;
@@ -241,6 +241,7 @@ t_bool				sort_opti2(t_data *data);
 UINT				get_smallest_opt(t_data *data);
 UINT				count_id_paths(t_data data);
 UINT				get_pnum(UINT pid, t_data *data);
+void				get_new_lenght(char **tab, UINT (*lenght)[]);
 
 /* aff des res */
 

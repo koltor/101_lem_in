@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/26 17:25:01 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 17:40:45 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 17:47:25 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ void	set_tab_zero(UINT max_paths, UINT (*tabc)[])
 	}
 }
 
-UINT 	count_id_paths(t_data data)
+UINT	count_id_paths(t_data data)
 {
 	UINT i;
 	UINT ret;

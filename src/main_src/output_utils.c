@@ -6,12 +6,24 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 13:33:27 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 17:40:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:01:48 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	get_new_lenght(char **tab, UINT (*lenght)[])
+{
+	UINT i;
+
+	i = 0;
+	while (tab[i])
+	{
+		(*lenght)[i] = ft_strlen(tab[i]);
+		i++;
+	}
+}
 
 void	del_temp_str(char **s1, char **s2, char **s3)
 {

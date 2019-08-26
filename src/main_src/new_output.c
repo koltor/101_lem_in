@@ -1,34 +1,34 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
 /*                                                              /             */
-/*   new_ouput.c                                      .::    .:/ .      .::   */
+/*   new_output.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/06 21:27:24 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/06 22:42:24 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/26 17:51:29 by ocrossi      #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/26 18:01:32 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_putstr_2d(char **tab)
+void	join_output_tab_norm(t_data *data, char **s1, char **s2, char **s3)
 {
-	UINT i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_putendl(tab[i]);
-		i++;
-	}
+	data->opt = ft_strdup(*s3);
+	ft_strdel(s3);
+	*s3 = ft_strjoin(data->bopt, data->opt);
+	ft_strdel(&(data->opt));
+	data->opt = ft_strdup(*s3);
+	del_temp_str(s1, s2, s3);
 }
 
 void	join_output_tab(t_opt *opt, t_data *data)
 {
-	UINT i;
-	char *s1;
-	char *s2;
-	char *s3;
+	UINT	i;
+	char	*s1;
+	char	*s2;
+	char	*s3;
 
 	i = 1;
 	if (data->lap == 1)
@@ -49,27 +49,10 @@ void	join_output_tab(t_opt *opt, t_data *data)
 		i++;
 		s2 = ft_strdup(opt->out[i]);
 	}
-	data->opt = ft_strdup(s3);
-	ft_strdel(&s3);
-	s3 = ft_strjoin(data->bopt, data->opt);
-	ft_strdel(&(data->opt));
-	data->opt = ft_strdup(s3);
-	del_temp_str(&s1, &s2, &s3);
+	join_output_tab_norm(data, &s1, &s2, &s3);
 }
 
-void		get_new_lenght(char **tab, UINT (*lenght)[])
-{
-	UINT i;
-
-	i = 0;
-	while (tab[i])
-	{
-		(*lenght)[i] = ft_strlen(tab[i]);
-		i++;
-	}
-}
-
-void		output_final_treatment(t_data *data, t_opt *opt, UINT (*lenght)[])
+void	output_final_treatment(t_data *data, t_opt *opt, UINT (*lenght)[])
 {
 	get_new_lenght(opt->out, lenght);
 	insert_linefeed(opt, lenght, data);
@@ -79,22 +62,20 @@ void		output_final_treatment(t_data *data, t_opt *opt, UINT (*lenght)[])
 	write(1, data->opt, data->len_opt);
 }
 
-void		init_opt(t_data *data, t_opt *opt, UINT (*lenght)[])
+void	init_opt(t_data *data, t_opt *opt, UINT (*lenght)[])
 {
 	opt->out = fill_buffer(data, lenght);
 	opt->ants = 1;
 	opt->lap = 0;
 }
 
-t_bool		new_output(t_data *data)
+t_bool	new_output(t_data *data)
 {
-	t_opt opt;
-	UINT i;
-	UINT j;
-	UINT lenght[data->lap];
+	t_opt	opt;
+	UINT	i;
+	UINT	lenght[data->lap];
 
 	init_opt(data, &opt, &lenght);
-	j = 0;
 	while (opt.ants != data->ants + 1)
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 14:23:08 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 17:37:21 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 17:49:29 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,6 +65,7 @@ UINT	get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths)
 	}
 	return (0);
 }
+
 UINT	get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths)
 {
 	UINT i;
