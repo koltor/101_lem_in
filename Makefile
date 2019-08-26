@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/08/24 17:58:49 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/08/26 17:36:29 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -35,7 +35,7 @@ NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c tab_potential_paths.c\
 						path_sorter_utils.c tab_path_creator_utils.c\
-						output_utils.c output_ants.c \
+						output_utils.c output_ants.c path_sorter_utils2.c path_sorter_utils3.c\
 						tab_path_creator.c generic_sorter.c print_fcts.c tab_path_manager.c\
 						sort_paths.c tab_path_vp.c  tab_path2_vp.c tab_path1_vp.c\
 						new_output.c sort_paths2.c\
