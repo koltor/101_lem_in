@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 15:52:20 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/07/16 13:15:00 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ static t_bool	exit_lem_in_error(char *line, char *line2, t_room *room, t_tube *t
 	if (line)
 		free(line);
 	if (line2)
-		free(line);
+		free(line2);
 	if (room)
 		free(room);
 	if (tube)
@@ -108,9 +108,12 @@ t_bool			lem_in(const char *path, int option)
 	{
 		if (stock_anthill(file_line, &data))
 			return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
+	//	FPF("lem_in [2]\n"); probleme ici avec le test 250k map
 	}
 	if (browse_map(&data))
 		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
+	if (!generic_sorter(&data))
+		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, NULL));	
 	manage_option(&data, option);
 	return (exit_lem_in_ok(file_line, &data));
 }

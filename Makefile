@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/06/28 16:38:33 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/08/24 17:58:49 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -33,10 +33,12 @@ LIB_PATH				= librairies
 # nom des fichier code source (*.c)
 NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
-						debug2.c tab_potential_paths.c tab_path_vp.c \
-						tab_path2_vp.c path_sorter.c path_sorter2.c \
-						path_sorter3.c path_sorter_utils.c opti_paths.c output.c \
-						output_utils.c output_ants.c
+						debug2.c tab_potential_paths.c\
+						path_sorter_utils.c tab_path_creator_utils.c\
+						output_utils.c output_ants.c \
+						tab_path_creator.c generic_sorter.c print_fcts.c tab_path_manager.c\
+						sort_paths.c tab_path_vp.c  tab_path2_vp.c tab_path1_vp.c\
+						new_output.c sort_paths2.c\
 
 NAME_SRC_PARSING		=	scan_create_struct.c scan_file.c scan_get_anthill.c \
 							scan_get_room.c scan_get_tube.c scan_is_order.c \
@@ -72,7 +74,7 @@ PARSING_MT_OBJ	= $(addprefix $(PARSING_MT_OBJ_PATH)/,$(PARSING_MT_NAME_OBJ))
 VISU_OBJ		= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc -g3 -fsanitize=address
+CC			= gcc #-g3 -fsanitize=address 
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
 

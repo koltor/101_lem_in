@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 15:17:31 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/24 18:28:54 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,13 +26,30 @@ void	del_2d_int_tab(UINT **tab)
 	free(tab);
 }
 
+void	malloc_path_tabs_norm(t_data *data, UINT *j, UINT i, UINT pname)
+{
+	if (!(data->paths[*j] = (UINT *)malloc(sizeof(UINT) *
+		(data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname -
+			1] + 4))))
+	{
+		f_error(ERR_MALLOC, NULL);
+		return ;
+	}
+	data->paths[*j][0] = pname;
+	data->paths[*j][1] =
+	data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname -
+		1] + 4;
+	data->paths[*j][2] = NUSED;
+	*j += 1;
+}
+
 void	malloc_path_tabs(t_data *data)
 {
-	UINT i;
-	UINT j;
-	UINT qt;
-	UINT pname;
-	ULL path_id_cp;
+	UINT	i;
+	UINT	j;
+	UINT	qt;
+	UINT	pname;
+	ULL		path_id_cp;
 
 	i = 0;
 	j = 0;
@@ -44,19 +61,7 @@ void	malloc_path_tabs(t_data *data)
 		while (j < qt)
 		{
 			pname = find_pname(&path_id_cp, data->r_tab[0].nb_link_tubes);
-			if (!(data->paths[j] = (UINT *)malloc(sizeof(UINT) *
-				(data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname -
-				 1] + 4))))
-			{
-				f_error(ERR_MALLOC, NULL);
-				return ;
-			}
-			data->paths[j][0] = pname;
-			data->paths[j][1] =
-			data->t_tab[data->r_tab[1].link_tubes[i]].tmp_turn[pname -
-			1] + 4;
-			data->paths[j][2] = NUSED;
-			j++;
+			malloc_path_tabs_norm(data, &j, i, pname);
 		}
 		i++;
 	}

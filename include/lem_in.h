@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 16:39:11 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/24 18:16:34 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 /*
 *************************************
-***************INCLUDES**************
+**************INCLUDES***************
 *************************************
 */
 
@@ -36,13 +36,14 @@
 ** help for option's comprehention
 */
 
-# define BUF_SIZE 5
+# define BUF_SIZE 5000 // a modif apres
 # define USED 0
 # define NUSED 1
 # define O_D (option & 1)
 # define O_V (option & 2)
 # define O_I (option & 4)
 # define O_M (option & 8)
+# define O_L (option & 16) // a faire a 101, rajouter un compteur de ligne devant chaque ligne d'output pr corr
 # define LIST_OPTION "dvim"
 
 enum	e_bool
@@ -98,6 +99,9 @@ typedef struct		s_output
 
 typedef struct		s_data
 {
+	enum e_bool		test;
+	UINT			npath;
+	UINT			pp; // potentail paths counter
 	UINT			max_paths;
 	UINT			pid;
 	UINT			ants;
@@ -106,8 +110,10 @@ typedef struct		s_data
 	UINT			**paths;
 	UINT			**ret;
 	UINT			path_nbr;
+	UINT			index;
 	UINT			lap;
 	UINT			len_opt;
+	enum e_bool		option_lines;
 	char			*bopt;
 	char			*opt;
 	struct s_tube	*t_tab;
@@ -180,20 +186,11 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 **************************************************
 */
 
-/* path sorter utils */
-UINT				get_pnum(UINT pid, t_data *data);
-UINT				get_min_pid(t_data *data, UINT max_paths);
-UINT				get_max_pid(t_data *data, UINT max_paths);
-UINT				get_size_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
-UINT				get_index_valid_tab(t_data *data, UINT (*res)[], UINT max_paths);
-
-void				path_sorter2(t_data *data, UINT (*res)[], UINT max_paths,
-					UINT cell);
-
-
-
 void				print_potential_paths(t_data *data);
+void				print_one_potential_path(t_data *data, UINT i);
 UINT				fill_path_tab(t_data *data);
+UINT				fill_tabs_with_current_room(UINT id_tab, UINT id_room, t_data *data, UINT cell);
+UINT				fill_tabs_with_current_room2(UINT id_tab, UINT id_room, t_data *data, UINT cell);
 void				fill_tabs_with_rooms(t_data *data);
 void				print_number_paths(t_data *data);
 UINT				count_bits(t_tube tube);
@@ -209,15 +206,50 @@ UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
 void				get_result_for_path_managment(t_data *data, UINT max_paths);
 UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
-void				print_tab(UINT (*res)[], UINT max_paths);
 void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
-void				set_tab_for_bf(UINT (*res)[], UINT path_nbr, UINT max_paths);
+
+/* nouvelle partie sans ff */
+
+void				fill_ret_tab_norm(t_data *data, UINT (*id_tab)[], UINT index, UINT j);
+UINT				get_biggest_turn(t_data *data, UINT (*id_tab)[], UINT index);
+void				fill_all_paths(t_data *data, UINT (*id_tab)[], UINT index);
+UINT				set_ref(t_data *data, UINT (*tab)[], UINT index);
+void				set_tab_with_order(t_data *data, UINT (*tab)[], UINT index);
+void				set_id_tab(t_data *data, UINT (*id_tab)[]);
+UINT				get_shortest_path(t_data *data);
+UINT				comp_unit_tab(t_data *data, UINT i1, UINT i2);
+UINT				generic_sorter(t_data *data);
+t_bool				init_stocker_tab(t_data *data);
+t_bool				fill_comp_tab(t_data *data);
+void				get_new_solution2(t_data *data, UINT index, UINT (*id_tab)[]);
+UINT				superposition_tab(t_data *data, UINT index);
+UINT				set_ppath_from_smallest(t_data *data, UINT index, UINT (*id_tab)[]);
+void				set_tab_zero(UINT (*tab)[], UINT len);
+UINT				manage_lap_ovf(t_data *data, UINT i, UINT ids);
+void				reset_marker_values(t_data *data);
+UINT				get_smallest_path(t_data *data, UINT index);
+t_bool				sort_opti2(t_data *data);
+UINT				get_smallest_opt(t_data *data);
+
+/* aff des res */
+
+void				print_smallest_opt(t_data *data);
+void				print_comp_tab(t_data *data);
+void				print_cp_tab_binary(t_data *data);
+void				aprint_tab(UINT *tab, UINT len);
+void				print_tab(UINT (*res)[], UINT max_paths);
+void				print_tab2(t_data *data, UINT (*res)[], UINT size);
+void				print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths);
+void				print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size);
+void				print_final_path_tab(t_data *data);
 
 /*
 **************************************************
 ***********************PART 4*********************
 **************************************************
 */
+
+t_bool	new_output(t_data *data);
 
 /* output utils */
 
@@ -226,16 +258,16 @@ void	stock_file_line(t_data *data, const char *s);
 char	**fill_buffer(t_data *data, UINT (*lenght)[]);
 void	insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data);
 void	get_name_lenght(t_data *data);
+void	join_output_tab(t_opt *opt, t_data *data);
+
 
 /* output ants */
 
 void	get_ant_move_ovf(t_opt *opt, char **s1, char **s2, UINT len);
 void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data);
 void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[]);
+void	len_tab_into_data(t_data *data, UINT (*lenght)[]);
 
-
-void	opti_paths(UINT (*res)[], UINT max_paths, t_data *data);
-void	fill_output(t_data *data);
 void	stock_file_line(t_data *data, const char *s);
 void	del_2d_int_tab(UINT **tab);
 /*

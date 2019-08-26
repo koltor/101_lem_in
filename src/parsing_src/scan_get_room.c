@@ -34,6 +34,7 @@ static t_bool	split_line_for_room(char *line, t_room *room)
 		return (*(t_bool*)f_error(ERR_ROOM_FORMAT, &value));
 	if (!(room->name = ft_strsub_c(line, ' ')))
 		return (*(t_bool*)f_error(ERR_MALLOC, &value));
+	room->len_name = ft_strlen(room->name);
 	value = true;
 	x1 = atol_id(line, ' ', 1, &value);
 	y1 = atol_id(line, ' ', 2, &value);

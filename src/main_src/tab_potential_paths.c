@@ -6,17 +6,23 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/18 16:34:24 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/25 15:07:27 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/24 18:21:21 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+void	fill_ret_tab_norm(t_data *data, UINT (*id_tab)[], UINT index, UINT j)
+{
+	data->ret[index][(*id_tab)[j]]++;
+	(*id_tab)[data->npath]--;
+}
+
 UINT	get_bit_place(ULL path_list)
 {
-	ULL max;
-	UINT cpt;
+	ULL		max;
+	UINT	cpt;
 
 	max = 0x4000000000000000;
 	cpt = 63;
@@ -46,11 +52,10 @@ UINT	find_pname(ULL *path_id, UINT nb_link_tubes_start)
 	return (path_name);
 }
 
-
 UINT	count_bits(t_tube tube)
 {
-	ULL path_cp;
-	UINT cpt;
+	ULL		path_cp;
+	UINT	cpt;
 
 	cpt = 0;
 	path_cp = tube.path_id;
@@ -76,4 +81,3 @@ UINT	potential_path_counter(t_data *data)
 	}
 	return (ret);
 }
-
