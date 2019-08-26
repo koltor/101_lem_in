@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/01 16:17:43 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/24 18:17:23 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:25:52 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,6 +111,5 @@ t_bool	sort_opti2(t_data *data)
 	}
 	data->index = get_smallest_opt(data);
 	data->lap = data->ret[data->index][data->pp];
-	print_smallest_opt(data);
 	return (true);
 }

@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/08/26 18:01:45 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/08/26 18:27:48 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,7 +31,7 @@ INC_PATH				= include
 LIB_PATH				= librairies
 
 # nom des fichier code source (*.c)
-NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c \
+NAME_SRC			=	debug.c lib_plus.c main.c option.c error.c browse_map2.c \
 						recursive_bs.c browse_map.c recursive_bs_destroy.c \
 						debug2.c  lib_plus2.c tab_potential_paths.c\
 						path_sorter_utils.c tab_path_creator_utils.c\

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:14:36 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:39:03 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <stdio.h>
-
+# include "ft_printf.h"
 # define UINT unsigned int
 # define ULL unsigned long long int
 # define ROOM_START 0
@@ -36,14 +36,14 @@
 ** help for option's comprehention
 */
 
-# define BUF_SIZE 5000 // a modif apres
+# define BUF_SIZE 5000
 # define USED 0
 # define NUSED 1
 # define O_D (option & 1)
 # define O_V (option & 2)
 # define O_I (option & 4)
 # define O_M (option & 8)
-# define O_L (option & 16) // a faire a 101, rajouter un compteur de ligne devant chaque ligne d'output pr corr
+# define O_L (option & 16)
 # define LIST_OPTION "dvim"
 
 enum	e_bool
@@ -82,8 +82,8 @@ typedef	struct		s_turn
 
 typedef struct		s_abc
 {
-	UINT      		abc_len[128];
-	UINT      		abc_start[128];
+	UINT			abc_len[128];
+	UINT			abc_start[128];
 	UINT			abc_id[128];
 }					t_abc;
 
@@ -138,12 +138,6 @@ typedef enum e_bool	t_bool;
 **************************************************
 */
 
-/* a enlever apres */
-
-#include "ft_printf.h"
-
-/******************/
-
 char				**get_option(int ac, char **av, int *option);
 char				*parsing_into_line(const char *path);
 char				*scan_line_line(char *s);
@@ -163,21 +157,17 @@ t_bool				get_nodes(t_data *data);
 
 void				check_duplicate_tube(t_tube *t_tab, UINT size);
 t_bool				check_dup_room_se(UINT id, t_room *r_tab, UINT st, UINT s);
-t_bool				check_dup_room_g(t_room room, t_room *r_tab, UINT st, UINT size);
-
+t_bool				check_dup_room_g(t_room room, t_room *r_tab, UINT st,
+		UINT size);
 int					is_room(const char *s);
 int					is_tube(const char *s);
 int					is_order(const char *s);
-
 t_bool				skip_ants_number(char *s);
 char				*skip_room(char *s);
-
-/*parsing for multithreading*/
 t_bool				stock_anthill_for_threading(char *file_line, t_data *data);
-
-/*parsing with alphabet_trie*/
 void				get_abc_for_room(const char *s, UINT (*abc)[]);
 void				get_abc_id_for_room(UINT (*abc_id)[], UINT abc[]);
+
 /*
 **************************************************
 ***********************PART 2*********************
@@ -198,8 +188,10 @@ UINT				destroy_turn(t_turn *turns, UINT o, UINT id, UINT c);
 void				print_potential_paths(t_data *data);
 void				print_one_potential_path(t_data *data, UINT i);
 UINT				fill_path_tab(t_data *data);
-UINT				fill_tabs_with_current_room(UINT id_tab, UINT id_room, t_data *data, UINT cell);
-UINT				fill_tabs_with_current_room2(UINT id_tab, UINT id_room, t_data *data, UINT cell);
+UINT				fill_tabs_with_current_room(UINT id_tab,
+		UINT id_room, t_data *data, UINT cell);
+UINT				fill_tabs_with_current_room2(UINT id_tab,
+		UINT id_room, t_data *data, UINT cell);
 void				fill_tabs_with_rooms(t_data *data);
 void				print_number_paths(t_data *data);
 UINT				count_bits(t_tube tube);
@@ -208,19 +200,21 @@ UINT				find_pname(ULL *path_id, UINT nb_link_tubes_start);
 UINT				potential_path_counter(t_data *data);
 UINT				max_paths(t_data data);
 void				reset_markers(t_data *data);
-void				bruteforce_sorter(t_data *data, UINT max_paths, UINT (*res)[]);
+void				bruteforce_sorter(t_data *data, UINT max_paths,
+		UINT (*res)[]);
 void				set_used_rooms(UINT id_tab, t_data *data);
 UINT				is_valid(UINT *tab, t_data *data);
 UINT				get_compatible_tab_for_pid(UINT pid, t_data *data);
 void				get_result_for_path_managment(t_data *data, UINT max_paths);
-UINT				check_path_found(UINT (*curr)[], UINT max_paths, UINT path_nbr);
+UINT				check_path_found(UINT (*curr)[], UINT max_paths,
+		UINT path_nbr);
 void				tab_cp(UINT (*curr)[], UINT (*res)[], UINT max_paths);
-void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr, UINT max_paths);
-
-/* nouvelle partie sans ff */
-
-void				fill_ret_tab_norm(t_data *data, UINT (*id_tab)[], UINT index, UINT j);
-UINT				get_biggest_turn(t_data *data, UINT (*id_tab)[], UINT index);
+void				set_tab_for_bf(UINT (*tab)[], UINT path_nbr,
+		UINT max_paths);
+void				fill_ret_tab_norm(t_data *data, UINT (*id_tab)[],
+		UINT index, UINT j);
+UINT				get_biggest_turn(t_data *data, UINT (*id_tab)[],
+		UINT index);
 void				fill_all_paths(t_data *data, UINT (*id_tab)[], UINT index);
 UINT				set_ref(t_data *data, UINT (*tab)[], UINT index);
 void				set_tab_with_order(t_data *data, UINT (*tab)[], UINT index);
@@ -230,9 +224,11 @@ UINT				comp_unit_tab(t_data *data, UINT i1, UINT i2);
 UINT				generic_sorter(t_data *data);
 t_bool				init_stocker_tab(t_data *data);
 t_bool				fill_comp_tab(t_data *data);
-void				get_new_solution2(t_data *data, UINT index, UINT (*id_tab)[]);
+void				get_new_solution2(t_data *data, UINT index,
+		UINT (*id_tab)[]);
 UINT				superposition_tab(t_data *data, UINT index);
-UINT				set_ppath_from_smallest(t_data *data, UINT index, UINT (*id_tab)[]);
+UINT				set_ppath_from_smallest(t_data *data,
+		UINT index, UINT (*id_tab)[]);
 void				set_tab_zero(UINT len, UINT (*tab)[]);
 UINT				manage_lap_ovf(t_data *data, UINT i, UINT ids);
 void				reset_marker_values(t_data *data);
@@ -242,17 +238,18 @@ UINT				get_smallest_opt(t_data *data);
 UINT				count_id_paths(t_data data);
 UINT				get_pnum(UINT pid, t_data *data);
 void				get_new_lenght(char **tab, UINT (*lenght)[]);
-
-/* aff des res */
-
+t_turn				*init_turn(UINT size);
+UINT				get_id_room(t_tube tubes, UINT id_room);
 void				print_smallest_opt(t_data *data);
 void				print_comp_tab(t_data *data);
 void				print_cp_tab_binary(t_data *data);
 void				aprint_tab(UINT *tab, UINT len);
 void				print_tab(UINT (*res)[], UINT max_paths);
 void				print_tab2(t_data *data, UINT (*res)[], UINT size);
-void				print_tab_with_size(t_data *data, UINT (*res)[], UINT max_paths);
-void				print_res_tab(t_data *data, UINT (*rtab)[], UINT (*id_tab)[], UINT size);
+void				print_tab_with_size(t_data *data,
+		UINT (*res)[], UINT max_paths);
+void				print_res_tab(t_data *data, UINT (*rtab)[],
+		UINT (*id_tab)[], UINT size);
 void				print_final_path_tab(t_data *data);
 
 /*
@@ -261,58 +258,52 @@ void				print_final_path_tab(t_data *data);
 **************************************************
 */
 
-t_bool	new_output(t_data *data);
-
-/* output utils */
-
-void	del_temp_str(char **s1, char **s2, char **s3);
-void	stock_file_line(t_data *data, const char *s);
-char	**fill_buffer(t_data *data, UINT (*lenght)[]);
-void	insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data);
-void	get_name_lenght(t_data *data);
-void	join_output_tab(t_opt *opt, t_data *data);
-
-
-/* output ants */
-
-void	get_ant_move_ovf(t_opt *opt, char **s1, char **s2, UINT len);
-void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data);
-void	ant_march(t_opt *opt, t_data *data, UINT i, UINT (*lenght)[]);
-void	len_tab_into_data(t_data *data, UINT (*lenght)[]);
-
-void	stock_file_line(t_data *data, const char *s);
-void	del_2d_int_tab(UINT **tab);
+t_bool				new_output(t_data *data);
+void				del_temp_str(char **s1, char **s2, char **s3);
+void				stock_file_line(t_data *data, const char *s);
+char				**fill_buffer(t_data *data, UINT (*lenght)[]);
+void				insert_linefeed(t_opt *opt, UINT (*lenght)[], t_data *data);
+void				get_name_lenght(t_data *data);
+void				join_output_tab(t_opt *opt, t_data *data);
+void				get_ant_move_ovf(t_opt *opt, char **s1,
+		char **s2, UINT len);
+void				get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data);
+void				ant_march(t_opt *opt, t_data *data,
+		UINT i, UINT (*lenght)[]);
+void				len_tab_into_data(t_data *data, UINT (*lenght)[]);
+void				stock_file_line(t_data *data, const char *s);
+void				del_2d_int_tab(UINT **tab);
 /*
 **************************************************
 ***********************ERROR**********************
 **************************************************
 */
 
-# define ERR_MALLOC 			1  // malloc a planté
-# define ERR_OPEN				2  //impossible d'ouvrir
-# define ERR_READ				3  //impossible de lire
-# define ERR_OCCURD				4  //une erreur est survenu
-# define ERR_DUPLICATE_STR		5 //
-# define ERR_DUPLICATE_END		6 //
-# define ERR_TUBES_FORMAT		7  // erreur format de tube
-# define ERR_TUBES				8  // au moins 1 chemin
-# define ERR_ROOMS				9  // au moins 2 salles
-# define ERR_ANTS				10 // le nombre de ants ne peut pas etre negatif
-# define ERR_ANTS_SPACE			11 // espace present autour du nombre de fourmis
-# define ERR_LACK_BEGIN			12 // pas de debut dans la fourmiliere
-# define ERR_LACK_END			13 // pas de fin dans la fourmiliere
-# define ERR_ROOM_FORMAT		14 // erreur format de room
-# define ERR_DUPL_ROOM			15 // 2 salles ont le meme nom
-# define ERR_DUPL_XY_ROOM		16 // 2 salles ont les meme coordonnées
-# define ERR_DUPL_TUBE			17 // Attention: 2 chemins sont identiques
-# define ERR_LINK_TUBE_ITSELF	18 // Une salle est relier a elle même
-# define ERR_EMPTY_FILE			19 // fichier vide
-# define ERR_ORDER				20 // ordre invalide
-# define ERR_OVERFLOW			21 // overflow sur les salles
-# define ERR_ONLY_COMMENT		22 // que des commentaires
-# define ERR_ROOM_NOT_DEFINE	23 // salle utilise dans les tubes non defini
-# define ERR_ROOM_WRONG_POS		24 //invalide positions sur les salles
-# define ERR_NO_ANTS			25 //invalide positions sur les salles
+# define ERR_MALLOC 			1
+# define ERR_OPEN				2
+# define ERR_READ				3
+# define ERR_OCCURD				4
+# define ERR_DUPLICATE_STR		5
+# define ERR_DUPLICATE_END		6
+# define ERR_TUBES_FORMAT		7
+# define ERR_TUBES				8
+# define ERR_ROOMS				9
+# define ERR_ANTS				10
+# define ERR_ANTS_SPACE			11
+# define ERR_LACK_BEGIN			12
+# define ERR_LACK_END			13
+# define ERR_ROOM_FORMAT		14
+# define ERR_DUPL_ROOM			15
+# define ERR_DUPL_XY_ROOM		16
+# define ERR_DUPL_TUBE			17
+# define ERR_LINK_TUBE_ITSELF	18
+# define ERR_EMPTY_FILE			19
+# define ERR_ORDER				20
+# define ERR_OVERFLOW			21
+# define ERR_ONLY_COMMENT		22
+# define ERR_ROOM_NOT_DEFINE	23
+# define ERR_ROOM_WRONG_POS		24
+# define ERR_NO_ANTS			25
 
 void				usage(void);
 void				usage_option(char c);
@@ -350,7 +341,5 @@ UINT				count_digits(UINT num);
 */
 
 void				main_visualisateur(t_data data);
-
-
 
 #endif

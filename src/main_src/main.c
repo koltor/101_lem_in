@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:45:42 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:46:59 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,7 +70,6 @@ static t_bool	lem_in2(t_data *data, int option, char *fine)
 	return (true);
 }
 
-
 /*
 ** lem_in:
 **	parameters
@@ -105,7 +104,7 @@ t_bool			lem_in(const char *path, int option)
 		return (exit_lem_in_error(f_line, data.bopt, NULL, NULL));
 	if (!(data.t_tab = create_tube(data.tubes)))
 		return (exit_lem_in_error(f_line, data.bopt, data.r_tab, NULL));
-	if(lem_in2(&data, option, f_line))
+	if (lem_in2(&data, option, f_line))
 		return (false);
 	O_D || O_I ? global_info(&data) : 0;
 	O_D ? debug_lem_in(&data) : 0;
