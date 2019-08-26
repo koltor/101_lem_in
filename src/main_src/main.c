@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/07/16 13:15:00 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:45:42 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,13 +14,6 @@
 #include "lem_in.h"
 #include <time.h>
 #include <sys/time.h>
-
-static void		manage_option(t_data *data, int option)
-{
-	O_D || O_I ? global_info(data) : 0;
-	O_D ? debug_lem_in(data) : 0;
-	O_V ? main_visualisateur(*data) : 0;
-}
 
 /*
 ** exit_lem_in_error:
@@ -30,16 +23,16 @@ static void		manage_option(t_data *data, int option)
 **		return false
 */
 
-static t_bool	exit_lem_in_error(char *line, char *line2, t_room *room, t_tube *tube)
+static t_bool	exit_lem_in_error(char *l, char *l2, t_room *r, t_tube *t)
 {
-	if (line)
-		free(line);
-	if (line2)
-		free(line2);
-	if (room)
-		free(room);
-	if (tube)
-		free(tube);
+	if (l)
+		free(l);
+	if (l2)
+		free(l2);
+	if (r)
+		free(r);
+	if (t)
+		free(t);
 	return (false);
 }
 
@@ -56,11 +49,27 @@ static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free(file_line);
 	free(data->t_tab);
 	free_room(data->r_tab, data->rooms);
-	//ft_strdel(&(data->opt));
-	//del_2d_int_tab(data->ret);
-	//del_2d_int_tab(data->paths);
+	ft_strdel(&(data->opt));
+	del_2d_int_tab(data->ret);
+	del_2d_int_tab(data->paths);
 	return (true);
 }
+
+static t_bool	lem_in2(t_data *data, int option, char *fine)
+{
+	get_abc_for_room(fine, &data->abc.abc_len);
+	get_abc_id_for_room(&data->abc.abc_start, data->abc.abc_len);
+	get_abc_id_for_room(&data->abc.abc_id, data->abc.abc_len);
+	if ((O_M && stock_anthill_for_threading(fine, data)) ||
+		(!O_M && stock_anthill(fine, data)))
+		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
+	if (browse_map(data))
+		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
+	if (!generic_sorter(data))
+		return (exit_lem_in_error(fine, data->bopt, data->r_tab, NULL));
+	return (true);
+}
+
 
 /*
 ** lem_in:
@@ -78,44 +87,30 @@ static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 
 t_bool			lem_in(const char *path, int option)
 {
-	char	*file_line;
+	char	*f_line;
 	t_data	data;
 
-	if (!(file_line = parsing_into_line(path)))
+	if (!(f_line = parsing_into_line(path)))
 	{
 		if (*(char*)f_error(0, NULL) == 0)
 			f_error(ERR_EMPTY_FILE, NULL);
-		return (exit_lem_in_error(file_line, NULL, NULL, NULL));
+		return (exit_lem_in_error(f_line, NULL, NULL, NULL));
 	}
-	stock_file_line(&data, file_line);
-	if ((data.rooms = get_number_of_room(file_line)) < 2)
-		return (exit_lem_in_error(file_line, data.bopt, NULL, NULL));
-	if ((data.tubes = get_number_of_tube(file_line)) < 1)
-		return (exit_lem_in_error(file_line, data.bopt, NULL, NULL));
+	stock_file_line(&data, f_line);
+	if ((data.rooms = get_number_of_room(f_line)) < 2)
+		return (exit_lem_in_error(f_line, data.bopt, NULL, NULL));
+	if ((data.tubes = get_number_of_tube(f_line)) < 1)
+		return (exit_lem_in_error(f_line, data.bopt, NULL, NULL));
 	if (!(data.r_tab = create_room(data.rooms)))
-		return (exit_lem_in_error(file_line, data.bopt, NULL, NULL));
+		return (exit_lem_in_error(f_line, data.bopt, NULL, NULL));
 	if (!(data.t_tab = create_tube(data.tubes)))
-		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, NULL));
-	get_abc_for_room(file_line, &data.abc.abc_len);
-	get_abc_id_for_room(&data.abc.abc_start, data.abc.abc_len);
-	get_abc_id_for_room(&data.abc.abc_id, data.abc.abc_len);
-	if (O_M)
-	{
-		if (stock_anthill_for_threading(file_line, &data))
-			return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
-	}
-	else
-	{
-		if (stock_anthill(file_line, &data))
-			return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
-		//FPF("lem_in [2]\n"); probleme ici avec le test 250k map
-	}
-	if (browse_map(&data))
-		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, data.t_tab));
-	if (!generic_sorter(&data))
-		return (exit_lem_in_error(file_line, data.bopt, data.r_tab, NULL));	
-	manage_option(&data, option);
-	return (exit_lem_in_ok(file_line, &data));
+		return (exit_lem_in_error(f_line, data.bopt, data.r_tab, NULL));
+	if(lem_in2(&data, option, f_line))
+		return (false);
+	O_D || O_I ? global_info(&data) : 0;
+	O_D ? debug_lem_in(&data) : 0;
+	O_V ? main_visualisateur(data) : 0;
+	return (exit_lem_in_ok(f_line, &data));
 }
 
 /*
