@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:02:38 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/26 18:22:13 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -242,6 +242,8 @@ UINT				get_smallest_opt(t_data *data);
 UINT				count_id_paths(t_data data);
 UINT				get_pnum(UINT pid, t_data *data);
 void				get_new_lenght(char **tab, UINT (*lenght)[]);
+t_turn				*init_turn(UINT size);
+UINT				get_id_room(t_tube tubes, UINT id_room);
 
 /* aff des res */
 
