@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/27 11:54:31 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 14:12:13 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 15:18:27 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,9 @@ void	free_room_error(t_data *data, UINT nb_room)
 	{
 		if (data->r_tab[i].name != NULL)
 			free(data->r_tab[i].name);
-		else if (i == 0 || i == 1)
+		else if ((i == 0 && *(char*)f_error(0, NULL) == ERR_LACK_BEGIN))
+			nb_room += 1;
+		else if ((i == 1 && *(char*)f_error(0, NULL) == ERR_LACK_END))
 			nb_room += 1;
 		i++;
 	}
