@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 17:01:11 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 14:01:55 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 14:22:12 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -124,8 +124,7 @@ void			get_tube_thread_main(char *file_line, t_data *data,
 		}
 		if (ret == -1 || split_line_for_tube(line, data, &(data->t_tab[id])))
 		{
-			if (id < tube.thread->tubes)
-				tube.thread->tubes = id;
+			tube.thread->tubes = (id < tube.thread->tubes) ? id : data->tubes;
 			break ;
 		}
 		stop--;
@@ -133,6 +132,5 @@ void			get_tube_thread_main(char *file_line, t_data *data,
 		if (!(line = scan_line_line_for_threading(file_line, tube.id - 1)))
 			break ;
 	}
-	if (ret == -1)
-		f_error(ERR_TUBES_FORMAT, NULL);
+	ret == -1 ? f_error(ERR_TUBES_FORMAT, NULL) : 0;
 }
