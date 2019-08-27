@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/07/11 13:33:07 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 17:49:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:19:19 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,15 +46,22 @@ void	get_ant_move(t_opt *opt, UINT (*lenght)[], t_data *data)
 	char *r1;
 	char *r2;
 	char *r3;
+	char *r4;
+	char *r5;
 
 	opt->save = (*lenght)[opt->lap_cp];
 	(*lenght)[opt->lap_cp] = 3 + data->r_tab[opt->room_id].len_name +
 			count_digits(opt->ants) + (*lenght)[opt->lap_cp];
 	if ((*lenght)[opt->lap_cp] >= BUF_SIZE)
 		get_ant_move_ovf(opt, &r1, &r2, (*lenght)[opt->lap_cp]);
-	r1 = ft_strjoin("L", ft_litoa((ULL)opt->ants));
-	r2 = ft_strjoin(r1, ft_strjoin("-",
-					ft_strjoin(data->r_tab[opt->room_id].name, " ")));
+	r4 = ft_litoa((ULL)opt->ants);
+	r1 = ft_strjoin("L", r4);
+	ft_strdel(&r4);
+	r4 = ft_strjoin(data->r_tab[opt->room_id].name, " ");
+	r5 = ft_strjoin("-", r4);
+	r2 = ft_strjoin(r1, r5);
+	ft_strdel(&r4);
+	ft_strdel(&r5);
 	ft_strdel(&r1);
 	r3 = ft_strdup(opt->out[opt->lap_cp]);
 	ft_strdel(&(opt->out[opt->lap_cp]));
