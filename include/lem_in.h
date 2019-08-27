@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:26:02 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:45:03 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -251,6 +251,8 @@ void				print_tab_with_size(t_data *data,
 void				print_res_tab(t_data *data, UINT (*rtab)[],
 		UINT (*id_tab)[], UINT size);
 void				print_final_path_tab(t_data *data);
+t_bool				free_tab_turn(t_tube *tab, UINT size);
+void				del_output(t_opt *opt);
 
 /*
 **************************************************
@@ -303,7 +305,7 @@ void				del_2d_int_tab(UINT **tab);
 # define ERR_ONLY_COMMENT		22
 # define ERR_ROOM_NOT_DEFINE	23
 # define ERR_ROOM_WRONG_POS		24
-# define ERR_NO_ANTS			25 
+# define ERR_NO_ANTS			25
 # define ERR_NO_PATHS			26
 
 void				usage(void);

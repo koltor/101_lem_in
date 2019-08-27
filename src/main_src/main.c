@@ -6,14 +6,12 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:19:56 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:51:21 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <time.h>
-#include <sys/time.h>
 
 /*
 ** exit_lem_in_error:
@@ -67,7 +65,11 @@ static t_bool	lem_in2(t_data *data, int option, char *fine)
 	if (browse_map(data))
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
 	if (!generic_sorter(data))
+	{
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, NULL));
+		free_tab_turn(data->t_tab, data->tubes);
+	}
+	free_tab_turn(data->t_tab, data->tubes);
 	return (true);
 }
 
@@ -137,6 +139,5 @@ int				main(int ac, char **av)
 		usage();
 	if (O_D || O_I)
 		debug_main(option);
-	//sleep(100000);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:25:45 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:46:08 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,7 +86,8 @@ void	str_error(int error)
 	"fichier vide\n", "ordre invalide\n", "overflow sur les salles\n",
 	"que des commentaires dans le fichier\n",
 	"salle non defini\n", "invalide positions sur les salles\n",
-	"manque les fourmis\n", "aucun chemin ne peut arriver a la fin\n", "\n", "\n", "\n",
+	"manque les fourmis\n", "aucun chemin ne peut arriver a la fin\n",
+	"\n", "\n", "\n",
 	};
 
 	ft_putstr(tab[error]);

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/30 12:35:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:31:27 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:35:36 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,7 +57,7 @@ t_turn			*prepare_turn_to_start(t_data *data, UINT id_room)
 	return (turns);
 }
 
-static t_bool	error_malloc_prepare(t_tube *tab, UINT size)
+static t_bool	error_prepare(t_tube *tab, UINT size)
 {
 	UINT i;
 
@@ -99,12 +99,12 @@ t_bool			browse_map(t_data *data)
 	data->ret = NULL;
 	if ((ret = prepare_tubes(data->t_tab, data->tubes,
 					data->r_tab[ROOM_START].nb_link_tubes)))
-		return (error_malloc_prepare(data->t_tab, ret));
+		return (error_prepare(data->t_tab, ret));
 	if (!(turns = prepare_turn_to_start(data, ROOM_START)))
-		return (false);
+		return (error_prepare(data->t_tab, ret));
 	recursive_bs_turn(data, turns, data->r_tab[ROOM_START].nb_link_tubes, 2);
 	if (!fill_path_tab(data))
-		return (false);
+		return (error_prepare(data->t_tab, ret));
 	fill_tabs_with_rooms(data);
 	data->max_paths = max_paths(*data);
 	data->pp = potential_path_counter(data);
