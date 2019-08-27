@@ -6,7 +6,11 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2019/08/27 11:29:44 by matheme     ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2019/08/27 11:19:56 by ocrossi     ###    #+. /#+    ###.fr     */
+>>>>>>> 33b8eae2bec8ab62027df49cf65167a83e05b29b
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,6 +67,7 @@ static t_bool	exit_lem_in_ok(char *file_line, t_data *data)
 	free(data->t_tab);
 	free_room(data->r_tab, data->rooms);
 	ft_strdel(&(data->opt));
+	ft_strdel(&(data->bopt));
 	del_2d_int_tab(data->ret);
 	del_2d_int_tab(data->paths);
 	return (true);
