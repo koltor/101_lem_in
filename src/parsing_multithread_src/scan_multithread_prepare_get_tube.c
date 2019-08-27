@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/21 16:13:09 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 18:03:04 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 13:40:42 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,6 +67,7 @@ static void	wait_thread(t_thread (*thread)[NB_THREAD], t_data *data)
 			free((*thread)[i].file_line);
 			(*thread)[i].file_line = NULL;
 		}
+		dprintf(1, "%u/%u\n", i + 1, NB_THREAD);
 		i++;
 	}
 }
@@ -100,8 +101,12 @@ void		multithread_get_tube(char *file_line, t_data *data,
 {
 	t_thread thread[NB_THREAD];
 
+	dprintf(1, "Ok");
 	prepare_thread(&thread, data, file_line, thread_info);
+	dprintf(1, "Ok");
 	launch_thread(&thread, data);
+	dprintf(1, "Ok\n");
 	wait_thread(&thread, data);
+	dprintf(1, "Ok");
 	data->tubes = thread_info->tubes;
 }
