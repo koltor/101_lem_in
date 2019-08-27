@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:08:47 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:29:44 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,19 @@
 #include "lem_in.h"
 #include <time.h>
 #include <sys/time.h>
+
+static t_bool	free_tab_turn(t_tube *tab, UINT size)
+{
+	UINT i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i].tmp_turn);
+		i += 1;
+	}
+	return (false);
+}
 
 /*
 ** exit_lem_in_error:
@@ -66,7 +79,11 @@ static t_bool	lem_in2(t_data *data, int option, char *fine)
 	if (browse_map(data))
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
 	if (!generic_sorter(data))
+	{
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, NULL));
+		free_tab_turn(data->t_tab, data->tubes);
+	}
+	free_tab_turn(data->t_tab, data->tubes);
 	return (true);
 }
 
