@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 12:52:31 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 14:03:21 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,7 +44,7 @@
 # define O_I (option & 4)
 # define O_M (option & 8)
 # define O_L (option & 16)
-# define LIST_OPTION "dvim"
+# define LIST_OPTION "dviml"
 
 enum	e_bool
 {

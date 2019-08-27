@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 13:33:31 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 14:11:46 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ void	malloc_path_tabs(t_data *data)
 	}
 }
 
-void			no_way(t_room *room, UINT size)
+void	no_way(t_room *room, UINT size)
 {
 	UINT i;
 
