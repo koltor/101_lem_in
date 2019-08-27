@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 17:51:58 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 18:01:49 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,9 +89,9 @@ static t_bool	select_ben(char *line, t_data *data, int *ord, UINT (*abc)[128])
 	UINT	start;
 
 	id = (*ord == 0) ? (*abc)[line[0]]++ : (*abc)[line[0]];
-	if (id == data->rooms && *ord == 0 && (value = false))
+	if ((value = false) && id == data->rooms && *ord == 0)
 		return (false);
-	if (*ord == 0 && (start = data->abc.abc_start[line[0]]))
+	if ((start = data->abc.abc_start[line[0]]) && *ord == 0)
 	{
 		if (split_line_for_room(line, &data->r_tab[id]))
 			return (false);
@@ -134,7 +134,6 @@ char			*get_room(char *file_line, t_data *data)
 	char	type;
 
 	order = 0;
-	skip_ants_number(file_line);
 	while ((line = scan_line_line(file_line)))
 	{
 		if ((type = is_room(line)) == -1)
