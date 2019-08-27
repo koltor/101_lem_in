@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/26 17:51:29 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:01:32 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:03:25 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,12 +52,26 @@ void	join_output_tab(t_opt *opt, t_data *data)
 	join_output_tab_norm(data, &s1, &s2, &s3);
 }
 
+void	del_output(t_opt *opt)
+{
+	UINT i;
+
+	i = 0;
+	while (opt->out[i])
+	{
+		ft_strdel(&(opt->out[i]));
+		i++;
+	}
+	free(opt->out);
+}
+
 void	output_final_treatment(t_data *data, t_opt *opt, UINT (*lenght)[])
 {
 	get_new_lenght(opt->out, lenght);
 	insert_linefeed(opt, lenght, data);
 	len_tab_into_data(data, lenght);
 	join_output_tab(opt, data);
+	del_output(opt);
 	data->len_opt = ft_strlen(data->opt);
 	write(1, data->opt, data->len_opt);
 }

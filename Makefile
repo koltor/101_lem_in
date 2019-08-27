@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/08/26 18:27:48 by ocrossi     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/08/27 11:10:31 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -50,7 +50,7 @@ NAME_SRC_PARSING_MT 	=	scan_multithread_file.c scan_multithread_get_anthill.c \
 							scan_multithread.skip.c scan_multithread_get_tube.c \
 							scan_multithread_prepare_get_tube.c
 
-NAME_SRC_VISU			=	main_visu.c algo_bresenham.c print.c event.c ui.c \
+#NAME_SRC_VISU			=	main_visu.c algo_bresenham.c print.c event.c ui.c \
 							ui2_legendary.c fill_pixel.c print2.c
 
 #nom des ficher objects (*.o)
@@ -74,7 +74,7 @@ PARSING_MT_OBJ	= $(addprefix $(PARSING_MT_OBJ_PATH)/,$(PARSING_MT_NAME_OBJ))
 VISU_OBJ		= $(addprefix $(VISU_OBJ_PATH)/,$(VISU_NAME_OBJ))
 
 #compilateur + flags + framework
-CC			= gcc #-g3 -fsanitize=address 
+CC			= gcc -g3# -fsanitize=address 
 CFLAGS		=  -Wall -Wextra -Werror
 FRAMEWORKS	= -lmlx -framework OpenGL -framework AppKit
 
@@ -90,8 +90,12 @@ LIBPF.A				= librairies/my_printf/libftprintf.a
 all : lib minilibx $(NAME)
 	@echo "\033[48;5;22m\033[38;5;15m lem-in \033[0m"
 
-$(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(VISU_OBJ) $(LIBFT.A)
-	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) -I $(MINILIBX_INC) -L $(MINILIBX) $(LIBPF.A) $^ -o $@ $(FRAMEWORKS)
+$(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(LIBFT.A)
+	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) $(LIBPF.A) $^ -o $@ 
+
+#$(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(VISU_OBJ) $(LIBFT.A)
+#	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) -I $(MINILIBX_INC) -L $(MINILIBX) $(LIBPF.A) $^ -o $@ $(FRAMEWORKS)
+
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HEADER)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

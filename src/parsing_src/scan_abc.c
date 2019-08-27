@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 21:27:14 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/28 16:20:32 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:07:32 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,6 +44,8 @@ void		get_abc_for_room(const char *s, UINT (*abc)[])
 	char	ret;
 	int		order;
 
+	ret = 0;
+	order = 0;
 	if (!(s_cpy = cpy_s(s)))
 		return ;
 	if (skip_ants_number(s_cpy))

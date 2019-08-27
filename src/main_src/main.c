@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:46:59 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:08:47 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -108,7 +108,7 @@ t_bool			lem_in(const char *path, int option)
 		return (false);
 	O_D || O_I ? global_info(&data) : 0;
 	O_D ? debug_lem_in(&data) : 0;
-	O_V ? main_visualisateur(data) : 0;
+	//O_V ? main_visualisateur(data) : 0;
 	return (exit_lem_in_ok(f_line, &data));
 }
 
@@ -136,5 +136,6 @@ int				main(int ac, char **av)
 		usage();
 	if (O_D || O_I)
 		debug_main(option);
+	//sleep(100000);
 	return (0);
 }
