@@ -6,7 +6,7 @@
 #    By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/14 16:56:52 by matheme      #+#   ##    ##    #+#        #
-#    Updated: 2019/08/27 14:47:22 by matheme     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/08/27 14:55:48 by ocrossi     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -90,8 +90,8 @@ LIBPF.A				= librairies/my_printf/libftprintf.a
 all : lib minilibx $(NAME)
 	@echo "\033[48;5;22m\033[38;5;15m lem-in \033[0m"
 
-$(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(LIBFT.A)
-	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) $(LIBPF.A) $^ -o $@
+#$(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(LIBFT.A)
+#	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) $(LIBPF.A) $^ -o $@
 
 $(NAME) : $(OBJ) $(PARSING_OBJ) $(PARSING_MT_OBJ) $(VISU_OBJ) $(LIBFT.A)
 	@$(CC) -I $(LIBFT_INC) -L $(LIBFT) -I $(MINILIBX_INC) -L $(MINILIBX) $(LIBPF.A) $^ -o $@ $(FRAMEWORKS)
