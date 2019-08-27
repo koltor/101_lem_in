@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/23 16:20:52 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 12:10:03 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 17:51:58 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,10 +88,10 @@ static t_bool	select_ben(char *line, t_data *data, int *ord, UINT (*abc)[128])
 	UINT	id;
 	UINT	start;
 
-	value = false;
 	id = (*ord == 0) ? (*abc)[line[0]]++ : (*abc)[line[0]];
-	start = data->abc.abc_start[line[0]];
-	if (*ord == 0)
+	if (id == data->rooms && *ord == 0 && (value = false))
+		return (false);
+	if (*ord == 0 && (start = data->abc.abc_start[line[0]]))
 	{
 		if (split_line_for_room(line, &data->r_tab[id]))
 			return (false);
@@ -144,8 +144,10 @@ char			*get_room(char *file_line, t_data *data)
 		if (type == 1 && order != 0 && is_order(line))
 			return (f_error(ERR_ORDER, NULL));
 		if (type == 0 && select_ben(line, data, &order, &data->abc.abc_id))
-			return (NULL);
+			break ;
 	}
+	if (*(char*)f_error(0, NULL) != 0)
+		return (NULL);
 	if (order)
 		return (f_error(ERR_ORDER, NULL));
 	if (data->r_tab[0].name == NULL)
