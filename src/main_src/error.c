@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/14 16:28:01 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:46:08 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 14:35:43 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@
 
 void	usage(void)
 {
-	printf("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
+	FPF("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
 }
 
 /*
@@ -32,8 +32,8 @@ void	usage(void)
 
 void	usage_option(char c)
 {
-	printf("ls: illegal option -- %c\n", c);
-	printf("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
+	FPF("ls: illegal option -- %c\n", c);
+	FPF("usage: lem-in [-%s][anthill_file ...]\n", LIST_OPTION);
 }
 
 /*
