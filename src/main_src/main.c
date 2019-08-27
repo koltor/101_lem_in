@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 14:34:36 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 14:47:26 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,8 +59,8 @@ static t_bool	lem_in2(t_data *data, int option, char *fine)
 	get_abc_for_room(fine, &data->abc.abc_len);
 	get_abc_id_for_room(&data->abc.abc_start, data->abc.abc_len);
 	get_abc_id_for_room(&data->abc.abc_id, data->abc.abc_len);
-	//if ((O_M && stock_anthill_for_threading(fine, data)) ||
-	if (!O_M && stock_anthill(fine, data))//)
+	if ((O_M && stock_anthill_for_threading(fine, data)) ||
+	(!O_M && stock_anthill(fine, data)))
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
 	if (browse_map(data))
 		return (exit_lem_in_error(fine, data->bopt, data->r_tab, data->t_tab));
@@ -111,7 +111,7 @@ t_bool			lem_in(const char *path, int option)
 		return (false);
 	O_D || O_I ? global_info(&data) : 0;
 	O_D ? debug_lem_in(&data) : 0;
-//	O_V ? main_visualisateur(data) : 0;
+	O_V ? main_visualisateur(data) : 0;
 	O_L ? FPF("here is the number of lines on output : %u\n", data.lap) : 0;
 	return (exit_lem_in_ok(f_line, &data));
 }
