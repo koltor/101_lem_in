@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:45:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 12:52:31 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -275,6 +275,8 @@ void				ant_march(t_opt *opt, t_data *data,
 void				len_tab_into_data(t_data *data, UINT (*lenght)[]);
 void				stock_file_line(t_data *data, const char *s);
 void				del_2d_int_tab(UINT **tab);
+void				free_room_error(t_data *data, UINT nb_room);
+
 /*
 **************************************************
 ***********************ERROR**********************

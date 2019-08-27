@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   tab_path.c                                       .::    .:/ .      .::   */
+/*   tab_path_vp.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 11:31:06 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 13:33:31 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,12 +67,27 @@ void	malloc_path_tabs(t_data *data)
 	}
 }
 
+void			no_way(t_room *room, UINT size)
+{
+	UINT i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (room[i].nb_link_tubes != 0)
+			free(room[i].link_tubes);
+		i++;
+	}
+}
+
 UINT	fill_path_tab(t_data *data)
 {
 	UINT path_nb;
 
 	if (!(path_nb = potential_path_counter(data)))
 	{
+		no_way(data->r_tab, data->rooms);
+		free_room_error(data, data->rooms);
 		f_error(ERR_NO_PATHS, NULL);
 		return (0);
 	}
