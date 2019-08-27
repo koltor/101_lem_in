@@ -6,7 +6,7 @@
 /*   By: ocrossi <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/06/17 11:24:26 by ocrossi      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/24 18:28:54 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:31:06 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,7 +72,10 @@ UINT	fill_path_tab(t_data *data)
 	UINT path_nb;
 
 	if (!(path_nb = potential_path_counter(data)))
+	{
+		f_error(ERR_NO_PATHS, NULL);
 		return (0);
+	}
 	data->path_nbr = path_nb;
 	if (!(data->paths = (UINT **)malloc(sizeof(UINT *) * (path_nb + 1))))
 	{

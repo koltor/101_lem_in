@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:38:20 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/26 18:39:03 by ocrossi     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/27 11:26:02 by ocrossi     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -303,7 +303,8 @@ void				del_2d_int_tab(UINT **tab);
 # define ERR_ONLY_COMMENT		22
 # define ERR_ROOM_NOT_DEFINE	23
 # define ERR_ROOM_WRONG_POS		24
-# define ERR_NO_ANTS			25
+# define ERR_NO_ANTS			25 
+# define ERR_NO_PATHS			26
 
 void				usage(void);
 void				usage_option(char c);
