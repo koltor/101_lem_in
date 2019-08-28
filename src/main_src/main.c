@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:35:25 by matheme      #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/27 18:07:14 by matheme     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/28 15:35:08 by matheme     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -130,14 +130,9 @@ int				main(int ac, char **av)
 {
 	int				option;
 
-	if (ac >= 2)
-	{
-		av = get_option(ac - 1, &av[1], &option);
-		if (lem_in(*av, option) && !O_D && !O_I)
-			str_error(*(char*)f_error(0, NULL));
-	}
-	else
-		usage();
+	av = get_option(ac - 1, &av[1], &option);
+	if (lem_in(*av, option) && !O_D && !O_I)
+		str_error(*(char*)f_error(0, NULL));
 	if (O_D || O_I)
 		debug_main(option);
 	return (0);
